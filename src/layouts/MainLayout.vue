@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="q-px-lg q-py-sm bg-white text-dark">
       <div  class=" flex items-center justify-between">
-        <img  src="~assets/logo.png">
+        <img class="logo" src="~assets/logo.webp">
         <q-tabs class="gt-sm"  indicator-color="transparent"
                 active-color="red-13"
                 v-model="curLink">
@@ -70,7 +70,7 @@
       <div class="container">
         <div class="row q-col-gutter-lg">
           <div class="col-12 col-sm-6">
-            <img class="q-mb-lg" src="~assets/logo.png">
+            <img class="q-mb-md logo" src="~assets/logo.webp">
             <div class="q-gutter-sm">
               <q-btn
                 flat
@@ -156,4 +156,8 @@ const menuItems = [
   display: grid
   grid-template-columns: 1fr
   grid-gap: 5px
+.logo
+  width: 100px
+  height: auto
+  object-fit: contain
 </style>
