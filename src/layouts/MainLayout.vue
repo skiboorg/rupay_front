@@ -7,7 +7,18 @@
                 active-color="red-13"
                 v-model="curLink">
 
-          <q-route-tab  no-caps :ripple="false" v-for="(tab,index) in menuItems" :key="tab.title" :name="index" :label="tab.title" :to="tab.link" />
+          <q-route-tab  no-caps
+                        :ripple="false"
+                        v-for="(tab,index) in menuItems"
+                        :key="tab.title"
+                        :name="index"
+                        :label="tab.title"
+                        :to="tab.link" />
+          <q-route-tab  no-caps
+                        :ripple="false"
+                        target="_blank"
+                        label="RuPay Scan"
+                        href="https://scan.rupay.pro" />
 
         </q-tabs>
         <div class="gt-sm q-gutter-sm">
@@ -98,6 +109,9 @@
               <p class="no-margin" v-for="tab in menuItems" :key="tab.title">
                 <router-link class="text-caption"  :to="tab.link">{{tab.title}}</router-link>
               </p>
+              <p class="no-margin">
+                <a class="text-caption" href="https://scan.rupay.pro">RuPay Scan</a>
+              </p>
             </div>
 
           </div>
@@ -118,35 +132,45 @@ const curLink=ref('index')
 const menuItems = [
   {
     title: 'Главная',
-    link: '/'
-  },{
-    title: 'Преимущества',
-    link: '/'
+    link: '/',
+    is_external_link:false
+
+
   },
   {
-    title: 'FAQ',
-    link: '/'
-  },
-  {
-    title: 'Как это работает',
-    link: '/'
-  },
-  {
-    title: 'Переводы',
-    link: '/'
-  },
-  {
-    title: 'Обменник',
-    link: '/'
-  },
-  {
-    title: 'Решения для бизнеса',
-    link: '/'
-  },
-  {
-    title: 'Спец. предложение для НКО',
-    link: '/'
+    title: 'Нода',
+    link: '/node',
+    is_external_link:false
   }
+
+  // {
+  //   title: 'Преимущества',
+  //   link: '/'
+  // },
+  // {
+  //   title: 'FAQ',
+  //   link: '/'
+  // },
+  // {
+  //   title: 'Как это работает',
+  //   link: '/'
+  // },
+  // {
+  //   title: 'Переводы',
+  //   link: '/'
+  // },
+  // {
+  //   title: 'Обменник',
+  //   link: '/'
+  // },
+  // {
+  //   title: 'Решения для бизнеса',
+  //   link: '/'
+  // },
+  // {
+  //   title: 'Спец. предложение для НКО',
+  //   link: '/'
+  // }
 ]
 
 
