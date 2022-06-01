@@ -19,6 +19,11 @@
                         target="_blank"
                         label="RuPay Scan"
                         href="https://scan.rupay.pro" />
+           <q-route-tab  no-caps
+                        :ripple="false"
+                        target="_blank"
+                        label="RuPay Wallet"
+                        href="https://wallet.rupay.pro" />
 
         </q-tabs>
         <div class="gt-sm q-gutter-sm">
