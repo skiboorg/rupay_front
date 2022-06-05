@@ -19,6 +19,11 @@
                         target="_blank"
                         label="RuPay Scan"
                         href="https://scan.rupay.pro" />
+           <q-route-tab  no-caps
+                        :ripple="false"
+                        target="_blank"
+                        label="RuPay Wallet"
+                        href="https://wallet.rupay.pro" />
 
         </q-tabs>
         <div class="gt-sm q-gutter-sm">
@@ -64,14 +69,17 @@
       bordered
       side="right"
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+      <div class="q-py-lg text-center"> <img class="logo" src="~assets/logo.webp"></div>
 
-      </q-list>
+       <q-list  >
+      <q-item ><router-link to="/">Главная</router-link></q-item>
+      <q-item ><router-link to="/node">Нода</router-link></q-item>
+
+      <q-item > <a  href="https://scan.rupay.pro">RuPay Scan</a></q-item>
+      <q-item > <a href="https://wallet.rupay.pro">RuPay Wallet</a></q-item>
+
+
+    </q-list>
     </q-drawer>
 
     <q-page-container>
@@ -111,6 +119,9 @@
               </p>
               <p class="no-margin">
                 <a class="text-caption" href="https://scan.rupay.pro">RuPay Scan</a>
+              </p>
+               <p class="no-margin">
+                <a class="text-caption" href="https://wallet.rupay.pro">RuPay Wallet</a>
               </p>
             </div>
 
