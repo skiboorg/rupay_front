@@ -4,7 +4,7 @@
       <div  class=" flex items-center justify-between">
         <img class="logo" src="~assets/logo.webp">
         <q-tabs class="gt-sm"  indicator-color="transparent"
-                active-color="red-13"
+                active-color="primary"
                 v-model="curLink">
 
           <q-route-tab  no-caps
@@ -26,27 +26,27 @@
                         href="https://wallet.rupay.pro" />
 
         </q-tabs>
-        <div class="gt-sm q-gutter-sm">
-          <q-btn
-            flat
-            dense
-            round
-            icon="lab la-vk"
-          />
-          <q-btn
-            flat
-            dense
-            round
-            icon="lab la-telegram"
-          />
-          <q-btn
-            flat
-            dense
-            round
-            icon="lab la-youtube"
-          />
+<!--        <div class="gt-sm q-gutter-sm">-->
+<!--          <q-btn-->
+<!--            flat-->
+<!--            dense-->
+<!--            round-->
+<!--            icon="lab la-vk"-->
+<!--          />-->
+<!--          <q-btn-->
+<!--            flat-->
+<!--            dense-->
+<!--            round-->
+<!--            icon="lab la-telegram"-->
+<!--          />-->
+<!--          <q-btn-->
+<!--            flat-->
+<!--            dense-->
+<!--            round-->
+<!--            icon="lab la-youtube"-->
+<!--          />-->
 
-        </div>
+<!--        </div>-->
         <q-btn
           flat
           dense
@@ -74,6 +74,8 @@
        <q-list  >
       <q-item ><router-link to="/">Главная</router-link></q-item>
       <q-item ><router-link to="/node">Нода</router-link></q-item>
+      <q-item ><router-link to="/tokens">Токенизация активов</router-link></q-item>
+      <q-item ><router-link to="/marketplace">Маркетплейс</router-link></q-item>
 
       <q-item > <a  href="https://scan.rupay.pro">RuPay Scan</a></q-item>
       <q-item > <a href="https://wallet.rupay.pro">RuPay Wallet</a></q-item>
@@ -90,27 +92,27 @@
         <div class="row q-col-gutter-lg">
           <div class="col-12 col-sm-6">
             <img class="q-mb-md logo" src="~assets/logo.webp">
-            <div class="q-gutter-sm">
-              <q-btn
-                flat
-                dense
-                round
-                icon="lab la-vk"
-              />
-              <q-btn
-                flat
-                dense
-                round
-                icon="lab la-telegram"
-              />
-              <q-btn
-                flat
-                dense
-                round
-                icon="lab la-youtube"
-              />
+<!--            <div class="q-gutter-sm">-->
+<!--              <q-btn-->
+<!--                flat-->
+<!--                dense-->
+<!--                round-->
+<!--                icon="lab la-vk"-->
+<!--              />-->
+<!--              <q-btn-->
+<!--                flat-->
+<!--                dense-->
+<!--                round-->
+<!--                icon="lab la-telegram"-->
+<!--              />-->
+<!--              <q-btn-->
+<!--                flat-->
+<!--                dense-->
+<!--                round-->
+<!--                icon="lab la-youtube"-->
+<!--              />-->
 
-            </div>
+<!--            </div>-->
           </div>
           <div class="col-12 col-sm-6">
             <div class="footer-grid">
@@ -152,16 +154,16 @@ const menuItems = [
     title: 'Нода',
     link: '/node',
     is_external_link:false
-  }
+  },
 
-  // {
-  //   title: 'Преимущества',
-  //   link: '/'
-  // },
-  // {
-  //   title: 'FAQ',
-  //   link: '/'
-  // },
+  {
+    title: 'Токенизация активов',
+    link: '/tokens'
+  },
+  {
+    title: 'Маркетплейс',
+    link: '/marketplace'
+  },
   // {
   //   title: 'Как это работает',
   //   link: '/'
