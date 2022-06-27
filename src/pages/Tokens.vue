@@ -201,7 +201,7 @@ async function sendMsg (){
   await axios.get(`https://api.telegram.org/bot${process.env.BOT_KEY}/sendMessage?chat_id=${process.env.CHAT_ID}
   &text=Имя : ${name.value ? name.value : "Не указано"}%0A
   Телефон ${phone.value}%0A
-  Организация: ${phone.value}%0A
+  Организация: ${org.value}%0A
   Текст: ${text.value ? text.value : "Не указан"}`)
   Notify.create({
     message: 'Сообщение отправлено',
