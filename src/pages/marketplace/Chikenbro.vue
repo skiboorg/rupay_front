@@ -2,7 +2,11 @@
   <q-page padding>
     <section class="">
       <div class="container">
-        <p class="text-h3 text-bold q-mb-lg">ЧикенБро</p>
+        <div class="flex items-center q-mb-lg">
+          <img style="height: 75px; width: 45px;object-fit: contain" src="~assets/market/123.jpeg">
+          <p class="text-h3 text-bold ">ЧикенБро</p>
+        </div>
+
         <p class="text-h6 text-primary"><a style="text-decoration: underline" target="_blank" href="/chicken_bro_info.pdf">Презентация ЧикенБро</a></p>
         <p class="text-h6">Токен чикен бро, выпущен ПКРГИ РОЛФ и обеспечен собственностью доли ПКРГИ РОЛФ в Компании Чикен Бро (50% доли). Реализация и выкуп данного актива возможны только с согласования совета правления кооператива РОЛФ, и средства, собранные с его реализации, направляются только на развитие компании Чикен Бро. Реализуя данный актив, кооператив РОЛФ обязуется произвести его обратный выкуп с выгодой для преобретателя, в соответствии с протоколом собрания кооператива.</p>
         <p class="text-h6"><strong>Выпущено актива:</strong> 10000000</p>
