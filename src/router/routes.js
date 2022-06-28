@@ -15,6 +15,7 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/marketplace/Index.vue') },
       { path: 'chikenbro', component: () => import('pages/marketplace/Chikenbro.vue') },
+      { path: 'a700', component: () => import('pages/marketplace/A700.vue') },
 
     ]
   },
