@@ -8,6 +8,7 @@
             <p>эволюция в транзакциях<br class="gt-sm">
               с применением новых технологий<br class="gt-sm">
               на собственном блокчейне</p>
+
           </div>
           <div class="col-12 col-sm-6">
             <q-img src="~assets/offer_img.png"/>

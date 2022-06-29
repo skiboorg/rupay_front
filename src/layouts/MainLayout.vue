@@ -74,6 +74,7 @@
        <q-list  >
       <q-item ><router-link to="/">Главная</router-link></q-item>
       <q-item ><router-link to="/node">Нода</router-link></q-item>
+      <q-item ><router-link to="/apps">Мобильные приложения</router-link></q-item>
       <q-item ><router-link to="/tokens">Токенизация активов</router-link></q-item>
       <q-item ><router-link to="/marketplace">Маркетплейс</router-link></q-item>
 
@@ -153,6 +154,11 @@ const menuItems = [
   {
     title: 'Нода',
     link: '/node',
+    is_external_link:false
+  },
+  {
+    title: 'Мобильные приложения',
+    link: '/apps',
     is_external_link:false
   },
 
