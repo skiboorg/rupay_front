@@ -18,7 +18,7 @@
             </div>
           </div>
           <div class="col-16 col-sm-6">
-            <p class="text-h6 text-bold  ">Токены, обеспеченые недвижимостью</p>
+            <p class="text-h6 text-bold  ">Токены, обеспеченные недвижимостью</p>
             <q-separator class="q-mb-md"/>
             <div class="row q-col-gutter-md">
               <div class="col-12 col-sm-6 ">
