@@ -24,6 +24,14 @@
                         target="_blank"
                         label="RuPay Wallet"
                         href="https://wallet.rupay.pro" />
+          <q-btn
+            flat
+            dense
+            href="https://t.me/rypay_pro"
+            round
+            target="_blank"
+            icon="lab la-telegram"
+          />
 
         </q-tabs>
 <!--        <div class="gt-sm q-gutter-sm">-->
@@ -93,19 +101,21 @@
         <div class="row q-col-gutter-lg">
           <div class="col-12 col-sm-6">
             <img class="q-mb-md logo" src="~assets/logo.webp">
-<!--            <div class="q-gutter-sm">-->
+            <div class="q-gutter-sm">
 <!--              <q-btn-->
 <!--                flat-->
 <!--                dense-->
 <!--                round-->
 <!--                icon="lab la-vk"-->
 <!--              />-->
-<!--              <q-btn-->
-<!--                flat-->
-<!--                dense-->
-<!--                round-->
-<!--                icon="lab la-telegram"-->
-<!--              />-->
+              <q-btn
+                flat
+                dense
+                href="https://t.me/rypay_pro"
+                round
+                target="_blank"
+                icon="lab la-telegram"
+              />
 <!--              <q-btn-->
 <!--                flat-->
 <!--                dense-->
@@ -113,7 +123,7 @@
 <!--                icon="lab la-youtube"-->
 <!--              />-->
 
-<!--            </div>-->
+            </div>
           </div>
           <div class="col-12 col-sm-6">
             <div class="footer-grid">

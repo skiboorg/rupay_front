@@ -64,7 +64,7 @@
         <div v-if="cur_app==='Android'" class="bg-grey-3 q-pa-lg">
           <div class="row q-col-gutter-md items-center">
             <div class="col-12 col-md-6">
-              <p class="text-bold text-h6 text-primary">Мобильное прилодение RUPAY Wallet</p>
+              <p class="text-bold text-h6 text-primary">Мобильное приложение RUPAY Wallet</p>
               <p class="q-mb-xl">
                 1. Скачивайте приложение только с сайта https://rupay.pro. На других могут быть мошенники.<br><br>
 
