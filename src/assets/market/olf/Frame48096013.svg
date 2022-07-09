@@ -1,0 +1,8 @@
+<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1" y="1" width="70" height="70" rx="35" fill="white"/>
+<rect x="1" y="1" width="70" height="70" rx="35" fill="black" fill-opacity="0.2"/>
+<rect x="1" y="1" width="70" height="70" rx="35" fill="black" fill-opacity="0.2"/>
+<path d="M36 50.1L24 43.05V28.95L36 21.9L48 28.95V43.05L36 50.1ZM27 41.4L36 46.65L45 41.4V30.75L36 25.5L27 30.75V41.4Z" fill="#9A281E"/>
+<path d="M52.5 24.3L37.5 15.45C37.05 15.15 36.6 15 36 15C35.4 15 34.95 15.15 34.5 15.45L19.5 24.3C18.6 24.9 18 25.8 18 26.85V45.15C18 46.2 18.6 47.25 19.5 47.7L34.5 56.55C34.95 56.85 35.55 57 36 57C36.45 57 37.05 56.85 37.5 56.55L52.5 47.7C53.4 47.1 54 46.2 54 45.15V26.85C54 25.8 53.4 24.75 52.5 24.3ZM51 45.15L36 54L21 45.15V26.85L36 18L51 26.85V45.15Z" fill="#9A281E"/>
+<rect x="1" y="1" width="70" height="70" rx="35" stroke="#9A281E" stroke-width="2"/>
+</svg>
