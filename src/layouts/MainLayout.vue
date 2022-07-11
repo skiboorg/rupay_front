@@ -98,7 +98,7 @@
     </q-page-container>
     <footer class="bg-grey-9 q-py-lg text-white">
       <div class="container">
-        <div class="row q-col-gutter-lg">
+        <div class="row q-col-gutter-lg q-mb-lg">
           <div class="col-12 col-sm-6">
             <img class="q-mb-md logo" src="~assets/logo.webp">
             <div class="q-gutter-sm">
@@ -141,6 +141,9 @@
           </div>
 
         </div>
+        <q-separator dark spaced="lg"/>
+        <p class="q-mb-sm">2022 (С) Потребительский кооператив по развитию гражданских инициатив РОЛФ</p>
+        <p class="text-caption q-mb-none">Cайт и сервисы rupay.pro доступны только пайщикам кооператива, как действующим так и ассоциированным</p>
       </div>
     </footer>
   </q-layout>
