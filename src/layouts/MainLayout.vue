@@ -1,10 +1,10 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="q-px-lg q-py-sm bg-white text-dark">
+    <q-header  class="q-px-lg q-py-sm bg-primary text-blue-grey-2">
       <div  class=" flex items-center justify-between">
-        <img class="logo" src="~assets/logo.png">
+        <img class="logo" src="~assets/logo_t.png">
         <q-tabs class="gt-sm"  indicator-color="transparent"
-                active-color="primary"
+                active-color="white"
                 v-model="curLink">
 
           <q-route-tab  no-caps
