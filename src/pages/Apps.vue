@@ -4,46 +4,46 @@
       <div class="container">
         <p class="text-h3 text-bold q-mb-xl text-center">Мобильные приложения RuPay</p>
 
-        <div class="text-center q-mb-xl">
-          <q-btn-toggle
-            size="18px"
-            v-model="cur_app"
-            rounded
-            unelevated
-            toggle-color="primary"
-            color="grey-4"
-            text-color="dark"
-            :options="[
-          {value: 'iPhone', slot: 'one'},
-          {value: 'Android', slot: 'two'},
+<!--        <div class="text-center q-mb-xl">-->
+<!--          <q-btn-toggle-->
+<!--            size="18px"-->
+<!--            v-model="cur_app"-->
+<!--            rounded-->
+<!--            unelevated-->
+<!--            toggle-color="primary"-->
+<!--            color="grey-4"-->
+<!--            text-color="dark"-->
+<!--            :options="[-->
+<!--          {value: 'iPhone', slot: 'one'},-->
+<!--          {value: 'iPhone', slot: 'two'},-->
 
-        ]"
-          >
-            <template v-slot:one>
-              <div class="row items-center no-wrap">
-                <q-icon left name="lab la-apple" />
-                <div class="text-center">
-                  iPhone
-                </div>
+<!--        ]"-->
+<!--          >-->
+<!--            <template v-slot:one>-->
+<!--              <div class="row items-center no-wrap">-->
+<!--                <q-icon left name="lab la-apple" />-->
+<!--                <div class="text-center">-->
+<!--                  iPhone-->
+<!--                </div>-->
 
-              </div>
-            </template>
+<!--              </div>-->
+<!--            </template>-->
 
-            <template v-slot:two>
-              <div class="row items-center no-wrap">
-                <div class="text-center">
-                  Android
-                </div>
-                <q-icon right name="lab la-android" />
-              </div>
-            </template>
+<!--            <template v-slot:two>-->
+<!--              <div class="row items-center no-wrap">-->
+<!--                <div class="text-center">-->
+<!--                  Android-->
+<!--                </div>-->
+<!--                <q-icon right name="lab la-android" />-->
+<!--              </div>-->
+<!--            </template>-->
 
-          </q-btn-toggle>
-        </div>
+<!--          </q-btn-toggle>-->
+<!--        </div>-->
         <div v-if="cur_app==='iPhone'" class="bg-grey-3 q-pa-lg">
           <div class="row q-col-gutter-md items-center">
             <div class="col-12 col-md-6">
-              <p class="text-bold text-h6 text-primary">RuPay-Онлайн</p>
+              <p class="text-bold text-h6 text-primary">RUPAY-Онлайн</p>
               <p class="q-mb-xl">
                 Мобильное приложение, которое работает на всех смартфонах.<br><br>
                 Оно такое же, как приложение, только удобнее — его не надо скачивать,

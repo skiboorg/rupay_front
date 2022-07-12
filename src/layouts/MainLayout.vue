@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="q-px-lg q-py-sm bg-white text-dark">
       <div  class=" flex items-center justify-between">
-        <img class="logo" src="~assets/logo.webp">
+        <img class="logo" src="~assets/logo.png">
         <q-tabs class="gt-sm"  indicator-color="transparent"
                 active-color="primary"
                 v-model="curLink">
@@ -77,7 +77,7 @@
       bordered
       side="right"
     >
-      <div class="q-py-lg text-center"> <img class="logo" src="~assets/logo.webp"></div>
+      <div class="q-py-lg text-center"> <img class="logo" src="~assets/logo.png"></div>
 
        <q-list  >
       <q-item ><router-link to="/">Главная</router-link></q-item>
@@ -100,7 +100,7 @@
       <div class="container">
         <div class="row q-col-gutter-lg q-mb-lg">
           <div class="col-12 col-sm-6">
-            <img class="q-mb-md logo" src="~assets/logo.webp">
+            <img class="q-mb-md logo" src="~assets/logo_t.png">
             <div class="q-gutter-sm">
 <!--              <q-btn-->
 <!--                flat-->
