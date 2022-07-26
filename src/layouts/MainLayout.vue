@@ -27,10 +27,26 @@
           <q-btn
             flat
             dense
+            to="https://vk.com/pypay"
+            target="_blank"
+            round
+            icon="lab la-vk"
+          />
+          <q-btn
+            flat
+            dense
             href="https://t.me/rypay_pro"
             round
             target="_blank"
             icon="lab la-telegram"
+          />
+          <q-btn
+            flat
+            dense
+            to="https://youtube.com/channel/UCCPCsBr7zUmKknyZryNFDJA"
+            target="_blank"
+            round
+            icon="lab la-youtube"
           />
 
         </q-tabs>
@@ -102,12 +118,14 @@
           <div class="col-12 col-sm-6">
             <img class="q-mb-md logo" src="~assets/logo_t.png">
             <div class="q-gutter-sm">
-<!--              <q-btn-->
-<!--                flat-->
-<!--                dense-->
-<!--                round-->
-<!--                icon="lab la-vk"-->
-<!--              />-->
+              <q-btn
+                flat
+                dense
+                to="https://vk.com/pypay"
+                target="_blank"
+                round
+                icon="lab la-vk"
+              />
               <q-btn
                 flat
                 dense
@@ -116,12 +134,14 @@
                 target="_blank"
                 icon="lab la-telegram"
               />
-<!--              <q-btn-->
-<!--                flat-->
-<!--                dense-->
-<!--                round-->
-<!--                icon="lab la-youtube"-->
-<!--              />-->
+              <q-btn
+                flat
+                dense
+                to="https://youtube.com/channel/UCCPCsBr7zUmKknyZryNFDJA"
+                target="_blank"
+                round
+                icon="lab la-youtube"
+              />
 
             </div>
           </div>
