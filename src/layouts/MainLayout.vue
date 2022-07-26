@@ -27,7 +27,7 @@
           <q-btn
             flat
             dense
-            to="https://vk.com/pypay"
+            href="https://vk.com/pypay"
             target="_blank"
             round
             icon="lab la-vk"
@@ -43,7 +43,7 @@
           <q-btn
             flat
             dense
-            to="https://youtube.com/channel/UCCPCsBr7zUmKknyZryNFDJA"
+            href="https://youtube.com/channel/UCCPCsBr7zUmKknyZryNFDJA"
             target="_blank"
             round
             icon="lab la-youtube"
@@ -121,7 +121,7 @@
               <q-btn
                 flat
                 dense
-                to="https://vk.com/pypay"
+                href="https://vk.com/pypay"
                 target="_blank"
                 round
                 icon="lab la-vk"
@@ -137,7 +137,7 @@
               <q-btn
                 flat
                 dense
-                to="https://youtube.com/channel/UCCPCsBr7zUmKknyZryNFDJA"
+                href="https://youtube.com/channel/UCCPCsBr7zUmKknyZryNFDJA"
                 target="_blank"
                 round
                 icon="lab la-youtube"
