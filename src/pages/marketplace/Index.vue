@@ -1,43 +1,47 @@
 <template>
   <q-page padding>
-    <section class="">
-      <div class="container">
-        <p class="text-h3 text-bold q-mb-xl text-center">Маркетплейс</p>
+    <section class="row q-col-gutter-lg marketplace">
+      <div class="col-12 col-md-6">
+        <div class="buisness-token">
+          <h3 class="buisness-token__heading">Токены, обеспеченные <br> бизнесом:</h3>
+          <div class="buisness-token__grid">
+            <router-link to="/marketplace/chikenbro" class="buisness-token__grid_item">
+              <img src="~assets/new/chicken-bro.png" alt="" class="buisness-token__grid_item_pic" />
+            </router-link>
+            <router-link to="/marketplace/olf" class="buisness-token__grid_item">
+              <img src="~assets/new/olf-token.png" alt="" class="buisness-token__grid_item_pic" />
+            </router-link>
 
-        <div class="row q-col-gutter-lg">
-          <div class="col-16 col-sm-6">
-            <p class="text-h6 text-bold ">Бизнес токены</p>
-            <q-separator class="q-mb-md"/>
-            <div class="row q-col-gutter-md">
-              <div class="col-12 col-sm-6 ">
-                <router-link to="/marketplace/chikenbro">
-                  <q-img fit="contain" src="~assets/market/ch.png"/>
-                </router-link>
-              </div>
-              <div class="col-12 col-sm-6 text-center">
-                <router-link class="text-center" to="/marketplace/olf">
-                  <img src="~assets/market/olf/Frame48096009.svg">
-                  <p class="text-bold">OLF</p>
-                </router-link>
-              </div>
-
-            </div>
-          </div>
-          <div class="col-16 col-sm-6">
-            <p class="text-h6 text-bold  ">Токены, обеспеченные недвижимостью</p>
-            <q-separator class="q-mb-md"/>
-            <div class="row q-col-gutter-md">
-              <div class="col-12 col-sm-6 ">
-                <router-link to="/marketplace/a700">
-                  <q-img fit="contain" src="~assets/market/a700/thumb.jpeg"/>
-                </router-link>
-              </div>
-
-            </div>
+            <a  class="buisness-token__grid_item"
+            ><img src="~assets/new/SOON.png" alt="" class="buisness-token__grid_item_pic" /></a
+            ><a  class="buisness-token__grid_item"
+          ><img src="~assets/new/SOON.png" alt="" class="buisness-token__grid_item_pic"
+          /></a>
+            <img src="~assets/new/marketplace-dot-circle.svg" alt="" class="buisness-token__grid_dot-circle">
           </div>
         </div>
-
       </div>
+      <div class="col-12 col-md-6">
+        <div class="real-estate-token">
+          <h3 class="real-estate-token__heading">Токены, обеспеченные <br> недвижимостью:</h3>
+          <div class="real-estate-token__grid">
+            <router-link to="/marketplace/a700" class="real-estate-token__grid_item">
+              <img src="~assets/new/ApartAv-token.png" alt="" class="real-estate-token__grid_item_pic" />
+            </router-link>
+
+            <a  class="real-estate-token__grid_item"
+          ><img src="~assets/new/SOON.png" alt="" class="real-estate-token__grid_item_pic" /></a
+          ><a  class="real-estate-token__grid_item"
+          ><img src="~assets/new/SOON.png" alt="" class="real-estate-token__grid_item_pic" /></a
+          ><a  class="real-estate-token__grid_item"
+          ><img src="~assets/new/SOON.png" alt="" class="real-estate-token__grid_item_pic"
+          /></a>
+            <img src="~assets/new/marketplace-dot-circle.svg" alt="" class="real-estate-token__grid_dot-circle">
+          </div>
+        </div>
+      </div>
+
+
     </section>
 
   </q-page>
@@ -47,5 +51,6 @@
 
 </script>
 <style lang="sass">
-
+.marketplace
+  padding-top: 100px
 </style>

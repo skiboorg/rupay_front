@@ -2,7 +2,11 @@
   <q-page padding>
     <section class="">
       <div class="container">
-        <p class="text-h3 text-bold q-mb-xl text-center">Мобильные приложения RuPay</p>
+        <h3 class="main-grid__text_top_heading">
+          <span>Мобильное приложение </span><br />
+          RUPAY
+        </h3>
+
 
 <!--        <div class="text-center q-mb-xl">-->
 <!--          <q-btn-toggle-->
@@ -40,7 +44,7 @@
 
 <!--          </q-btn-toggle>-->
 <!--        </div>-->
-        <div v-if="cur_app==='iPhone'" class="bg-grey-3 q-pa-lg">
+        <div v-if="cur_app==='iPhone'" class=" q-pa-lg">
           <div class="row q-col-gutter-md items-center">
             <div class="col-12 col-md-6">
               <p class="text-bold text-h6 text-primary">RUPAY-Онлайн</p>
@@ -104,5 +108,8 @@ let cur_app=ref('iPhone')
 // })
 </script>
 <style lang="sass">
-
+.container
+  max-width: 1024px
+  margin: 0 auto
+  padding: 0 10px
 </style>
