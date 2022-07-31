@@ -158,7 +158,7 @@
                   <a href="https://youtube.com/channel/UCCPCsBr7zUmKknyZryNFDJA" target="_blank" class="nav-menu__list_li_link_container_contact-dropdown_a">
                     YouTube
                   </a>
-                  <a href="https://vk.com/pypay" target="_blank" class="nav-menu__list_li_link_container_contact-dropdown_a">
+                  <a href="https://vk.com/rupay_pro" target="_blank" class="nav-menu__list_li_link_container_contact-dropdown_a">
                     ВКонтакте
                   </a>
 <!--                  <a href="" target="_blank" class="nav-menu__list_li_link_container_contact-dropdown_a">-->
