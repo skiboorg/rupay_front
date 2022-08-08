@@ -108,8 +108,5 @@ let cur_app=ref('iPhone')
 // })
 </script>
 <style lang="sass">
-.container
-  max-width: 1024px
-  margin: 0 auto
-  padding: 0 10px
+
 </style>

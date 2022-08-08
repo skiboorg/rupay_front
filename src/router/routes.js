@@ -9,6 +9,7 @@ const routes = [
       // { path: 'node', component: () => import('pages/Node.vue') },
       // { path: 'tokens', component: () => import('pages/Tokens.vue') },
       { path: 'apps', component: () => import('pages/Apps.vue') },
+      { path: 'ido', component: () => import('pages/Ido.vue') },
     ]
   },
   {
@@ -19,6 +20,15 @@ const routes = [
       { path: 'chikenbro', component: () => import('pages/marketplace/Chikenbro.vue') },
       { path: 'a700', component: () => import('pages/marketplace/A700.vue') },
       { path: 'olf', component: () => import('pages/marketplace/Olf.vue') },
+
+    ]
+  },
+  {
+    path: '/games',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/games/Index.vue') },
+
 
     ]
   },
