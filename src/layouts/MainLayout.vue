@@ -43,9 +43,10 @@
             >
           </li>
           <li class="nav-menu__list_li">
-            <a href="https://wallet.rupay.pro/dashboard" target="_blank" class="nav-menu__list_li_link"
-            ><p>RUpay Wallet</p></a
-            >
+            <router-link class="nav-menu__list_li_link" to="/wallet">
+              <p :class="$route.path === '/wallet' ? 'active' : ''">RUpay Wallet</p>
+            </router-link>
+
           </li>
           <li class="nav-menu__list_li contact">
             <a href="javascript:;" class="nav-menu__list_li_link">

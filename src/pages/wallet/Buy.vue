@@ -1,0 +1,159 @@
+<template>
+  <page>
+    <page-body class="q-px-md">
+      <page-header>
+      </page-header>
+      <div class="" style="height: 40px"></div>
+      <div v-if="asset.show_description" class="q-mb-lg">
+        <p class="q-mb-sm text-caption">Укажите кошелек с которого будете совершать транзакцию*</p>
+        <q-input class="q-mb-sm"  outlined rounded v-model="fromWallet"  />
+        <div>
+          <p class="q-mb-sm text-caption">С указанного вами кошелька совершаете транзакцию на адрес:</p>
+          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
+          <q-btn class="q-mb-sm" color="primary" rounded label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <p class="q-mb-sm text-caption">
+            Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+            <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
+            Совершая транзакцию в <span class="text-weight-bold">{{asset.name}}</span> вы делаете добровольный имущественный паевой взнос ПКРГИ РОЛФ
+            Равный количеству отправляемых {{asset.name}} Вывод монет с кошелька является выплатой по вашему взносу<br>
+            Зачисление происходит в сроки до 24 часов с момента транзакции (указаны максимальные сроки)
+          </p>
+          <p class="q-mb-sm text-caption">Сумма пополнения*</p>
+          <q-input class="q-mb-sm" rounded  outlined  v-model="amount" type="number" />
+          <btn rounded color="primary"  :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps :outline="false" label="Отправить"/>
+        </div>
+        </div>
+      <div v-else class="q-mb-lg">
+        <q-scroll-area style="height: 85vh;">
+          <div v-if="is_sent" class="">
+            <p class="q-mb-sm text-caption">Для пополнения вашего баланса {{asset.name}} по указанным реквизитам ниже совершаете оплату в назначении платежа указать:</p>
+            <p class="q-mb-sm text-caption text-weight-bold"> Добровольный членский взнос от ФИО, КОД {{code}}</p>
+            <p class="q-mb-sm text-caption text-weight-bold">  ВНИМАНИЕ НАЗНАЧЕНИЕ ПЛАТЕЖА ДОЛЖНО СОВПАДАТЬ С УКАЗАННЫМ В ИНСТРУКЦИИ.</p>
+            <p class="q-mb-sm text-caption">   Зачисление {{asset.name}} происходит в течении нескольких часов после получения средств на счет!
+              Рекомендуем совершать оплату с Альфа Банка, тогда зачисление будет происходить быстрее.
+              Оплата с других банков может затянуть зачисление до 5 рабочих дней.</p>
+            <q-img src="~assets/qr.jpg"/>
+            <p class="q-mb-lg text-caption"><span style="font-weight: bold">Реквизиты для оплаты взносов</span><br>
+              Номер счёта: 40703810326350000009<br>
+              Валюта: RUR<br>
+              Название: ПОТРЕБИТЕЛЬСКИЙ КООПЕРАТИВ ПО РАЗВИТИЮ ГРАЖДАНСКИХ ИНИЦИАТИВ "РОЛФ"<br>
+              ИНН: 2366034781<br>
+              КПП: 236601001<br>
+              Банк: ФИЛИАЛ "РОСТОВСКИЙ" АО "АЛЬФА-БАНК"<br>
+              БИК: 046015207<br>
+              Кор. счёт: 30101810500000000207<br>
+              Юридический адрес компании: улица ГОРЬКОГО, д. 60/4, кв./оф. 44, Краснодарский край, р-н ГОРОД-КУРОРТ СОЧИ, г. Сочи</p>
+          </div>
+
+          <p class="q-mb-sm text-caption">Сумма пополнения в рублях* (<span class="text-bold text-negative">мининум 1000 руб</span>)</p>
+        <q-input class="q-mb-sm" rounded  outlined  v-model="amount" type="number" />
+          <p class="q-mb-sm text-caption text-bold">Вы получите: {{amount / asset.course}} {{asset.name}}</p>
+        <btn color="primary" :loading="is_loading" @click="send" :disable="!amount || amount<1000" unelevated no-caps :outline="false" label="Отправить"/>
+        </q-scroll-area>
+      </div>
+    </page-body>
+  </page>
+
+</template>
+<script setup>
+
+import { useEraStore } from 'stores/eraChain'
+const sraStore = useEraStore()
+
+import { useAccountStore } from 'stores/account'
+const accountStore = useAccountStore()
+
+import {computed, ref,onBeforeMount} from "vue";
+import {api} from "boot/axios";
+import axios from 'axios'
+
+import {useRoute} from "vue-router"
+
+const route = useRoute()
+
+import {useNotify} from "src/helpers/utils";
+import { copyToClipboard } from 'quasar'
+
+
+let code = ref(null)
+let amount = ref(null)
+let fromWallet = ref(null)
+let is_loading = ref(false)
+let is_sent = ref(false)
+let asset_key = ref(0)
+
+async function send(){
+  is_loading.value = !is_loading.value
+  await api.post('/api/settings/payment_request',{
+    code:code.value,
+    wallet:current_address.value,
+    fromWallet:fromWallet.value,
+    currency:asset.value.name,
+    amount:amount.value,
+  })
+
+  await axios.get(`https://api.telegram.org/bot603507616:AAEmmGeaujFe_lqkw31HHSoh2EiAvVNtFA4/sendMessage?chat_id=-542426502
+  &text=Код : ${code.value}%0A
+  На кошелек ${current_address.value}%0A
+  С кошелька: ${fromWallet.value}%0A
+  Валюта: ${asset.value.name}%0A
+  Сумма пополнения: ${amount.value}
+`
+  )
+  code.value = makeid(4)
+  fromWallet.value=null
+  amount.value=null
+
+  is_loading.value = !is_loading.value
+  is_sent.value = true
+  useNotify('positive','Запрос успешно отправлен<br>Ожидаем поступление средств')
+
+
+}
+
+
+function copyAddress(){
+  copyToClipboard(asset.value.from_address)
+    .then(() => {
+      useNotify('positive', 'Адрес кошелька скопирован')
+    })
+    .catch(() => {
+      // fail
+    })
+}
+
+const asset = computed(()=>{
+  return sraStore.assets.find(x=>x.key===asset_key.value)
+})
+
+const current_address = computed(()=>{
+  return accountStore.addresses[accountStore.currentAddressIdx].address
+})
+
+function makeid(length) {
+  var result           = '';
+  var characters       = '0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() *
+      charactersLength));
+  }
+  return result;
+}
+
+onBeforeMount( async ()=>{
+  asset_key.value = parseInt(route.query.asset)
+  code.value=makeid(4)
+})
+</script>
+
+<style lang="sass">
+.qr-card
+  max-width: 80%
+  margin: 0 auto 16px
+
+  &-text
+    font-size: 12px
+    text-align: center
+    line-height: 120%
+</style>

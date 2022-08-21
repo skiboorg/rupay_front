@@ -7,7 +7,7 @@
 
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
-
+const BASE_URL = 'https://xn--k1affs.xn--p1ai'
 
 const { configure } = require('quasar/wrappers');
 
@@ -24,7 +24,10 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
     boot: [
 
-      'axios',
+      'init',
+      //'axios',
+      'global-components',
+      'erachain',
     ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
@@ -51,8 +54,12 @@ module.exports = configure(function (ctx) {
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env: {
         BOT_KEY: '603507616:AAF0LvAu2wqJYI-fLEBkD_Lli0VxyR4pgIM',
-        CHAT_ID: '-542426502'
-
+        CHAT_ID: '-542426502',
+        API: BASE_URL,
+        //WS: BASE_URL_WS,
+        //TODO CHANGE VERSION
+        APP_VERSION: '0.01',
+        API_URL: 'https://scan.rupay.pro',
 
       },
       // transpile: false,
@@ -75,7 +82,10 @@ module.exports = configure(function (ctx) {
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
 
-      chainWebpack (/* chain */) {}
+      chainWebpack (chain) {
+        const nodePolyfillWebpackPlugin = require('node-polyfill-webpack-plugin')
+        chain.plugin('node-polyfill').use(nodePolyfillWebpackPlugin)
+      }
 
     },
 
@@ -110,7 +120,10 @@ module.exports = configure(function (ctx) {
 
     // animations: 'all', // --- includes all animations
     // https://quasar.dev/options/animations
-    animations: [],
+    animations: [
+      'slideInRight',
+      'slideOutRight'
+    ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/developing-ssr/configuring-ssr
     ssr: {
