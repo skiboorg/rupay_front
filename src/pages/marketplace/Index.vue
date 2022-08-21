@@ -1,6 +1,15 @@
 <template>
   <q-page padding>
+
+      <div class="flex items-center justify-center">
+        <router-link  to="/marketplace/rupay" class="buisness-token__grid_item">
+          <img src="~assets/new/rulogo.png" alt="" class="buisness-token__grid_item_pic" />
+        </router-link>
+      </div>
+
+
     <section class="row q-col-gutter-lg marketplace">
+
       <div class="col-12 col-md-6">
         <div class="buisness-token">
           <h3 class="buisness-token__heading">Токены, обеспеченные <br> бизнесом:</h3>
@@ -52,5 +61,5 @@
 </script>
 <style lang="sass">
 .marketplace
-  padding-top: 100px
+  padding-top: 0px
 </style>

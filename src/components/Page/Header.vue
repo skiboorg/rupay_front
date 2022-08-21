@@ -14,62 +14,6 @@
   </q-header>
 
 
-<!--  <q-drawer-->
-<!--    v-model="menuOpened"-->
-<!--    show-if-above-->
-<!--    bordered-->
-<!--    side="right"-->
-<!--    class="q-py-lg"-->
-<!--  >-->
-
-<!--    <q-list separator class="text-dark">-->
-<!--      <q-item>-->
-<!--        <q-item-section></q-item-section>-->
-<!--        <q-item-section side><q-btn round text-color="primary" icon="las la-times-circle" unelevated @click="menuOpened = !menuOpened"/></q-item-section>-->
-<!--      </q-item>-->
-
-<!--      <q-item  v-if="person">-->
-<!--        <q-item-section avatar><q-avatar><img :src="API_URL+person.maker_image" ></q-avatar></q-item-section>-->
-<!--        <q-item-section>-->
-<!--          <q-item-label>{{person.maker_name}}</q-item-label>-->
-<!--        </q-item-section>-->
-<!--      </q-item>-->
-<!--      <q-item v-else class="block ">-->
-
-<!--        <p class="text-negative text-bold q-mb-sm">Ваш счет является анонимным. Для разблокировки всего функционала создайте персону и верифицируйте счет</p>-->
-<!--        <q-btn label="Создать персону" color="blue-7" @click="router.push({name:'create_person'})" icon="las la-user-plus" no-caps unelevated/>-->
-
-<!--      </q-item>-->
-<!--      <q-item>-->
-<!--        <q-item-section>-->
-<!--          <q-item-label overline>-->
-<!--            <p class="text-caption q-mb-none ellipsis">{{current_address}}</p>-->
-<!--          </q-item-label>-->
-<!--          <q-item-label caption>Адрес кошелька</q-item-label>-->
-<!--        </q-item-section>-->
-<!--        <q-item-section side>-->
-<!--          <q-btn color="blue-7" @click="copyAddress" round dense unelevated icon="las la-clipboard"/>-->
-<!--        </q-item-section>-->
-<!--      </q-item>-->
-<!--            <q-item v-if="person" clickable @click="router.push({name:'verify_person'})" >-->
-<!--              <q-item-section avatar><q-icon size="20px" name="las la-id-card"/></q-item-section>-->
-<!--              <q-item-section >Верифицировать пользователя</q-item-section>-->
-<!--            </q-item>-->
-<!--      <q-item clickable @click="logout" class="text-negative">-->
-<!--        <q-item-section avatar><q-icon size="20px" name="las la-sign-out-alt"/></q-item-section>-->
-<!--        <q-item-section >Выход</q-item-section>-->
-<!--      </q-item>-->
-<!--      <q-separator/>-->
-
-
-
-
-
-<!--    </q-list>-->
-<!--    <q-banner  class="bg-blue-7 absolute-bottom">RUPAY Wallet - Версия {{app_version}}</q-banner>-->
-<!--  </q-drawer>-->
-
-
 </template>
 <style lang="sass">
 .header-spacer

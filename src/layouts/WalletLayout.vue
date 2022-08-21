@@ -172,8 +172,9 @@
             </svg>
 
             <img draggable="false"
+
                  class="main-grid__img_container_pic"
-                 src="~assets/new/girl.png"
+                 src="~assets/new/mm.png"
                  alt=""
             />
             <svg viewBox="0 0 223 184" fill="none" xmlns="http://www.w3.org/2000/svg"                     class="main-grid__img_container_svg-2"

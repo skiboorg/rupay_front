@@ -1,7 +1,43 @@
 <template>
   <q-page class="full-width">
      <div class="flex column items-center justify-evenly">
+       <q-list  class="full-width">
+         <q-item   v-if="person">
+           <q-item-section avatar>
+             <q-avatar><img :src="API_URL+person.maker_image" ></q-avatar>
+           </q-item-section>
+           <q-item-section>
+             <q-item-label>{{person.maker_name}}</q-item-label>
+           </q-item-section>
+           <q-item-section>
+             <q-item-label overline>
+               <p class="text-caption q-mb-none ellipsis">{{current_address}}</p>
+             </q-item-label>
+             <q-item-label caption>Адрес кошелька</q-item-label>
+           </q-item-section>
 
+
+         </q-item>
+         <q-item v-else class="block ">
+           <q-item-section>
+             <p class="text-negative text-bold q-mb-sm">Ваш счет является анонимным. Для разблокировки всего функционала
+               <router-link :to="{name:'create_person'}">создайте персону</router-link>
+               и верифицируйте счет</p>
+           </q-item-section>
+         <q-item-section>
+             <q-item-label overline>
+               <p class="text-caption q-mb-none ellipsis">{{current_address}}</p>
+             </q-item-label>
+             <q-item-label caption>Адрес кошелька</q-item-label>
+           </q-item-section>
+
+         </q-item>
+
+         <q-item v-if="person"  >
+
+           <q-item-section ><router-link class="text-dark" :to="{name:'verify_person'}">Верифицировать пользователя</router-link> </q-item-section>
+         </q-item>
+       </q-list>
        <div class=" flex items-center text-center q-mb-xl">
 
 
@@ -10,37 +46,33 @@
        </div>
 
        <div class="top-buttons">
-
-         <div class="text-center cursor-pointer" @click="$router.push({name: 'wallet_own_assets'})">
-           <q-avatar class="bg-blue-7 q-mb-sm">
+         <q-btn stack @click="$router.push({name: 'wallet_own_assets'})" color="primary" unelevated no-caps>
              <q-icon color="white" size="22px" name="las la-upload"/>
-           </q-avatar>
            <p class="no-margin text-caption lh100">Отправить<br>в сети RUPAY</p>
-         </div>
-         <div class="text-center cursor-pointer" @click="$router.push({name: 'wallet_select'})">
-           <q-avatar class="bg-blue-7 q-mb-sm">
-             <q-icon color="white" size="22px" name="las la-download"/>
-           </q-avatar>
+         </q-btn>
+
+         <q-btn stack @click="$router.push({name: 'wallet_select'})" color="primary" unelevated no-caps>
+           <q-icon color="white" size="22px" name="las la-download"/>
            <p class="no-margin text-caption lh100">Получить<br>в сети RUPAY</p>
-         </div>
-         <div class="text-center cursor-pointer" @click="$router.push({name: 'wallet_assets_for_buy'})">
-           <q-avatar class="bg-blue-7 q-mb-sm">
-             <q-icon color="white" size="22px" name="las la-tag"/>
-           </q-avatar>
+         </q-btn>
+
+         <q-btn stack @click="$router.push({name: 'wallet_assets_for_buy'})" color="primary" unelevated no-caps>
+           <q-icon color="white" size="22px" name="las la-tag"/>
            <p class="no-margin text-caption lh100">Купить</p>
-         </div>
-         <div class="text-center cursor-pointer" @click="$router.push({name: 'wallet_exchange'})">
-           <q-avatar class="bg-blue-7 q-mb-sm">
-             <q-icon color="white" size="22px" name="las la-exchange-alt"/>
-           </q-avatar>
+         </q-btn>
+
+
+         <q-btn stack @click="$router.push({name: 'wallet_exchange'})" color="primary" unelevated no-caps>
+           <q-icon color="white" size="22px" name="las la-exchange-alt"/>
            <p class="no-margin text-caption lh100">Обмен</p>
-         </div>
-         <div class="text-center cursor-pointer" @click="$router.push({name: 'withdraw'})">
-           <q-avatar class="bg-blue-7 q-mb-sm">
-             <q-icon color="white" size="22px" name="las la-wallet"/>
-           </q-avatar>
+         </q-btn>
+
+
+         <q-btn stack @click="$router.push({name: 'withdraw'})" color="primary" unelevated no-caps>
+           <q-icon color="white" size="22px" name="las la-wallet"/>
            <p class="no-margin text-caption lh100">Вывести</p>
-         </div>
+         </q-btn>
+
 
        </div>
 
@@ -119,6 +151,10 @@ const assets = computed(()=>{
   return accountStore.assets
 })
 
+const person = computed(()=>{
+  return accountStore.verifyPersonData
+})
+
 const balances = computed(()=>{
   return accountStore.balances
 })
@@ -174,7 +210,7 @@ const total = computed(()=>{
 .top-buttons
   display: grid
   grid-template-columns: repeat(5,1fr)
-  grid-gap: 40px
+  grid-gap: 10px
   padding: 0 8px
 .tokens-tab
   border-top-left-radius: 10px

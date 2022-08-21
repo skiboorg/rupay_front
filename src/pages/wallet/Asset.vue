@@ -17,25 +17,25 @@
           <p class="text-weight-medium text-body1 text-dark no-margin" :class="{blur:$global.isBlur}">~ {{$filters.convertAmount(rub_balance)}} &#8381;</p>
         </div>
 
-        <div style="display: grid;grid-template-columns: 1fr 1fr 1fr" class=" full-width text-dark">
-          <div class="text-center cursor-pointer" @click="globalStore.toggleSendAssetModalVisible()">
-            <q-avatar class="bg-blue-7 q-mb-sm">
-              <q-icon color="white" size="22px" name="las la-upload"/>
-            </q-avatar>
+        <div style="display: grid;grid-template-columns: 1fr 1fr 1fr; grid-gap: 10px" class=" full-width text-dark">
+
+
+          <q-btn stack @click="globalStore.toggleSendAssetModalVisible()" color="primary" unelevated no-caps>
+            <q-icon color="white" size="22px" name="las la-upload"/>
             <p class="no-margin text-caption lh100">Отправить<br>в сети RUPAY</p>
-          </div>
-          <div class="text-center cursor-pointer" @click="$router.push(`/wallet/receive?asset=${asset.key}&amount=0`)">
-            <q-avatar class="bg-blue-7 q-mb-sm">
-              <q-icon color="white" size="22px" name="las la-download"/>
-            </q-avatar>
+          </q-btn>
+
+          <q-btn stack @click="$router.push(`/wallet/receive?asset=${asset.key}&amount=0`)" color="primary" unelevated no-caps>
+            <q-icon color="white" size="22px" name="las la-download"/>
             <p class="no-margin text-caption lh100">Получить<br>в сети RUPAY</p>
-          </div>
-          <div class="text-center cursor-pointer" @click="$router.push({name: 'wallet_exchange'})">
-            <q-avatar class="bg-blue-7 q-mb-sm">
-              <q-icon color="white" size="22px" name="las la-exchange-alt"/>
-            </q-avatar>
+          </q-btn>
+
+
+          <q-btn stack @click="$router.push({name: 'wallet_exchange'})" color="primary" unelevated no-caps>
+            <q-icon color="white" size="22px" name="las la-exchange-alt"/>
             <p class="no-margin text-caption">Обмен</p>
-          </div>
+          </q-btn>
+
         </div>
       </div>
       <div class="">
