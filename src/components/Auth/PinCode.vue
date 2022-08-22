@@ -1,4 +1,17 @@
 <template>
+
+    <q-inner-loading
+      class="z-max"
+
+      :showing="globalStore.is_loading"
+      color="primary"
+    >
+      <q-spinner
+        color="primary"
+        size="4em"
+      />
+    </q-inner-loading>
+
   <p v-if="showDigits" class="text-center text-weight-medium ">{{currentMode === 'init' ? 'Придумайте пинкод' : 'Повторите пинкод'}}</p>
   <p v-else class="text-center text-weight-medium ">Введите пинкод</p>
   <div class="text-center q-gutter-md q-mb-lg">
@@ -29,6 +42,9 @@ let repeat_code = ref([11,11,11,11])
 let currentDigit = ref(0)
 let currentMode = ref('init')
 const numbers = ref([1,2,3,4,5,6,7,8,9,0])
+
+import { useGlobalStore } from 'stores/global'
+const globalStore = useGlobalStore()
 
 const props = defineProps({
   showDigits:Boolean

@@ -13,7 +13,8 @@
              <q-item-label overline>
                <p class="text-caption q-mb-none ellipsis">{{current_address}}</p>
              </q-item-label>
-             <q-item-label caption>Адрес кошелька</q-item-label>
+             <q-item-label @click="copyAddress" caption
+                           style="text-decoration: underline" class="cursor-pointer">Скопировать адрес кошелька</q-item-label>
            </q-item-section>
 
 
@@ -28,7 +29,8 @@
              <q-item-label overline>
                <p class="text-caption q-mb-none ellipsis">{{current_address}}</p>
              </q-item-label>
-             <q-item-label caption>Адрес кошелька</q-item-label>
+             <q-item-label @click="copyAddress" caption
+                           style="text-decoration: underline" class="cursor-pointer">Скопировать адрес кошелька</q-item-label>
            </q-item-section>
 
          </q-item>
@@ -140,7 +142,7 @@ const accountStore = useAccountStore()
 const API_URL = process.env.API_URL
 const tab = ref('tokens')
 const selectedAssetId = ref(undefined)
-
+import {copyClipBoard} from "src/helpers/utils"
 
 
 const current_address = computed(()=>{
@@ -158,6 +160,11 @@ const person = computed(()=>{
 const balances = computed(()=>{
   return accountStore.balances
 })
+
+
+async function copyAddress(){
+  await copyClipBoard(current_address.value,'positive','Адрес кошелька скопирован')
+}
 
 function test(){
   Notification.requestPermission().then((result) => {

@@ -24,140 +24,158 @@
       </q-header>
 
       <q-card-section class="q-pt-none">
-        <div class="row q-col-gutter-sm">
-          <div class="col-4">
-            <p v-if="first_asset.name !== 'OLF'" class="no-margin text-bold text-h6">{{parseFloat(pair_data.last_price).toFixed(4)}}</p>
-            <p v-else class="no-margin text-bold text-h6 text-positive">{{first_asset.course}}</p>
-            </div>
-          <div class="col-8">
-            <div class="row q-col-gutter-xs text-caption">
-              <div class="col-5"><span class="text-grey-7">Макс за 24ч</span><br>
-              {{parseFloat(pair_data.highest_price_24h).toFixed(2)}}<br>
-                <span class="text-grey-7">Мин за 24ч</span><br>
-                {{parseFloat(pair_data.lowest_price_24h).toFixed(2)}}
-              </div>
-              <div class="col-6">
-                <p class="text-grey-7 ellipsis q-mb-none">Объем за 24ч ({{first_asset.name}})</p>
-                ~{{parseFloat(pair_data.base_volume_24).toFixed(2)}}<br>
-                <p class="text-grey-7 ellipsis q-mb-none">Объем за 24ч ({{second_asset.name}})</p>
-                ~{{parseFloat(pair_data.quote_volume_24).toFixed(2)}}<br>
-              </div>
 
+
+        <div class="row q-col-gutter-md">
+          <div class="col-7">
+            <div class="row q-col-gutter-sm">
+              <div class="col-4">
+                <p v-if="first_asset.name !== 'OLF'" class="no-margin text-bold text-h6">{{parseFloat(pair_data.last_price).toFixed(4)}}</p>
+                <p v-else class="no-margin text-bold text-h6 text-positive">{{first_asset.course}}</p>
+              </div>
+              <div class="col-8">
+                <div class="row q-col-gutter-xs text-caption">
+                  <div class="col-5"><span class="text-grey-7">Макс за 24ч</span><br>
+                    {{parseFloat(pair_data.highest_price_24h).toFixed(2)}}<br>
+                    <span class="text-grey-7">Мин за 24ч</span><br>
+                    {{parseFloat(pair_data.lowest_price_24h).toFixed(2)}}
+                  </div>
+                  <div class="col-6">
+                    <p class="text-grey-7 ellipsis q-mb-none">Объем за 24ч ({{first_asset.name}})</p>
+                    ~{{parseFloat(pair_data.base_volume_24).toFixed(2)}}<br>
+                    <p class="text-grey-7 ellipsis q-mb-none">Объем за 24ч ({{second_asset.name}})</p>
+                    ~{{parseFloat(pair_data.quote_volume_24).toFixed(2)}}<br>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <q-separator spaced="md"/>
+            <div class="flex items-center no-wrap q-mb-md">
+              <q-btn
+                unelevated
+                no-caps
+                class="bye-btn full-width q-py-sm"
+                :color="trade_type ==='buy' ? 'positive' : 'grey-5' "
+                @click="trade_type='buy'">
+                Купить {{first_asset.name}} <br>за {{second_asset.name}}
+              </q-btn>
+              <q-btn
+                :color="trade_type ==='sell' ? 'negative' : 'grey-5' "
+                unelevated
+                class="sell-btn full-width q-py-sm"
+                no-caps
+                @click="trade_type='sell'">
+                Продать {{first_asset.name}} <br>за {{second_asset.name}}
+              </q-btn>
+            </div>
+            <p class="text-caption q-mb-sm">{{trade_type === 'buy' ? 'Кол-во к покупке' : 'Кол-во к продаже'}}</p>
+            <q-input class="q-mb-sm" rounded dense outlined  v-model="amount" @keyup="amountChange"  type="number" >
+              <template v-slot:append>
+                <q-btn v-if="trade_type==='sell'" @click="amount = balances[first_asset.key][0][1]" size="10px" flat rounded label="Продать все"  />
+              </template>
+            </q-input>
+            <p class="text-caption q-mb-sm">Цена за единицу</p>
+            <q-input class="q-mb-sm" rounded dense outlined  v-model="unit_price"  @blur="priceChange" type="number" />
+            <p class="text-caption q-mb-sm">Итого</p>
+            <q-input class="q-mb-md" rounded dense outlined  v-model="total"  @keyup="totalChange"  type="number" >
+              <!--          <template v-slot:append>-->
+              <!--            <q-btn v-if="trade_type==='buy'" @click="total = balances[second_asset.key][0][1]" size="10px" flat rounded label="Купить на все"  />-->
+              <!--          </template>-->
+            </q-input>
+            <q-btn rounded
+                   :loading="is_loading"
+                   :label="trade_type === 'buy' ? 'Купить' : 'Продать'"
+                   :color="trade_type === 'buy' ? 'positive' : 'negative'"
+                   class="full-width q-mb-md"
+                   unelevated
+                   size="18px"
+                   no-caps
+                   :disable="!amount || !unit_price || !total"
+                   @click="createOrder"
+            />
+
+          </div>
+          <div class="col-5">
+            <div class="">
+              <div class="row q-col-gutter-sm">
+                <div class="col-6">
+                  <div class="orders-grid">
+                    <div class="flex items-center justify-between">
+                      <p class="no-margin text-10 text-grey-8 text-weight-medium">Цена</p>
+                      <p class="no-margin text-10 text-grey-8 text-weight-medium">Объем</p>
+                    </div>
+                    <q-linear-progress reverse
+                                       v-for="(order,index) in orders.have"
+                                       @click="sellOrderClick(order)"
+                                       class="flex items-center justify-between relative-position sell-pr cursor-pointer"
+                                       color="red-2"
+                                       :value="order.leftHave / order.amountHave"
+                                       size="20px"  >
+                      <p class="no-margin price-red-color text-10 text-weight-medium">{{order.pairPrice}}</p>
+                      <p class="no-margin vol-color text-10 text-weight-medium">{{order.leftHave}}</p>
+                    </q-linear-progress>
+                  </div>
+
+                </div>
+                <div class="col-6">
+                  <div class="orders-grid">
+                    <div class="flex items-center justify-between">
+                      <p class="no-margin text-10 text-grey-8 text-weight-medium">Цена</p>
+                      <p class="no-margin text-10 text-grey-8 text-weight-medium">Объем</p>
+                    </div>
+                    <q-linear-progress
+                      v-for="(order,index) in orders.want"
+                      @click="buyOrderClick(order)"
+                      class="flex items-center justify-between relative-position bg-white buy-pr cursor-pointer"
+                      color="light-green-11"
+                      :value="order.leftWant / order.amountWant"
+                      size="20px"  >
+                      <p class="no-margin price-green-color text-10 text-weight-medium">{{order.pairPrice }}</p>
+                      <p class="no-margin vol-color text-10 text-weight-medium">{{order.leftWant}}</p>
+                    </q-linear-progress>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <q-separator/>
+                  <div class="flex items-center justify-between">
+                    <p class="no-margin text-10 text-grey-8 text-weight-medium">Всего</p>
+                    <p class="no-margin text-10 vol-color text-weight-medium">{{totalSell}}</p>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <q-separator/>
+                  <div class="flex items-center justify-between">
+                    <p class="no-margin text-10 text-grey-8 text-weight-medium">Всего</p>
+                    <p class="no-margin text-10 vol-color text-weight-medium">{{totalBuy}}</p>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
-        <q-separator spaced="md"/>
+        <div  class=" relative-position">
+          <q-inner-loading
+            class="z-max"
 
-        <div class="flex items-center no-wrap q-mb-md">
-          <q-btn
-                 unelevated
-                 no-caps
-                 class="bye-btn full-width q-py-sm"
-                 :color="trade_type ==='buy' ? 'positive' : 'grey-5' "
-                  @click="trade_type='buy'">
-            Купить {{first_asset.name}} <br>за {{second_asset.name}}
-          </q-btn>
-          <q-btn
-                 :color="trade_type ==='sell' ? 'negative' : 'grey-5' "
-                 unelevated
-                 class="sell-btn full-width q-py-sm"
-                 no-caps
-                 @click="trade_type='sell'">
-            Продать {{first_asset.name}} <br>за {{second_asset.name}}
-          </q-btn>
-        </div>
-        <p class="text-caption q-mb-sm">{{trade_type === 'buy' ? 'Кол-во к покупке' : 'Кол-во к продаже'}}</p>
-        <q-input class="q-mb-sm" rounded dense outlined  v-model="amount" @keyup="amountChange"  type="number" >
-          <template v-slot:append>
-            <q-btn v-if="trade_type==='sell'" @click="amount = balances[first_asset.key][0][1]" size="10px" flat rounded label="Продать все"  />
-          </template>
-        </q-input>
-        <p class="text-caption q-mb-sm">Цена за единицу</p>
-        <q-input class="q-mb-sm" rounded dense outlined  v-model="unit_price"  @blur="priceChange" type="number" />
-        <p class="text-caption q-mb-sm">Итого</p>
-        <q-input class="q-mb-md" rounded dense outlined  v-model="total"  @keyup="totalChange"  type="number" >
-<!--          <template v-slot:append>-->
-<!--            <q-btn v-if="trade_type==='buy'" @click="total = balances[second_asset.key][0][1]" size="10px" flat rounded label="Купить на все"  />-->
-<!--          </template>-->
-        </q-input>
-        <q-btn rounded
-               :loading="is_loading"
-               :label="trade_type === 'buy' ? 'Купить' : 'Продать'"
-               :color="trade_type === 'buy' ? 'positive' : 'negative'"
-               class="full-width q-mb-md"
-               unelevated
-               size="18px"
-               no-caps
-               :disable="!amount || !unit_price || !total"
-               @click="createOrder"
-        />
-<!--        <div v-if="chartOptions.series[0].data.length>0" class="full-width">-->
-<!--          <vue-highcharts-->
-<!--            type="stockChart"-->
-<!--            :options="chartOptions"-->
-<!--            :redrawOnUpdate="true"-->
-<!--            :oneToOneUpdate="false"-->
-<!--            :animateOnUpdate="true"-->
+            :showing="trades_loading"
+            color="primary"
+          >
+            <q-spinner
+              color="primary"
+              size="2em"
+            />
+          </q-inner-loading>
+          <vue-highcharts
+            style="width: 100%;overflow: unset"
+            type="stockChart"
+            :options="chartOptions"
+            :redrawOnUpdate="true"
+            :oneToOneUpdate="false"
+            :animateOnUpdate="true"
 
-<!--          />-->
-<!--        </div>-->
-
-
-        <div class="">
-          <div class="row q-col-gutter-sm">
-            <div class="col-6">
-              <div class="orders-grid">
-                <div class="flex items-center justify-between">
-                  <p class="no-margin text-10 text-grey-8 text-weight-medium">Цена</p>
-                  <p class="no-margin text-10 text-grey-8 text-weight-medium">Объем</p>
-                </div>
-                <q-linear-progress reverse
-                                   v-for="(order,index) in orders.have"
-                                   @click="sellOrderClick(order)"
-                                   class="flex items-center justify-between relative-position sell-pr"
-                                   color="red-2"
-                                   :value="order.leftHave / order.amountHave"
-                                   size="16px"  >
-                  <p class="no-margin price-red-color text-10 text-weight-medium">{{order.pairPrice}}</p>
-                  <p class="no-margin vol-color text-10 text-weight-medium">{{order.leftHave}}</p>
-                </q-linear-progress>
-              </div>
-
-            </div>
-            <div class="col-6">
-              <div class="orders-grid">
-                <div class="flex items-center justify-between">
-                  <p class="no-margin text-10 text-grey-8 text-weight-medium">Цена</p>
-                  <p class="no-margin text-10 text-grey-8 text-weight-medium">Объем</p>
-                </div>
-                <q-linear-progress
-                                   v-for="(order,index) in orders.want"
-                                   @click="buyOrderClick(order)"
-                                   class="flex items-center justify-between relative-position bg-white buy-pr"
-                                   color="light-green-11"
-                                   :value="order.leftWant / order.amountWant"
-                                   size="16px"  >
-                <p class="no-margin price-green-color text-10 text-weight-medium">{{order.pairPrice }}</p>
-                <p class="no-margin vol-color text-10 text-weight-medium">{{order.leftWant}}</p>
-                </q-linear-progress>
-              </div>
-            </div>
-            <div class="col-6">
-              <q-separator/>
-              <div class="flex items-center justify-between">
-                <p class="no-margin text-10 text-grey-8 text-weight-medium">Всего</p>
-                <p class="no-margin text-10 vol-color text-weight-medium">{{totalSell}}</p>
-              </div>
-            </div>
-            <div class="col-6">
-              <q-separator/>
-              <div class="flex items-center justify-between">
-                <p class="no-margin text-10 text-grey-8 text-weight-medium">Всего</p>
-                <p class="no-margin text-10 vol-color text-weight-medium">{{totalBuy}}</p>
-              </div>
-            </div>
-
-          </div>
+          />
         </div>
       </q-card-section>
     </q-card>
@@ -217,7 +235,7 @@ HighCharts.setOptions({
     buttons:[{type: 'month', count: 1,   text: '1м', title: '1 мес'},
       {    type: 'month',    count: 3,    text: '3м',    title: '3 мес'},
       {    type: 'month',    count: 6,    text: '6м',    title: '6 мес'},
-      {    type: 'ytd',    text: 'С начала года',    title: 'С начала года'},
+      {    type: 'ytd',    text: 'СНГ',    title: 'С начала года'},
       {    type: 'year',    count: 1,    text: '1г',    title: '1 год'},
       {    type: 'all',    text: 'Все',    title: 'Показать всё'}]
   },
@@ -295,6 +313,7 @@ let totalSell = ref(0)
 let totalBuy = ref(0)
 let pair_data = ref({})
 let trades = ref([])
+let trades_loading = ref(true)
 let chartOptions = ref({
   rangeSelector: {
     selected: 1,
@@ -449,6 +468,7 @@ function sellOrderClick(order){
 }
 
 async function getAssets(){
+  trades_loading.value = true
   //globalStore.toggleLoadingState()
   // first_asset.value = await getAssetByKey(props.tradePair['0'])
   // second_asset.value = await getAssetByKey(props.tradePair['1'])
@@ -477,13 +497,14 @@ async function getAssets(){
   //console.log(pair_data.value)
   //console.log(totalSell.value)
   //console.log(totalBuy.value)
-  // const resp_trades = await api.get(`https://scan.rupay.pro/apiexchange/trades/${first_asset.value.key}/${second_asset.value.key}`)
-  // for (let x of resp_trades.data.reverse()){
-  //   trades.value.push([x.timestamp,x.price])
-  // }
-  // chartOptions.value.series[0].data = trades.value
-  // chartOptions.value.series[0].name = `${first_asset.value.name}/${second_asset.value.name}`
-  // console.log(trades.value)
+  const resp_trades = await api.get(`https://scan.rupay.pro/apiexchange/trades/${first_asset.value.key}/${second_asset.value.key}`)
+  for (let x of resp_trades.data.reverse()){
+    trades.value.push([x.timestamp,x.price])
+  }
+  chartOptions.value.series[0].data = trades.value
+  chartOptions.value.series[0].name = `${first_asset.value.name}/${second_asset.value.name}`
+  console.log(trades.value)
+  trades_loading.value = false
   //globalStore.toggleLoadingState()
 }
 
@@ -512,13 +533,13 @@ async function getAssets(){
   &.sell
     background-color: $red-13
 .text-10
-  font-size: 11px
+  font-size: 14px
   position: relative
   z-index: 20
 .orders-grid
   display: grid
   grid-template-columns: 1fr
-  grid-gap: 5px
+  grid-gap: 10px
 .q-linear-progress__track
   background: white
 .price-green-color

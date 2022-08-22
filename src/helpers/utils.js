@@ -7,7 +7,7 @@ export function useNotify(color,message){
     timeout:1000,
     html: true,
     color: color,
-    position: 'bottom',
+    position: 'bottom-right',
   })
 }
 
