@@ -20,7 +20,7 @@ export const  getTradePairs = async () => {
 }
 
 export const  getOrders = async (first_asset_key,second_asset_key) => {
-  const response = await axios.get(`${process.env.API_URL}/apiexchange/ordersbook/${first_asset_key}/${second_asset_key}`)
+  const response = await axios.get(`${process.env.API_URL}/apiexchange/ordersbook/${first_asset_key}/${second_asset_key}?limit=500`)
   return response.data
 }
 

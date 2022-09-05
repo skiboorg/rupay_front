@@ -93,7 +93,8 @@
           <q-item class="no-padding">
             <q-item-section side class="text-weight-medium text-dark">Комиссия транзакции</q-item-section>
             <q-item-section class="text-caption">
-              <span v-if="sendInfo.fee>0">{{sendInfo.fee}} {{asset.key < 4000 ? asset.name : 'OLF'}}</span></q-item-section>
+              <span v-if="asset.maker_name === 'РОЛФ Тех.Аккаунт ruPay'">{{parseFloat(sendInfo.amount * 0.01).toFixed(5)}}</span>
+              <span v-if="sendInfo.fee>0">+ газ {{sendInfo.fee}} {{asset.key < 4000 ? asset.name : 'OLF'}}</span></q-item-section>
           </q-item>
         </q-list>
         <p class="text-caption text-white q-pa-md bg-negative">Внимание, если адрес получателя указан неверно, Вы не сможете вернуть средства назад</p>
