@@ -6,11 +6,11 @@
       <div class="" style="height: 40px"></div>
       <div v-if="asset.show_description" class="q-mb-lg">
         <p class="q-mb-sm text-caption">Укажите кошелек с которого будете совершать транзакцию*</p>
-        <q-input class="q-mb-sm"  outlined rounded v-model="fromWallet"  />
+        <q-input class="q-mb-sm" rounded outlined  v-model="fromWallet"  />
         <div>
           <p class="q-mb-sm text-caption">С указанного вами кошелька совершаете транзакцию на адрес:</p>
           <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-          <q-btn class="q-mb-sm" color="primary" rounded label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <q-btn class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
           <p class="q-mb-sm text-caption">
             Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
             <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
@@ -19,36 +19,55 @@
             Зачисление происходит в сроки до 24 часов с момента транзакции (указаны максимальные сроки)
           </p>
           <p class="q-mb-sm text-caption">Сумма пополнения*</p>
-          <q-input class="q-mb-sm" rounded  outlined  v-model="amount" type="number" />
-          <btn rounded color="primary"  :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps :outline="false" label="Отправить"/>
+          <q-input class="q-mb-sm" rounded outlined  v-model="amount" type="number" />
+          <q-btn color="primary" rounded :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
         </div>
-        </div>
+      </div>
       <div v-else class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
-          <div v-if="is_sent" class="">
-            <p class="q-mb-sm text-caption">Для пополнения вашего баланса {{asset.name}} по указанным реквизитам ниже совершаете оплату в назначении платежа указать:</p>
-            <p class="q-mb-sm text-caption text-weight-bold"> Добровольный членский взнос от ФИО, КОД {{code}}</p>
-            <p class="q-mb-sm text-caption text-weight-bold">  ВНИМАНИЕ НАЗНАЧЕНИЕ ПЛАТЕЖА ДОЛЖНО СОВПАДАТЬ С УКАЗАННЫМ В ИНСТРУКЦИИ.</p>
-            <p class="q-mb-sm text-caption">   Зачисление {{asset.name}} происходит в течении нескольких часов после получения средств на счет!
-              Рекомендуем совершать оплату с Альфа Банка, тогда зачисление будет происходить быстрее.
-              Оплата с других банков может затянуть зачисление до 5 рабочих дней.</p>
-            <q-img src="~assets/qr.jpg"/>
-            <p class="q-mb-lg text-caption"><span style="font-weight: bold">Реквизиты для оплаты взносов</span><br>
-              Номер счёта: 40703810326350000009<br>
-              Валюта: RUR<br>
-              Название: ПОТРЕБИТЕЛЬСКИЙ КООПЕРАТИВ ПО РАЗВИТИЮ ГРАЖДАНСКИХ ИНИЦИАТИВ "РОЛФ"<br>
-              ИНН: 2366034781<br>
-              КПП: 236601001<br>
-              Банк: ФИЛИАЛ "РОСТОВСКИЙ" АО "АЛЬФА-БАНК"<br>
-              БИК: 046015207<br>
-              Кор. счёт: 30101810500000000207<br>
-              Юридический адрес компании: улица ГОРЬКОГО, д. 60/4, кв./оф. 44, Краснодарский край, р-н ГОРОД-КУРОРТ СОЧИ, г. Сочи</p>
+          <div v-if="selected_payment.value !== 'rs'">
+            <q-select rounded v-if="asset.key === 2 || asset.key===1643" v-model="selected_payment" outlined  :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>
+
+            <p class="q-mb-sm text-caption">Сумма пополнения в {{selected_payment.currency}}*<br>
+              <span class="text-bold text-negative ">
+              мининум {{selected_payment.min}} {{selected_payment.currency}},
+              максимум {{selected_payment.max}} {{selected_payment.currency}},
+            комиссия {{selected_payment.commission * 100}} %</span></p>
+            <q-input rounded class="q-mb-sm"  outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
+            <p  class="q-mb-sm text-caption text-bold">Вы получите: {{want_to_buy}} {{asset.name}}</p>
+
+            <q-btn color="primary" rounded :loading="is_loading" @click="new_payment" :disable="to_pay<selected_payment.min || to_pay>selected_payment.max" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+
+          </div>
+          <div v-else>
+
+            <div v-if="!is_sent"><p class="q-mb-sm text-caption">Сумма пополнения в рублях* (<span class="text-bold text-negative">мининум 1000 руб</span>)</p>
+              <q-input rounded class="q-mb-sm"  outlined  v-model="amount" type="number" />
+              <p class="q-mb-sm text-caption text-bold">Вы получите: {{amount / asset.course}} {{asset.name}}</p>
+              <q-btn color="primary"  :loading="is_loading" @click="send" :disable="!amount || amount<1000" unelevated no-caps class="full-width q-py-md q-mb-md" rounded label="Отправить"/>
+            </div>
+            <div v-else> <p class="text-bold">Внимание!</p>
+              <p class="q-mb-sm text-caption">Для пополнения вашего баланса {{asset.name}} по указанным реквизитам ниже совершаете оплату в назначении платежа указать:</p>
+              <p class="q-mb-sm text-caption text-weight-bold"> Добровольный членский взнос от ФИО, КОД {{code}}</p>
+              <p class="q-mb-sm text-caption text-weight-bold">  ВНИМАНИЕ НАЗНАЧЕНИЕ ПЛАТЕЖА ДОЛЖНО СОВПАДАТЬ С УКАЗАННЫМ В ИНСТРУКЦИИ.</p>
+              <p class="q-mb-sm text-caption">   Зачисление {{asset.name}} происходит в течении нескольких часов после получения средств на счет!
+                Рекомендуем совершать оплату с Альфа Банка, тогда зачисление будет происходить быстрее.
+                Оплата с других банков может затянуть зачисление до 5 рабочих дней.</p>
+              <q-img src="~assets/qr.jpg"/>
+              <p class="q-mb-lg text-caption"><span style="font-weight: bold">Реквизиты для оплаты взносов</span><br>
+                Номер счёта: 40703810326350000009<br>
+                Валюта: RUR<br>
+                Название: ПОТРЕБИТЕЛЬСКИЙ КООПЕРАТИВ ПО РАЗВИТИЮ ГРАЖДАНСКИХ ИНИЦИАТИВ "РОЛФ"<br>
+                ИНН: 2366034781<br>
+                КПП: 236601001<br>
+                Банк: ФИЛИАЛ "РОСТОВСКИЙ" АО "АЛЬФА-БАНК"<br>
+                БИК: 046015207<br>
+                Кор. счёт: 30101810500000000207<br>
+                Юридический адрес компании: улица ГОРЬКОГО, д. 60/4, кв./оф. 44, Краснодарский край, р-н ГОРОД-КУРОРТ СОЧИ, г. Сочи</p></div>
+
+
           </div>
 
-          <p class="q-mb-sm text-caption">Сумма пополнения в рублях* (<span class="text-bold text-negative">мининум 1000 руб</span>)</p>
-        <q-input class="q-mb-sm" rounded  outlined  v-model="amount" type="number" />
-          <p class="q-mb-sm text-caption text-bold">Вы получите: {{amount / asset.course}} {{asset.name}}</p>
-        <btn color="primary" :loading="is_loading" @click="send" :disable="!amount || amount<1000" unelevated no-caps :outline="false" label="Отправить"/>
         </q-scroll-area>
       </div>
     </page-body>
@@ -81,6 +100,49 @@ let fromWallet = ref(null)
 let is_loading = ref(false)
 let is_sent = ref(false)
 let asset_key = ref(0)
+let to_pay = ref(300)
+let summ = ref(0)
+let comission = ref(0.02)
+let current_course = ref(0)
+const selected_payment = ref({label:'Visa/Mastercard',currency:"RUB",value:'Card1',min:300,max:50000,commission:0.15})
+
+const payment_systems = [
+  {label:'Visa/Mastercard',value:'Card1',currency:"RUB", min:300,max:50000,commission:0.15},
+  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:50000,commission:0.15},
+  {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0},
+]
+
+const want_to_buy = computed(()=>{
+  if (asset.value.key === 2){
+    summ.value = to_pay.value
+    return parseFloat(parseFloat(to_pay.value / asset.value.course) - parseFloat(to_pay.value / asset.value.course * selected_payment.value.commission)).toFixed(5)
+  }else{
+    summ.value = to_pay.value * asset.value.course_api
+    return parseFloat(to_pay.value - (to_pay.value * selected_payment.value.commission)).toFixed(5)
+  }
+
+})
+
+async function new_payment(){
+  is_loading.value = !is_loading.value
+  const response = await axios.post('https://rupay.pro/api/data/create_payment',
+    {
+      wallet:current_address.value,
+      type:selected_payment.value.value,
+      want_to_buy:want_to_buy.value,
+      amount:summ.value,
+      currency : asset.value.key === 2 || asset.value.key === 1643 ? selected_payment.value.currency : 'USD',
+      asset_id:asset.value.key
+    }
+  )
+  is_loading.value = !is_loading.value
+  if (response.data.success){
+    window.location.href = response.data.url
+  }else {
+    useNotify('negative',JSON.stringify(response.data.message))
+  }
+
+}
 
 async function send(){
   is_loading.value = !is_loading.value
@@ -93,11 +155,11 @@ async function send(){
   })
 
   await axios.get(`https://api.telegram.org/bot603507616:AAEmmGeaujFe_lqkw31HHSoh2EiAvVNtFA4/sendMessage?chat_id=-542426502
-  &text=Код : ${code.value}%0A
+  &text=Запрос на пополнение с RUPAY%0A
+  Код : ${code.value}%0A
   На кошелек ${current_address.value}%0A
-  С кошелька: ${fromWallet.value}%0A
-  Валюта: ${asset.value.name}%0A
-  Сумма пополнения: ${amount.value}
+  Сумма пополнения: ${amount.value} руб
+
 `
   )
   code.value = makeid(4)
@@ -144,6 +206,18 @@ function makeid(length) {
 onBeforeMount( async ()=>{
   asset_key.value = parseInt(route.query.asset)
   code.value=makeid(4)
+  if (asset.value.payment_system){
+    selected_payment.value = {label:asset.value.payment_system,
+      value:asset.value.payment_system,
+      currency:`${asset.value.name}`,
+      min:asset.value.payment_min / asset.value.course_api,
+      max:asset.value.payment_max / asset.value.course_api,
+
+      commission:asset.value.payment_comission/100
+    }
+    to_pay.value = asset.value.payment_min / asset.value.course_api
+  }
+
 })
 </script>
 
