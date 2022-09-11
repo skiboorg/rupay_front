@@ -30,6 +30,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/games/Index.vue') },
+      { path: 'chiken_bro', component: () => import('pages/games/ChikenBro.vue') },
 
 
     ]

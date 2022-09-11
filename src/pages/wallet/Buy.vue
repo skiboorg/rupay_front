@@ -3,10 +3,10 @@
     <page-body class="q-px-md">
       <page-header>
       </page-header>
-      <div class="" style="height: 40px"></div>
+      <div class="" style="height: 60px"></div>
       <div v-if="asset.show_description" class="q-mb-lg">
         <p class="q-mb-sm text-caption">Укажите кошелек с которого будете совершать транзакцию*</p>
-        <q-input class="q-mb-sm" rounded outlined  v-model="fromWallet"  />
+        <q-input class="q-mb-sm" dense outlined  v-model="fromWallet"  />
         <div>
           <p class="q-mb-sm text-caption">С указанного вами кошелька совершаете транзакцию на адрес:</p>
           <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
@@ -19,21 +19,21 @@
             Зачисление происходит в сроки до 24 часов с момента транзакции (указаны максимальные сроки)
           </p>
           <p class="q-mb-sm text-caption">Сумма пополнения*</p>
-          <q-input class="q-mb-sm" rounded outlined  v-model="amount" type="number" />
-          <q-btn color="primary" rounded :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+          <q-input class="q-mb-sm" dense outlined  v-model="amount" type="number" />
+          <q-btn color="primary" :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
         </div>
       </div>
       <div v-else class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
           <div v-if="selected_payment.value !== 'rs'">
-            <q-select rounded v-if="asset.key === 2 || asset.key===1643" v-model="selected_payment" outlined  :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>
+            <q-select rounded v-if="asset.key === 2 || asset.key===1643" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>
 
             <p class="q-mb-sm text-caption">Сумма пополнения в {{selected_payment.currency}}*<br>
               <span class="text-bold text-negative ">
               мининум {{selected_payment.min}} {{selected_payment.currency}},
               максимум {{selected_payment.max}} {{selected_payment.currency}},
             комиссия {{selected_payment.commission * 100}} %</span></p>
-            <q-input rounded class="q-mb-sm"  outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
+            <q-input rounded class="q-mb-sm" dense outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
             <p  class="q-mb-sm text-caption text-bold">Вы получите: {{want_to_buy}} {{asset.name}}</p>
 
             <q-btn color="primary" rounded :loading="is_loading" @click="new_payment" :disable="to_pay<selected_payment.min || to_pay>selected_payment.max" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
@@ -42,7 +42,7 @@
           <div v-else>
 
             <div v-if="!is_sent"><p class="q-mb-sm text-caption">Сумма пополнения в рублях* (<span class="text-bold text-negative">мининум 1000 руб</span>)</p>
-              <q-input rounded class="q-mb-sm"  outlined  v-model="amount" type="number" />
+              <q-input rounded class="q-mb-sm" dense outlined  v-model="amount" type="number" />
               <p class="q-mb-sm text-caption text-bold">Вы получите: {{amount / asset.course}} {{asset.name}}</p>
               <q-btn color="primary"  :loading="is_loading" @click="send" :disable="!amount || amount<1000" unelevated no-caps class="full-width q-py-md q-mb-md" rounded label="Отправить"/>
             </div>
@@ -104,12 +104,12 @@ let to_pay = ref(300)
 let summ = ref(0)
 let comission = ref(0.02)
 let current_course = ref(0)
-const selected_payment = ref({label:'Visa/Mastercard',currency:"RUB",value:'Card1',min:300,max:50000,commission:0.15})
+const selected_payment = ref({label:'Visa/Mastercard',currency:"RUB",value:'Card1',min:300,max:50000,commission:0})
 
 const payment_systems = [
-  {label:'Visa/Mastercard',value:'Card1',currency:"RUB", min:300,max:50000,commission:0.15},
-  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:50000,commission:0.15},
-  {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0},
+  {label:'Visa/Mastercard',value:'Card1',currency:"RUB", min:300,max:50000,commission:0},
+  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:50000,commission:0},
+  // {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0},
 ]
 
 const want_to_buy = computed(()=>{

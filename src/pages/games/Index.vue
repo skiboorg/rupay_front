@@ -9,7 +9,7 @@
             </h3>
 
             <div class="game__grid">
-              <div class="game__grid__item">
+              <div @click="$router.push('/games/chiken_bro')" class="game__grid__item">
                 <img src="~assets/game1.jpeg" alt="">
               </div>
 
@@ -44,6 +44,7 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
   grid-gap: 15px
   &__item
+    cursor: pointer
     img
       width: 100%
       height: 100%
