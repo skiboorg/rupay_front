@@ -8,7 +8,7 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 const BASE_URL = 'https://xn--k1affs.xn--p1ai'
-const GAME_URL = 'http://127.0.0.1:8000'
+const GAME_URL = 'https://astraz.ru'
 
 const { configure } = require('quasar/wrappers');
 
