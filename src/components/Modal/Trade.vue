@@ -374,12 +374,22 @@ function priceChange(){
   console.log(second_asset.value)
   console.log(minAmount.value)
 
-  if (minAmount.value>0 && trade_type.value ==='sell'){
-    console.log(first_asset.value.course / second_asset.value.course)
-    if (unit_price.value > first_asset.value.course / second_asset.value.course){
-      console.log('more')
+  // if (minAmount.value>0 && trade_type.value ==='sell'){
+  //   console.log(first_asset.value.course / second_asset.value.course)
+  //   if (unit_price.value > first_asset.value.course / second_asset.value.course){
+  //     console.log('more')
+  //   }else {
+  //     unit_price.value = first_asset.value.course / second_asset.value.course
+  //   }
+  // }
+  if (minAmount.value>0 && trade_type.value ==='sell' && first_asset.value.key === 2 ){
+    console.log(second_asset.value)
+    //first_asset.value.course / second_asset.value.course
+    if (unit_price.value >= minAmount.value){
+      console.log('norm')
     }else {
-      unit_price.value = first_asset.value.course / second_asset.value.course
+      unit_price.value = minAmount.value //first_asset.value.course / second_asset.value.course
+      console.log('dsf')
     }
   }
 
@@ -482,7 +492,7 @@ async function getAssets(){
   //console.log('first_asset',first_asset.value)
   //console.log(second_asset.value)
 
-  minAmount.value = first_asset.value.min_trade_price
+  minAmount.value = second_asset.value.min_trade_price
   //console.log(orders)
   for (let x of orders.value.have){
     totalSell.value += parseFloat(x.leftHave)
