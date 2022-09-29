@@ -22,6 +22,9 @@ const routes = [
       { path: 'a700', component: () => import('pages/marketplace/A700.vue') },
       { path: 'olf', component: () => import('pages/marketplace/Olf.vue') },
       { path: 'rupay', component: () => import('pages/marketplace/Rupay.vue') },
+      { path: 'sky', component: () => import('pages/marketplace/Sky.vue') },
+      { path: 'blago', component: () => import('pages/marketplace/Blago.vue') },
+      { path: 'broker', component: () => import('pages/marketplace/Broker.vue') },
 
     ]
   },

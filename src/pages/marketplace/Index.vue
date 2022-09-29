@@ -21,11 +21,20 @@
               <img src="~assets/new/olf-token.png" alt="" class="buisness-token__grid_item_pic" />
             </router-link>
 
-            <a  class="buisness-token__grid_item"
-            ><img src="~assets/new/SOON.png" alt="" class="buisness-token__grid_item_pic" /></a
-            ><a  class="buisness-token__grid_item"
-          ><img src="~assets/new/SOON.png" alt="" class="buisness-token__grid_item_pic"
-          /></a>
+            <router-link to="/marketplace/sky" class="buisness-token__grid_item">
+              <img  src="~assets/market/sky.jpeg" alt="" class="buisness-token__grid_item_pic image" />
+            </router-link>
+            <router-link to="/marketplace/blago" class="buisness-token__grid_item">
+              <img  src="~assets/market/blago.jpeg" alt="" class="buisness-token__grid_item_pic image" />
+            </router-link>
+            <router-link to="/marketplace/broker" class="buisness-token__grid_item">
+              <img  src="~assets/market/broker.jpeg" alt="" class="buisness-token__grid_item_pic image" />
+            </router-link>
+
+
+            <a  class="buisness-token__grid_item">
+              <img src="~assets/new/SOON.png" alt="" class="buisness-token__grid_item_pic"/>
+            </a>
             <img src="~assets/new/marketplace-dot-circle.svg" alt="" class="buisness-token__grid_dot-circle">
           </div>
         </div>
@@ -62,4 +71,9 @@
 <style lang="sass">
 .marketplace
   padding-top: 0px
+.image
+  width: 50%
+  height: auto
+  object-fit: cover
+  border-radius: 20px
 </style>
