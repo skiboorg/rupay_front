@@ -1,9 +1,13 @@
 <template>
   <q-page padding>
 
-      <div class="flex items-center justify-center">
+      <div class="flex items-center justify-center q-gutter-md">
         <router-link  to="/marketplace/rupay" class="buisness-token__grid_item">
           <img src="~assets/new/rulogo.png" alt="" class="buisness-token__grid_item_pic" />
+        </router-link>
+        <router-link to="/marketplace/blago" class="buisness-token__grid_item">
+          <img  src="~assets/market/blago.jpeg" alt="" class="buisness-token__grid_item_pic image q-mb-xs" />
+          <p class="no-margin">Токен Благо</p>
         </router-link>
       </div>
 
@@ -12,7 +16,7 @@
 
       <div class="col-12 col-md-6">
         <div class="buisness-token">
-          <h3 class="buisness-token__heading">Токены, обеспеченные <br> бизнесом:</h3>
+          <h3 class="buisness-token__heading">Токены, обеспеченные <br>доходными активами:</h3>
           <div class="buisness-token__grid">
             <router-link to="/marketplace/chikenbro" class="buisness-token__grid_item">
               <img src="~assets/new/chicken-bro.png" alt="" class="buisness-token__grid_item_pic" />
@@ -22,13 +26,13 @@
             </router-link>
 
             <router-link to="/marketplace/sky" class="buisness-token__grid_item">
-              <img  src="~assets/market/sky.jpeg" alt="" class="buisness-token__grid_item_pic image" />
+              <img  src="~assets/market/sky.jpeg" alt="" class="buisness-token__grid_item_pic image " />
+
             </router-link>
-            <router-link to="/marketplace/blago" class="buisness-token__grid_item">
-              <img  src="~assets/market/blago.jpeg" alt="" class="buisness-token__grid_item_pic image" />
-            </router-link>
+
             <router-link to="/marketplace/broker" class="buisness-token__grid_item">
-              <img  src="~assets/market/broker.jpeg" alt="" class="buisness-token__grid_item_pic image" />
+              <img  src="~assets/market/broker.jpeg" alt="" class="buisness-token__grid_item_pic image q-mb-xs" />
+              <p class="no-margin">Токен Ваш Брокер</p>
             </router-link>
 
 
@@ -76,4 +80,5 @@
   height: auto
   object-fit: cover
   border-radius: 20px
+
 </style>
