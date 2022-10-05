@@ -127,8 +127,13 @@
       <q-item ><router-link class="mobile-link" to="/ido">IDO RUpay</router-link></q-item>
 
 
-      <q-item > <a class="mobile-link" href="https://scan.rupay.pro">RuPay Scan</a></q-item>
-      <q-item > <a class="mobile-link" href="https://wallet.rupay.pro">RuPay Wallet</a></q-item>
+      <q-item > <a class="mobile-link" href="https://scan.rupay.pro">RUpay Scan</a></q-item>
+      <q-item >
+        <router-link class="mobile-link" to="/wallet">
+          RUpay Wallet
+        </router-link>
+
+      </q-item>
 
 
     </q-list>
