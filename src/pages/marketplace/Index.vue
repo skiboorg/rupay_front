@@ -6,7 +6,7 @@
           <img src="~assets/new/rulogo.png" alt="" class="buisness-token__grid_item_pic" />
         </router-link>
         <router-link to="/marketplace/blago" class="buisness-token__grid_item">
-          <img  src="~assets/market/blago.jpeg" alt="" class="buisness-token__grid_item_pic image q-mb-xs" />
+          <img  src="~assets/market/bb.png" alt="" class="buisness-token__grid_item_pic image q-mb-xs" />
           <p class="no-margin">Токен Благо</p>
         </router-link>
       </div>
