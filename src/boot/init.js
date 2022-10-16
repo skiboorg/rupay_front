@@ -5,20 +5,29 @@ import { useEraStore } from 'stores/eraChain'
 const sraStore = useEraStore()
 import { useGlobalStore } from 'stores/global'
 const globalStore = useGlobalStore()
+import {useRoute} from "vue-router"
 
 
 
 export default boot(async ({ app,store,router }) => {
 
+
+  console.log(window.location.href.includes('wallet'))
+
   const addresses = localStorage.getItem('addresses')
   const hash = localStorage.getItem('hash')
-  if (!sraStore.seed){
-    await router.push('/')
+  if (window.location.href.includes('wallet')){
+    if (!sraStore.seed){
+      await router.push('/wallet')
+    }
+    if (!hash){
+      await accountStore.wipeInfo()
+      await router.push('/wallet')
+    }
   }
-  if (!hash){
-    await accountStore.wipeInfo()
-    await router.push('/')
-  }
+
+
+
 
   if(addresses){
     await accountStore.setAddresses()

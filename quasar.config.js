@@ -9,7 +9,7 @@
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 const BASE_URL = 'https://xn--k1affs.xn--p1ai'
 const GAME_URL = 'https://astraz.ru'
-//const GAME_URL = 'http://localhost:8000'
+//const BASE_URL = 'http://localhost:8000'
 
 const { configure } = require('quasar/wrappers');
 
@@ -55,7 +55,7 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env: {
-        BOT_KEY: '603507616:AAF0LvAu2wqJYI-fLEBkD_Lli0VxyR4pgIM',
+        BOT_KEY: '603507616:AAEmmGeaujFe_lqkw31HHSoh2EiAvVNtFA4',
         CHAT_ID: '-542426502',
         API: BASE_URL,
         GAME_API: GAME_URL,

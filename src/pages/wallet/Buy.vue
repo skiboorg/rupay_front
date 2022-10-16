@@ -3,14 +3,15 @@
     <page-body class="q-px-md">
       <page-header>
       </page-header>
+
       <div class="" style="height: 60px"></div>
-      <div v-if="asset.show_description" class="q-mb-lg">
+      <div v-if="action_type==='other' " class="q-mb-lg">
         <p class="q-mb-sm text-caption">Укажите кошелек с которого будете совершать транзакцию*</p>
-        <q-input class="q-mb-sm" dense outlined  v-model="fromWallet"  />
+        <q-input class="q-mb-sm" rounded dense outlined  v-model="fromWallet"  />
         <div>
           <p class="q-mb-sm text-caption">С указанного вами кошелька совершаете транзакцию на адрес:</p>
           <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-          <q-btn class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <q-btn rounded class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
           <p class="q-mb-sm text-caption">
             Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
             <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
@@ -19,14 +20,14 @@
             Зачисление происходит в сроки до 24 часов с момента транзакции (указаны максимальные сроки)
           </p>
           <p class="q-mb-sm text-caption">Сумма пополнения*</p>
-          <q-input class="q-mb-sm" dense outlined  v-model="amount" type="number" />
-          <q-btn color="primary" :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+          <q-input rounded class="q-mb-sm" dense outlined  v-model="amount" type="number" />
+          <q-btn rounded color="primary" :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
         </div>
       </div>
       <div v-else class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
           <div v-if="selected_payment.value !== 'rs'">
-            <q-select rounded v-if="asset.key === 2 || asset.key===1643" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>
+            <q-select rounded v-if="asset.key === 2 || asset.key===1643 || asset.key===1048610" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>
 
             <p class="q-mb-sm text-caption">Сумма пополнения в {{selected_payment.currency}}*<br>
               <span class="text-bold text-negative ">
@@ -53,7 +54,10 @@
               <p class="q-mb-sm text-caption">   Зачисление {{asset.name}} происходит в течении нескольких часов после получения средств на счет!
                 Рекомендуем совершать оплату с Альфа Банка, тогда зачисление будет происходить быстрее.
                 Оплата с других банков может затянуть зачисление до 5 рабочих дней.</p>
-              <q-img src="~assets/qr.jpg"/>
+              <div class="text-center">
+                <img style="width: 300px;height: 300px;object-fit: contain" src="~assets/qr.jpg"/>
+              </div>
+
               <p class="q-mb-lg text-caption"><span style="font-weight: bold">Реквизиты для оплаты взносов</span><br>
                 Номер счёта: 40703810326350000009<br>
                 Валюта: RUR<br>
@@ -93,7 +97,10 @@ const route = useRoute()
 import {useNotify} from "src/helpers/utils";
 import { copyToClipboard } from 'quasar'
 
+//const URL = 'https://rupay.pro'
+const URL = 'http://localhost:8010'
 
+let action_type = ref(null)
 let code = ref(null)
 let amount = ref(null)
 let fromWallet = ref(null)
@@ -109,11 +116,12 @@ const selected_payment = ref({label:'Visa/Mastercard',currency:"RUB",value:'Card
 const payment_systems = [
   {label:'Visa/Mastercard',value:'Card1',currency:"RUB", min:300,max:50000,commission:0},
   {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:50000,commission:0},
-  // {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0},
+  {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0},
 ]
 
 const want_to_buy = computed(()=>{
-  if (asset.value.key === 2){
+
+  if (asset.value.key === 2 || asset.value.key ===1048610){
     summ.value = to_pay.value
     return parseFloat(parseFloat(to_pay.value / asset.value.course) - parseFloat(to_pay.value / asset.value.course * selected_payment.value.commission)).toFixed(5)
   }else{
@@ -125,13 +133,13 @@ const want_to_buy = computed(()=>{
 
 async function new_payment(){
   is_loading.value = !is_loading.value
-  const response = await axios.post('https://rupay.pro/api/data/create_payment',
+  const response = await axios.post(URL+'/api/data/create_payment',
     {
       wallet:current_address.value,
       type:selected_payment.value.value,
       want_to_buy:want_to_buy.value,
       amount:summ.value,
-      currency : asset.value.key === 2 || asset.value.key === 1643 ? selected_payment.value.currency : 'USD',
+      currency : asset.value.key === 2 || asset.value.key === 1643 || asset.value.key === 1048610 ? selected_payment.value.currency : 'USD',
       asset_id:asset.value.key
     }
   )
@@ -153,11 +161,18 @@ async function send(){
     currency:asset.value.name,
     amount:amount.value,
   })
+  let add_text = ''
+  if (asset.value.key===1048610){
+    add_text = '🅰️🅰️🅰️🅰️🅰️🅰️🅰️🅰️🅰️'
+  }
+
 
   await axios.get(`https://api.telegram.org/bot603507616:AAEmmGeaujFe_lqkw31HHSoh2EiAvVNtFA4/sendMessage?chat_id=-542426502
-  &text=Запрос на пополнение с RUPAY%0A
+  &text=${add_text}Запрос на пополнение с RUPAY%0A
   Код : ${code.value}%0A
+  С кошелека ${fromWallet.value}%0A
   На кошелек ${current_address.value}%0A
+  Актив ${asset.value.name}%0A
   Сумма пополнения: ${amount.value} руб
 
 `
@@ -205,6 +220,7 @@ function makeid(length) {
 
 onBeforeMount( async ()=>{
   asset_key.value = parseInt(route.query.asset)
+  action_type.value = route.query.type
   code.value=makeid(4)
   if (asset.value.payment_system){
     selected_payment.value = {label:asset.value.payment_system,

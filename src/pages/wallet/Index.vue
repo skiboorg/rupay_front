@@ -60,7 +60,7 @@
 
          <q-btn stack @click="$router.push({name: 'wallet_assets_for_buy'})" color="primary" unelevated no-caps>
            <q-icon color="white" size="22px" name="las la-tag"/>
-           <p class="no-margin text-caption lh100">Купить</p>
+           <p class="no-margin text-caption lh100">Получить</p>
          </q-btn>
 
 
