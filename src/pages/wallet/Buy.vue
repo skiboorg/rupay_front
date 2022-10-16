@@ -97,8 +97,8 @@ const route = useRoute()
 import {useNotify} from "src/helpers/utils";
 import { copyToClipboard } from 'quasar'
 
-//const URL = 'https://rupay.pro'
-const URL = 'http://localhost:8010'
+const URL = 'https://rupay.pro'
+//const URL = 'http://localhost:8010'
 
 let action_type = ref(null)
 let code = ref(null)
