@@ -6,23 +6,40 @@
 
       <div class="" style="height: 60px"></div>
       <div v-if="action_type==='other' " class="q-mb-lg">
-        <p class="q-mb-sm text-caption">Укажите кошелек с которого будете совершать транзакцию*</p>
-        <q-input class="q-mb-sm" rounded dense outlined  v-model="fromWallet"  />
-        <div>
-          <p class="q-mb-sm text-caption">С указанного вами кошелька совершаете транзакцию на адрес:</p>
+        <div v-if="asset.key!==1048610">
+          <p class="q-mb-sm text-caption">Укажите кошелек с которого будете совершать транзакцию*</p>
+          <q-input class="q-mb-sm" rounded dense outlined  v-model="fromWallet"  />
+          <div>
+            <p class="q-mb-sm text-caption">С указанного вами кошелька совершаете транзакцию на адрес:</p>
+            <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
+            <q-btn rounded class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+            <p class="q-mb-sm text-caption">
+              Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+              <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
+              Совершая транзакцию в <span class="text-weight-bold">{{asset.name}}</span> вы делаете добровольный имущественный паевой взнос ПКРГИ РОЛФ
+              Равный количеству отправляемых {{asset.name}} Вывод монет с кошелька является выплатой по вашему взносу<br>
+              Зачисление происходит в сроки до 24 часов с момента транзакции (указаны максимальные сроки)
+            </p>
+            <p class="q-mb-sm text-caption">Сумма пополнения*</p>
+            <q-input rounded class="q-mb-sm" dense outlined  v-model="amount" type="number" />
+            <q-btn rounded color="primary" :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+          </div>
+        </div>
+        <div v-else>
+          <p class="q-mb-sm text-caption">Cовершаете транзакцию на адрес:</p>
           <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
           <q-btn rounded class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
           <p class="q-mb-sm text-caption">
             Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
             <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
-            Совершая транзакцию в <span class="text-weight-bold">{{asset.name}}</span> вы делаете добровольный имущественный паевой взнос ПКРГИ РОЛФ
-            Равный количеству отправляемых {{asset.name}} Вывод монет с кошелька является выплатой по вашему взносу<br>
-            Зачисление происходит в сроки до 24 часов с момента транзакции (указаны максимальные сроки)
           </p>
-          <p class="q-mb-sm text-caption">Сумма пополнения*</p>
-          <q-input rounded class="q-mb-sm" dense outlined  v-model="amount" type="number" />
-          <q-btn rounded color="primary" :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+          <p class="q-mb-sm text-caption text-bold">После проведения транзакции, скопируйте Transaction Hash, вставьте в поле ниже и нажмите кнопку проверить</p>
+
+          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
+          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash" :disable="!tx_hash" unelevated no-caps
+                 class="full-width q-py-md" label="Проверить транзакцию"/>
         </div>
+
       </div>
       <div v-else class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
@@ -109,6 +126,7 @@ let is_sent = ref(false)
 let asset_key = ref(0)
 let to_pay = ref(300)
 let summ = ref(0)
+let tx_hash = ref(null)
 let comission = ref(0.02)
 let current_course = ref(0)
 const selected_payment = ref({label:'Visa/Mastercard',currency:"RUB",value:'Card1',min:300,max:50000,commission:0})
@@ -121,6 +139,7 @@ const payment_systems = [
 
 const want_to_buy = computed(()=>{
 
+
   if (asset.value.key === 2 || asset.value.key ===1048610){
     summ.value = to_pay.value
     return parseFloat(parseFloat(to_pay.value / asset.value.course) - parseFloat(to_pay.value / asset.value.course * selected_payment.value.commission)).toFixed(5)
@@ -130,6 +149,22 @@ const want_to_buy = computed(()=>{
   }
 
 })
+
+async function checkTxHash(){
+  is_loading.value = !is_loading.value
+  const response = await axios.post(URL+'/api/data/check_tx_hash',{
+    tx:tx_hash.value,
+    wallet:current_address.value,
+    addr:asset.value.from_address
+  })
+  if (response.data.success){
+    useNotify('positive',JSON.stringify(response.data.message))
+  }else {
+    useNotify('negative',JSON.stringify(response.data.message))
+  }
+
+  is_loading.value = !is_loading.value
+}
 
 async function new_payment(){
   is_loading.value = !is_loading.value
@@ -173,7 +208,7 @@ async function send(){
   С кошелека ${fromWallet.value}%0A
   На кошелек ${current_address.value}%0A
   Актив ${asset.value.name}%0A
-  Сумма пополнения: ${amount.value} руб
+  Сумма пополнения: ${amount.value} ${asset.value.name}
 
 `
   )
