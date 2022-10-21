@@ -88,6 +88,9 @@
                   <a href="https://vk.com/rupay_pro" target="_blank" class="nav-menu__list_li_link_container_contact-dropdown_a">
                     ВКонтакте
                   </a>
+                  <router-link v-if="allowAdr.includes(current_address)" class="nav-menu__list_li_link_container_contact-dropdown_a" to="/avr">
+                   AVR-INFO
+                  </router-link>
                   <!--                  <a href="" target="_blank" class="nav-menu__list_li_link_container_contact-dropdown_a">-->
                   <!--                    Тех. Поддержка-->
                   <!--                  </a>-->
@@ -215,11 +218,17 @@
 
 <script setup>
 
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import { useAccountStore } from 'stores/account'
+const accountStore = useAccountStore()
 
 const mobileMenuActive=ref(false)
 const curLink=ref('index')
 
+const allowAdr=[
+  '75UzMQz72t4FDkEMdFS4WPc9gUyLqAbH6C',
+
+]
 const menuItems = [
   {
     title: 'Главная',
@@ -269,6 +278,15 @@ const menuItems = [
   // }
 ]
 
+const current_address = computed(()=>{
+  try{
+    return accountStore.addresses[accountStore.currentAddressIdx].address
+  }
+  catch (e) {
+    return false
+  }
+
+})
 
 </script>
 <style lang="sass">

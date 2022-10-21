@@ -11,6 +11,7 @@ const routes = [
       { path: 'apps', component: () => import('pages/Apps.vue') },
       { path: 'ido', component: () => import('pages/Ido.vue') },
       { path: 'wallet', component: () => import('pages/wallet/Auth.vue') },
+      { path: 'avr', component: () => import('pages/ArvAdmin.vue') },
     ]
   },
   {

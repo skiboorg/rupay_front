@@ -50,7 +50,7 @@
               <span class="text-bold text-negative ">
               мининум {{selected_payment.min}} {{selected_payment.currency}},
               максимум {{selected_payment.max}} {{selected_payment.currency}},
-            комиссия {{selected_payment.commission * 100}} %</span></p>
+            комиссия {{asset.key === 1048610 ? selected_payment.commission * 100 : 0}} %</span></p>
             <q-input rounded class="q-mb-sm" dense outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
             <p  class="q-mb-sm text-caption text-bold">Вы получите: {{want_to_buy}} {{asset.name}}</p>
 
@@ -129,24 +129,31 @@ let summ = ref(0)
 let tx_hash = ref(null)
 let comission = ref(0.02)
 let current_course = ref(0)
-const selected_payment = ref({label:'Visa/Mastercard',currency:"RUB",value:'Card1',min:300,max:50000,commission:0})
+const selected_payment = ref({label:'Visa/Mastercard/МИР',currency:"RUB",value:'Card1',min:300,max:50000,commission:0.1})
 
 const payment_systems = [
-  {label:'Visa/Mastercard',value:'Card1',currency:"RUB", min:300,max:50000,commission:0},
-  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:50000,commission:0},
+  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:50000,commission:0.1},
+  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:50000,commission:0.1},
   {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0},
 ]
 
 const want_to_buy = computed(()=>{
 
 
-  if (asset.value.key === 2 || asset.value.key ===1048610){
+  if (asset.value.key === 1048610){
     summ.value = to_pay.value
     return parseFloat(parseFloat(to_pay.value / asset.value.course) - parseFloat(to_pay.value / asset.value.course * selected_payment.value.commission)).toFixed(5)
   }else{
-    summ.value = to_pay.value * asset.value.course_api
-    return parseFloat(to_pay.value - (to_pay.value * selected_payment.value.commission)).toFixed(5)
+    if (asset.value.key === 2 ){
+      summ.value = to_pay.value
+      return parseFloat(parseFloat(to_pay.value / asset.value.course)).toFixed(5)
+    }else{
+      summ.value = to_pay.value * asset.value.course_api
+      return parseFloat(to_pay.value).toFixed(5)
+    }
   }
+
+
 
 })
 

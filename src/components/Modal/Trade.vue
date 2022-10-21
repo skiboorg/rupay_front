@@ -309,6 +309,7 @@ let confirmModalVisible=ref(false)
 let is_loading=ref(false)
 let orderInfo = ref({})
 let minAmount = ref(0)
+let minAmount_first_asset = ref(0)
 let totalSell = ref(0)
 let totalBuy = ref(0)
 let pair_data = ref({})
@@ -370,9 +371,9 @@ watch(trade_type, (val) => {
 })
 
 function priceChange(){
-  console.log(first_asset.value)
-  console.log(second_asset.value)
-  console.log(minAmount.value)
+  // console.log(first_asset.value)
+  // console.log(second_asset.value)
+  // console.log(minAmount.value)
 
   // if (minAmount.value>0 && trade_type.value ==='sell'){
   //   console.log(first_asset.value.course / second_asset.value.course)
@@ -382,16 +383,19 @@ function priceChange(){
   //     unit_price.value = first_asset.value.course / second_asset.value.course
   //   }
   // }
-  if (minAmount.value>0 && trade_type.value ==='sell' && first_asset.value.key === 2 ){
-    console.log(second_asset.value)
-    //first_asset.value.course / second_asset.value.course
-    if (unit_price.value >= minAmount.value){
-      console.log('norm')
-    }else {
-      unit_price.value = minAmount.value //first_asset.value.course / second_asset.value.course
-      console.log('dsf')
+
+    if (minAmount.value>0 && trade_type.value ==='sell' && (first_asset.value.key === 2 || first_asset.value.key === 1048610) ){
+
+      //first_asset.value.course / second_asset.value.course
+      if (unit_price.value >= minAmount_first_asset.value){
+       // console.log('norm')
+      }else {
+        unit_price.value = minAmount_first_asset.value //first_asset.value.course / second_asset.value.course
+       // console.log('dsf')
+      }
     }
-  }
+
+
 
   if (amount.value){
     total.value = parseFloat(amount.value * unit_price.value).toFixed(5)
@@ -492,7 +496,8 @@ async function getAssets(){
   //console.log('first_asset',first_asset.value)
   //console.log(second_asset.value)
 
-  minAmount.value = second_asset.value.min_trade_price
+  minAmount.value = parseFloat(second_asset.value.min_trade_price)
+  minAmount_first_asset.value = parseFloat(first_asset.value.min_trade_price)
   //console.log(orders)
   for (let x of orders.value.have){
     totalSell.value += parseFloat(x.leftHave)
