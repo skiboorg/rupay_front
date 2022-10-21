@@ -230,7 +230,8 @@ const curLink=ref('index')
 
 const allowAdr=[
   '75UzMQz72t4FDkEMdFS4WPc9gUyLqAbH6C',
-  '7HxoBFYJQXbq6SN8tTiE4ukQCn3ezcFnaS'
+  '7HxoBFYJQXbq6SN8tTiE4ukQCn3ezcFnaS',
+  '73SB6ZgqkhX98WnqZRRNxhd9XGtmas2Btb'
 
 ]
 const menuItems = [
