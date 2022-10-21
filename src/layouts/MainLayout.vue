@@ -137,8 +137,11 @@
         </router-link>
 
       </q-item>
-
-
+         <q-item v-if="allowAdr.includes(current_address)">
+           <router-link class="mobile-link" to="/avr">
+             AVR-INFO
+           </router-link>
+         </q-item>
     </q-list>
     </q-drawer>
 
