@@ -59,7 +59,10 @@
             </div>
             <div v-else>
               <div v-if="asset && asset.key===1048610">
-                  <Avr/>
+                <Avr/>
+              </div>
+              <div v-else-if="asset && asset.key===1048615">
+                <Mttl/>
               </div>
               <div v-else>
                 <p class="q-mb-sm text-negative ">Сервис RUPAY не взимает комиссию за вывод, однако блокчейн выводимой сети взимает, на ваш счёт указанный для вывода поступит сумма за вычетом комиссии сети
@@ -97,6 +100,7 @@
 
 
 import Avr from "components/Withdrawal/Avr";
+import Mttl from "components/Withdrawal/Mttl";
 
 import {computed, ref,onBeforeMount} from "vue";
 

@@ -44,13 +44,15 @@
       <div v-else class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
           <div v-if="selected_payment.value !== 'rs'">
-            <q-select rounded v-if="asset.key === 2 || asset.key===1643 || asset.key===1048610" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>
+            <q-select rounded v-if="asset.key === 2 || asset.key===1643 || asset.key===1048610 || asset.key===1048615" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>
 
             <p class="q-mb-sm text-caption">Сумма пополнения в {{selected_payment.currency}}*<br>
               <span class="text-bold text-negative ">
               мининум {{selected_payment.min}} {{selected_payment.currency}},
               максимум {{selected_payment.max}} {{selected_payment.currency}},
-            комиссия {{asset.key === 1048610 ? selected_payment.commission * 100 : 0}} %</span></p>
+                <!--            комиссия {{selected_payment.commission * 100}} %-->
+              </span>
+            </p>
             <q-input rounded class="q-mb-sm" dense outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
             <p  class="q-mb-sm text-caption text-bold">Вы получите: {{want_to_buy}} {{asset.name}}</p>
 
@@ -140,9 +142,12 @@ const payment_systems = [
 const want_to_buy = computed(()=>{
 
 
-  if (asset.value.key === 1048610){
+
+  if (asset.value.key === 1048610 || asset.value.key === 1048615 ){
     summ.value = to_pay.value
-    return parseFloat(parseFloat(to_pay.value / asset.value.course) - parseFloat(to_pay.value / asset.value.course * selected_payment.value.commission)).toFixed(5)
+    let cource_plus_comission  = parseFloat(parseFloat(asset.value.course) + parseFloat(asset.value.course * selected_payment.value.commission)).toFixed(2)
+    console.log(cource_plus_comission)
+    return parseFloat(to_pay.value / cource_plus_comission).toFixed(5)
   }else{
     if (asset.value.key === 2 ){
       summ.value = to_pay.value
