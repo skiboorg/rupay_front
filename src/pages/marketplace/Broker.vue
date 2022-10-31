@@ -11,13 +11,41 @@
   Совокупная цена акций делится на общее количество реализованных токенов, таким образом формируется цена моментального откупа данного токена.
   В случае продажи пользователем данного токена обратно, на данную сумму продаются и акции для покрытия откупа данного токена.
 </p>
+        <div class="">
 
-
-
-
-
-
+          <q-list bordered separator>
+            <q-item v-for="item in data" :key="item.id">
+              <q-item-section avatar>
+                <q-avatar rounded>
+                  <img :src="item.icon">
+                </q-avatar>
+              </q-item-section>
+              <q-item-section>
+                <q-item-label > <span class="text-bold">{{item.name}}</span> <span class="gt-sm"> | {{item.amount}}шт - {{item.price}} руб</span></q-item-label>
+                <q-item-label class="lt-md" caption>{{item.amount}}шт - {{item.price}} руб</q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-item-label ><span class="text-dark text-bold">{{item.amount * item.price}} руб </span>
+                <span class="gt-sm" :class="[item.change[0]==='-' ? 'text-red' : 'text-green']">  {{item.change}} </span>
+                </q-item-label>
+                <q-item-label caption class="lt-md" :class="[item.change[0]==='-' ? 'text-red' : 'text-green']">{{item.change}}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
       </div>
     </main>
   </q-page>
 </template>
+<script setup>
+import {onBeforeMount,ref} from "vue";
+import {api} from "boot/axios";
+
+let data = ref([])
+
+onBeforeMount( async ()=> {
+  const resp = await api.get('/api/settings/broker')
+  data.value=resp.data
+
+})
+</script>
