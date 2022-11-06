@@ -49,7 +49,7 @@
             <p class="q-mb-sm text-caption">Сумма пополнения в {{selected_payment.currency}}*<br>
               <span class="text-bold text-negative ">
               мининум {{selected_payment.min}} {{selected_payment.currency}},
-              максимум {{selected_payment.max}} {{selected_payment.currency}},
+              максимум {{selected_payment.max}} {{selected_payment.currency}}
                 <!--            комиссия {{selected_payment.commission * 100}} %-->
               </span>
             </p>
@@ -131,11 +131,11 @@ let summ = ref(0)
 let tx_hash = ref(null)
 let comission = ref(0.02)
 let current_course = ref(0)
-const selected_payment = ref({label:'Visa/Mastercard/МИР',currency:"RUB",value:'Card1',min:300,max:50000,commission:0.1})
+const selected_payment = ref({label:'Visa/Mastercard/МИР',currency:"RUB",value:'Card1',min:300,max:15000,commission:0.1})
 
 const payment_systems = [
-  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:50000,commission:0.1},
-  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:50000,commission:0.1},
+  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1},
+  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:15000,commission:0.1},
   {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0},
 ]
 
