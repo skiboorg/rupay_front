@@ -45,18 +45,28 @@
         <q-scroll-area style="height: 85vh;">
           <div v-if="selected_payment.value !== 'rs'">
             <q-select rounded v-if="asset.key === 2 || asset.key===1643 || asset.key===1048610 || asset.key===1048615" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>
-
-            <p class="q-mb-sm text-caption">Сумма пополнения в {{selected_payment.currency}}*<br>
-              <span class="text-bold text-negative ">
+            <div class="" v-if="!selected_payment.disabled">
+              <p class="q-mb-sm text-caption">Сумма пополнения в {{selected_payment.currency}}*<br>
+                <span class="text-bold text-negative ">
               мининум {{selected_payment.min}} {{selected_payment.currency}},
-              максимум {{selected_payment.max}} {{selected_payment.currency}}
-                <!--            комиссия {{selected_payment.commission * 100}} %-->
+              максимум {{selected_payment.max}} {{selected_payment.currency}},
+                  <!--            комиссия {{selected_payment.commission * 100}} %-->
               </span>
-            </p>
-            <q-input rounded class="q-mb-sm" dense outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
-            <p  class="q-mb-sm text-caption text-bold">Вы получите: {{want_to_buy}} {{asset.name}}</p>
+              </p>
+              <q-input rounded class="q-mb-sm" dense outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
+              <div class="q-mb-sm flex items-center justify-between">
+                <p  class="no-margin text-caption text-bold">Вы получите: {{want_to_buy}} {{asset.name}}</p>
+                <p  class="no-margin text-caption text-bold">Текущий курс: {{current_course}} руб</p>
 
-            <q-btn color="primary" rounded :loading="is_loading" @click="new_payment" :disable="to_pay<selected_payment.min || to_pay>selected_payment.max" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+              </div>
+
+
+              <q-btn color="primary" rounded :loading="is_loading" @click="new_payment" :disable="to_pay<selected_payment.min || to_pay>selected_payment.max" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+
+            </div>
+            <div v-else>
+              <p class="text-center text-bold">Данный тип оплаты временно не доступен</p>
+            </div>
 
           </div>
           <div v-else>
@@ -126,33 +136,34 @@ let fromWallet = ref(null)
 let is_loading = ref(false)
 let is_sent = ref(false)
 let asset_key = ref(0)
+
 let to_pay = ref(300)
 let summ = ref(0)
 let tx_hash = ref(null)
 let comission = ref(0.02)
 let current_course = ref(0)
-const selected_payment = ref({label:'Visa/Mastercard/МИР',currency:"RUB",value:'Card1',min:300,max:15000,commission:0.1})
+const selected_payment = ref({label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:true})
 
 const payment_systems = [
-  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1},
-  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:15000,commission:0.1},
-  {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0},
+  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:true},
+  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:15000,commission:0.1, disabled:true},
+  {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0, disabled:false},
 ]
 
 const want_to_buy = computed(()=>{
-
-
-
   if (asset.value.key === 1048610 || asset.value.key === 1048615 ){
     summ.value = to_pay.value
     let cource_plus_comission  = parseFloat(parseFloat(asset.value.course) + parseFloat(asset.value.course * selected_payment.value.commission)).toFixed(2)
     console.log(cource_plus_comission)
+    current_course.value = cource_plus_comission
     return parseFloat(to_pay.value / cource_plus_comission).toFixed(5)
   }else{
     if (asset.value.key === 2 ){
       summ.value = to_pay.value
+      current_course.value = asset.value.course
       return parseFloat(parseFloat(to_pay.value / asset.value.course)).toFixed(5)
     }else{
+      current_course.value = asset.value.course_api
       summ.value = to_pay.value * asset.value.course_api
       return parseFloat(to_pay.value).toFixed(5)
     }
