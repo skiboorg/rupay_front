@@ -56,7 +56,7 @@
               <q-input rounded class="q-mb-sm" dense outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
               <div class="q-mb-sm flex items-center justify-between">
                 <p  class="no-margin text-caption text-bold">Вы получите: {{want_to_buy}} {{asset.name}}</p>
-                <p  class="no-margin text-caption text-bold">Текущий курс: {{current_course}} руб</p>
+                <p  class="no-margin text-caption text-bold">Текущий курс: {{parseFloat(current_course).toFixed(2)}} руб</p>
 
               </div>
 
@@ -127,7 +127,7 @@ import {useNotify} from "src/helpers/utils";
 import { copyToClipboard } from 'quasar'
 
 const URL = 'https://rupay.pro'
-//const URL = 'http://localhost:8010'
+//const URL = 'http://127.0.0.1:8000'
 
 let action_type = ref(null)
 let code = ref(null)
@@ -142,11 +142,11 @@ let summ = ref(0)
 let tx_hash = ref(null)
 let comission = ref(0.02)
 let current_course = ref(0)
-const selected_payment = ref({label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:true})
+const selected_payment = ref({label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:false})
 
 const payment_systems = [
-  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:true},
-  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:15000,commission:0.1, disabled:true},
+  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:false},
+  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:15000,commission:0.1, disabled:false},
   {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0, disabled:false},
 ]
 

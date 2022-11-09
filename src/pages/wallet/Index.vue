@@ -19,7 +19,7 @@
 
 
          </q-item>
-         <q-item v-else class="block ">
+         <q-item v-if="!person" class="block ">
            <q-item-section>
              <p class="text-negative text-bold q-mb-sm">Ваш счет является анонимным. Для разблокировки всего функционала
                <router-link :to="{name:'create_person'}">создайте персону</router-link>
@@ -34,7 +34,9 @@
            </q-item-section>
 
          </q-item>
-
+         <q-item v-if="!person" class="block ">
+           <a class="q-btn q-btn-item non-selectable no-outline q-btn--unelevated q-btn--rectangle bg-blue-7 text-white q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--active" tabindex="0" href="https://t.me/verify_RUpaybot" target="_blank"><span class="q-focus-helper" tabindex="-1"></span><span class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i class="q-icon on-left lab la-telegram" aria-hidden="true" role="img"> </i><span class="block">Бот для верификации</span></span></a>
+         </q-item>
          <q-item v-if="person"  >
 
            <q-item-section ><router-link class="text-dark" :to="{name:'verify_person'}">Верифицировать пользователя</router-link> </q-item-section>

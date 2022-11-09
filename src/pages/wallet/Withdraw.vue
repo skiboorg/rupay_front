@@ -45,7 +45,7 @@
 
               </div>
               <p class="q-mb-sm text-caption">Сумма вывода в рублях* (Ваш баланс <span>{{balances[1643] ? balances[1643][0][1] : '0'}}</span> RUB)</p>
-              <p class="q-mb-sm text-caption">Минимальная сумма вывода 5000 RUB</p>
+              <p class="q-mb-sm text-caption">Минимальная сумма вывода 2500 RUB</p>
               <q-input class="q-mb-md" rounded dense outlined  v-model="sendInfo.amount" type="number" >
                 <template v-if="balances[1643]" v-slot:append>
                   <q-btn @click="sendInfo.amount = balances[1643][0][1]" size="10px" flat rounded label="Вывести все"/>
@@ -54,15 +54,15 @@
               <p class="q-mb-sm text-caption text-bold" v-if="need_pay_13">Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.15 + 50)}} RUB</p>
               <p class="q-mb-sm text-caption text-bold" v-else>Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.02 + 50)}} RUB</p>
 
-              <q-btn color="primary" rounded :loading="is_loading" @click="send" :disable="(!sendInfo.amount || sendInfo.amount<5000) || !fio || !card || !bank" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+              <q-btn color="primary" rounded :loading="is_loading" @click="send" :disable="(!sendInfo.amount || sendInfo.amount<2500) || !fio || !card || !bank" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
 
             </div>
             <div v-else>
               <div v-if="asset && asset.key===1048610">
-                <Avr/>
+                  <Avr/>
               </div>
               <div v-else-if="asset && asset.key===1048615">
-                <Mttl/>
+                  <Mttl/>
               </div>
               <div v-else>
                 <p class="q-mb-sm text-negative ">Сервис RUPAY не взимает комиссию за вывод, однако блокчейн выводимой сети взимает, на ваш счёт указанный для вывода поступит сумма за вычетом комиссии сети
