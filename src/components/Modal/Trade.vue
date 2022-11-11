@@ -204,9 +204,9 @@
           </q-item>
 
           <q-item>
-            <q-item-section>Комиссия</q-item-section>
+            <q-item-section>Газ</q-item-section>
             <q-item-section>
-              {{orderInfo.fee}}
+              {{orderInfo.fee}} OLF
 
             </q-item-section>
           </q-item>

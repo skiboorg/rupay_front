@@ -41,18 +41,19 @@ export const  findTransactionsByAddress = async (address,limit,offset) => {
 
 async function allordersbyaddress(address,last_id=0){
   if (last_id===0){
-    const response = await axios.get(`${process.env.API_URL}/apiexchange/allordersbyaddress/${address}`)
+    const response = await axios.get(`${process.env.API_URL}/apiexchange/allordersbyaddress/${address}?limit=20&desc`)
     return response.data
   }else {
-    const response = await axios.get(`${process.env.API_URL}/apiexchange/allordersbyaddress/${address}/${last_id}`)
+    const response = await axios.get(`${process.env.API_URL}/apiexchange/allordersbyaddress/${address}/${last_id}?limit=20&desc`)
     return response.data
   }
 }
 
 function checkOrdersData(data){
-  //console.log('checkOrdersData')
-  if (data.length===50){
-    return  data[49].id
+  console.log('checkOrdersData',data.length)
+  console.log(data)
+  if (data.length===20){
+    return  data[19].id
   }else {
     return false
   }
@@ -65,7 +66,8 @@ export const  findOrdersByAddress = async (address) => {
     do{
       let new_data = await allordersbyaddress(address,last_id)
       data = data.concat(new_data)
-      last_id = checkOrdersData(data)
+      last_id = checkOrdersData(new_data)
+      console.log('do again', last_id)
     }while (last_id)
   }
 
@@ -78,10 +80,11 @@ export const  filterTransactionsByAssetName = async (address,assetKey,limit,offs
   let filtered_transactions_result = []
   let filtered_transactions_temp = []
   const transactions = await findTransactionsByAddress(address,limit,offset)
-
-  const filtered_transactions = transactions.data.filter(x=>x.assetKey===assetKey)
   //console.log(transactions.data)
+  const filtered_transactions = transactions.data.filter(x=>x.assetKey===assetKey)
+  //console.log(filtered_transactions)
   for (let i in filtered_transactions){
+    console.log(i)
     filtered_transactions[i].fullDate = new Date(filtered_transactions[i].timestamp).toLocaleString()
     filtered_transactions[i].timestamp = new Date(filtered_transactions[i].timestamp).toLocaleDateString()
   }
@@ -91,6 +94,7 @@ export const  filterTransactionsByAssetName = async (address,assetKey,limit,offs
 
   //console.log(filtered_transactions_result)
   return filtered_transactions_result
+
 
 
 
