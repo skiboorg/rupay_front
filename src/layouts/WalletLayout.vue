@@ -135,7 +135,7 @@
     </q-drawer>
 
       <div class="container">
-        <div class="main-grid wallet">
+        <div style="padding-top: 0" class="main-grid wallet">
           <div class="main-grid__text_top full-width">
             <q-page-container>
               <router-view />

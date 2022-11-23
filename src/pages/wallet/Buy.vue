@@ -65,38 +65,44 @@
 
             </div>
             <div v-else>
-              <p class="text-center text-bold">Данный тип оплаты временно не доступен</p>
+              <p class="text-center text-negative text-bold">Данный тип оплаты временно не доступен</p>
+              <p class="text-center text-positive text-bold">Вы можете возпользоваться площадкой <router-link :to="{name:'p2p_index'}">P2P</router-link></p>
             </div>
 
           </div>
           <div v-else>
-
-            <div v-if="!is_sent"><p class="q-mb-sm text-caption">Сумма пополнения в рублях* (<span class="text-bold text-negative">мининум 1000 руб</span>)</p>
-              <q-input rounded class="q-mb-sm" dense outlined  v-model="amount" type="number" />
-              <p class="q-mb-sm text-caption text-bold">Вы получите: {{amount / asset.course}} {{asset.name}}</p>
-              <q-btn color="primary"  :loading="is_loading" @click="send" :disable="!amount || amount<1000" unelevated no-caps class="full-width q-py-md q-mb-md" rounded label="Отправить"/>
-            </div>
-            <div v-else> <p class="text-bold">Внимание!</p>
-              <p class="q-mb-sm text-caption">Для пополнения вашего баланса {{asset.name}} по указанным реквизитам ниже совершаете оплату в назначении платежа указать:</p>
-              <p class="q-mb-sm text-caption text-weight-bold"> Добровольный членский взнос от ФИО, КОД {{code}}</p>
-              <p class="q-mb-sm text-caption text-weight-bold">  ВНИМАНИЕ НАЗНАЧЕНИЕ ПЛАТЕЖА ДОЛЖНО СОВПАДАТЬ С УКАЗАННЫМ В ИНСТРУКЦИИ.</p>
-              <p class="q-mb-sm text-caption">   Зачисление {{asset.name}} происходит в течении нескольких часов после получения средств на счет!
-                Рекомендуем совершать оплату с Альфа Банка, тогда зачисление будет происходить быстрее.
-                Оплата с других банков может затянуть зачисление до 5 рабочих дней.</p>
-              <div class="text-center">
-                <img style="width: 300px;height: 300px;object-fit: contain" src="~assets/qr.jpg"/>
+            <div v-if="!selected_payment.disabled">
+              <div v-if="!is_sent"><p class="q-mb-sm text-caption">Сумма пополнения в рублях* (<span class="text-bold text-negative">мининум 1000 руб</span>)</p>
+                <q-input rounded class="q-mb-sm" dense outlined  v-model="amount" type="number" />
+                <p class="q-mb-sm text-caption text-bold">Вы получите: {{amount / asset.course}} {{asset.name}}</p>
+                <q-btn color="primary"  :loading="is_loading" @click="send" :disable="!amount || amount<1000" unelevated no-caps class="full-width q-py-md q-mb-md" rounded label="Отправить"/>
               </div>
+              <div v-else> <p class="text-bold">Внимание!</p>
+                <p class="q-mb-sm text-caption">Для пополнения вашего баланса {{asset.name}} по указанным реквизитам ниже совершаете оплату в назначении платежа указать:</p>
+                <p class="q-mb-sm text-caption text-weight-bold"> Добровольный членский взнос от ФИО, КОД {{code}}</p>
+                <p class="q-mb-sm text-caption text-weight-bold">  ВНИМАНИЕ НАЗНАЧЕНИЕ ПЛАТЕЖА ДОЛЖНО СОВПАДАТЬ С УКАЗАННЫМ В ИНСТРУКЦИИ.</p>
+                <p class="q-mb-sm text-caption">   Зачисление {{asset.name}} происходит в течении нескольких часов после получения средств на счет!
+                  Рекомендуем совершать оплату с Альфа Банка, тогда зачисление будет происходить быстрее.
+                  Оплата с других банков может затянуть зачисление до 5 рабочих дней.</p>
+                <div class="text-center">
+                  <img style="width: 300px;height: 300px;object-fit: contain" src="~assets/qr.jpg"/>
+                </div>
 
-              <p class="q-mb-lg text-caption"><span style="font-weight: bold">Реквизиты для оплаты взносов</span><br>
-                Номер счёта: 40703810326350000009<br>
-                Валюта: RUR<br>
-                Название: ПОТРЕБИТЕЛЬСКИЙ КООПЕРАТИВ ПО РАЗВИТИЮ ГРАЖДАНСКИХ ИНИЦИАТИВ "РОЛФ"<br>
-                ИНН: 2366034781<br>
-                КПП: 236601001<br>
-                Банк: ФИЛИАЛ "РОСТОВСКИЙ" АО "АЛЬФА-БАНК"<br>
-                БИК: 046015207<br>
-                Кор. счёт: 30101810500000000207<br>
-                Юридический адрес компании: улица ГОРЬКОГО, д. 60/4, кв./оф. 44, Краснодарский край, р-н ГОРОД-КУРОРТ СОЧИ, г. Сочи</p></div>
+                <p class="q-mb-lg text-caption"><span style="font-weight: bold">Реквизиты для оплаты взносов</span><br>
+                  Номер счёта: 40703810326350000009<br>
+                  Валюта: RUR<br>
+                  Название: ПОТРЕБИТЕЛЬСКИЙ КООПЕРАТИВ ПО РАЗВИТИЮ ГРАЖДАНСКИХ ИНИЦИАТИВ "РОЛФ"<br>
+                  ИНН: 2366034781<br>
+                  КПП: 236601001<br>
+                  Банк: ФИЛИАЛ "РОСТОВСКИЙ" АО "АЛЬФА-БАНК"<br>
+                  БИК: 046015207<br>
+                  Кор. счёт: 30101810500000000207<br>
+                  Юридический адрес компании: улица ГОРЬКОГО, д. 60/4, кв./оф. 44, Краснодарский край, р-н ГОРОД-КУРОРТ СОЧИ, г. Сочи</p></div>
+            </div>
+            <div v-else>
+              <p class="text-center text-negative text-bold">Данный тип оплаты временно не доступен</p>
+              <p class="text-center text-positive text-bold">Вы можете возпользоваться площадкой <router-link :to="{name:'p2p_index'}">P2P</router-link></p>
+            </div>
 
 
           </div>
@@ -147,7 +153,7 @@ const selected_payment = ref({label:'Visa/Mastercard/МИР',value:'Card1',curre
 const payment_systems = [
   {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:true},
   {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:15000,commission:0.1, disabled:true},
-  {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0, disabled:false},
+  {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0, disabled:true},
 ]
 
 const want_to_buy = computed(()=>{

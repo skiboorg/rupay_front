@@ -9,6 +9,7 @@
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 const BASE_URL = 'https://xn--k1affs.xn--p1ai'
 const GAME_URL = 'https://astraz.ru'
+const BASE_URL_WS = 'wss://xn--k1affs.xn--p1ai'
 //const BASE_URL = 'http://localhost:8000'
 
 const { configure } = require('quasar/wrappers');
@@ -59,7 +60,7 @@ module.exports = configure(function (ctx) {
         CHAT_ID: '-542426502',
         API: BASE_URL,
         GAME_API: GAME_URL,
-        //WS: BASE_URL_WS,
+        WS: BASE_URL_WS,
         //TODO CHANGE VERSION
         APP_VERSION: '0.01',
         API_URL: 'https://scan.rupay.pro',

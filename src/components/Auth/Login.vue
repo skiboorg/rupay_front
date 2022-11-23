@@ -53,6 +53,8 @@ import { useGlobalStore } from 'stores/global'
 
 const globalStore = useGlobalStore()
 
+import { useWSStore } from 'stores/ws'
+const wsStore = useWSStore()
 
 const seed=ref('')
 //const password=ref('ifpass112233theN')
@@ -81,6 +83,8 @@ async function login() {
   const hash = encryptSeed({seed:seed.value,password:password.value})
   await authStore.login(seed.value, hash)
   //console.log(hash)
+  const addresses = localStorage.getItem('addresses')
+  await wsStore.connectWS(JSON.parse(addresses)[0].address)
   globalStore.toggleLoadingState()
   await router.push({name:'wallet_index'})
 }

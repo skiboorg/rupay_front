@@ -39,7 +39,20 @@ export const useGlobalStore = defineStore('global', () => {
   function toggleTradeModalVisible(){
     tradeModalVisible.value = !tradeModalVisible.value
   }
-
+  async function getVersion(){
+    navigator.serviceWorker.getRegistrations().then(function (registrations) {
+      checkInterval.value = setInterval(  function() {
+        registrations[0].update()
+      },15000)
+    })
+    // checkInterval.value = setInterval( async function() {
+    //   const app_version = await api.post('/api/settings/web_app_version', {version: process.env.APP_VERSION})
+    //   needUpdate.value = app_version.data.success
+    //   if (needUpdate.value){
+    //     window.location.reload()
+    //   }
+    // },10000)
+  }
 
     return{
       is_loading,
@@ -57,6 +70,7 @@ export const useGlobalStore = defineStore('global', () => {
       toggleTradeModalVisible,
       togglePinCodeModalVisible,
       setPinOk,
+      getVersion,
       toggleIsBlur
 
 

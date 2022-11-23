@@ -42,7 +42,7 @@ export const useAuthStore = defineStore('auth', () => {
     accountStore.clearInfo()
     sraStore.stopCheckUnconfirmTx()
     //console.log(accountStore.addresses)
-    await router.push('/wallet')
+    await router.push('/')
     await router.go()
 
     return Promise.resolve('Success')

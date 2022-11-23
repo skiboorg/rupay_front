@@ -64,6 +64,11 @@ const routes = [
         component: () => import('pages/wallet/SelectAsset.vue'),
       },
       {
+        path: '/wallet/buy_part',
+        name: 'buy_part',
+        component: () => import('pages/wallet/Buy_part.vue'),
+      },
+      {
         path: '/wallet/unconfirmed',
         name: 'wallet_unconfirmed',
         component: () => import('pages/wallet/UnconfirmedTx.vue'),
@@ -102,6 +107,47 @@ const routes = [
         path: '/wallet/withdraw',
         name: 'withdraw',
         component: () => import('pages/wallet/Withdraw.vue'),
+      },
+
+      {
+        path: '/wallet/notifications',
+        name: 'notifications',
+        component: () => import('pages/wallet/Notifications.vue'),
+      },
+      {
+        path: '/wallet/p2p',
+        name: 'p2p_index',
+        component: () => import('pages/wallet/P2P/Index.vue'),
+      },
+      {
+        path: '/wallet/p2p',
+        name: 'p2p_index_blank',
+        component: () => import('pages/wallet/P2P/IndexNonAuth.vue'),
+      },
+      {
+        path: '/wallet/p2p/offer/:offer_id',
+        name: 'p2p_offer',
+        component: () => import('pages/wallet/P2P/Offer.vue'),
+      },
+      {
+        path: '/wallet/p2p/trade/:uid',
+        name: 'p2p_trade',
+        component: () => import('pages/wallet/P2P/Trade.vue'),
+      },
+      {
+        path: '/wallet/p2p/new_buy_offer',
+        name: 'p2p_new_buy_offer',
+        component: () => import('pages/wallet/P2P/NewBuyOffer.vue'),
+      },
+      {
+        path: '/wallet/p2p/new_sell_offer',
+        name: 'p2p_new_sell_offer',
+        component: () => import('pages/wallet/P2P/NewSellOffer.vue'),
+      },
+      {
+        path: '/wallet/p2p/user',
+        name: 'p2p_user',
+        component: () => import('pages/wallet/P2P/User.vue'),
       },
 
 

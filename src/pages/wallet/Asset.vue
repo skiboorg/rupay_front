@@ -17,7 +17,7 @@
           <p class="text-weight-medium text-body1 text-dark no-margin" :class="{blur:$global.isBlur}">~ {{$filters.convertAmount(rub_balance)}} &#8381;</p>
         </div>
 
-        <div style="display: grid;grid-template-columns: 1fr 1fr 1fr; grid-gap: 10px" class=" full-width text-dark">
+        <div style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr; grid-gap: 10px" class=" full-width text-dark">
 
 
           <q-btn stack @click="globalStore.toggleSendAssetModalVisible()" color="primary" unelevated no-caps>
@@ -34,6 +34,11 @@
           <q-btn stack @click="$router.push({name: 'wallet_exchange'})" color="primary" unelevated no-caps>
             <q-icon color="white" size="22px" name="las la-exchange-alt"/>
             <p class="no-margin text-caption">Обмен</p>
+          </q-btn>
+
+          <q-btn stack @click="$router.push({name: 'buy_part'})" color="primary" unelevated no-caps>
+            <q-icon color="white" size="22px" name="las la-puzzle-piece"/>
+            <p class="no-margin text-caption lh100">Внести паевой<br>взнос</p>
           </q-btn>
 
         </div>

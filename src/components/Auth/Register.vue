@@ -52,6 +52,8 @@ const authStore = useAuthStore()
 import {useRouter} from "vue-router"
 const router = useRouter()
 
+import { useWSStore } from 'stores/ws'
+const wsStore = useWSStore()
 
 const step = ref(1)
 const password=ref('')
@@ -94,6 +96,8 @@ async function register(){
   isLoading.value = !isLoading.value
   const hash = encryptSeed({seed:seed.value,password:password.value})
   await authStore.login(seed.value, hash)
+  const addresses = localStorage.getItem('addresses')
+  await wsStore.connectWS(JSON.parse(addresses)[0].address)
   await router.push({name:'wallet_index'})
   isLoading.value = !isLoading.value
 }

@@ -20,10 +20,23 @@
 
          </q-item>
          <q-item v-if="!person" class="block ">
+           <a class="q-btn q-btn-item non-selectable no-outline q-btn--unelevated q-btn--rectangle bg-blue-7 text-white q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--active" tabindex="0" href="https://t.me/verify_RUpaybot" target="_blank"><span class="q-focus-helper" tabindex="-1"></span><span class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i class="q-icon on-left lab la-telegram" aria-hidden="true" role="img"> </i><span class="block">Бот для верификации</span></span></a>
+         </q-item>
+         <q-item>
+    <q-item-section side>
+      <q-btn color="primary" @click="$router.push({name:'p2p_user'})" no-caps unelevated label="Настройки P2P"/>
+    </q-item-section>
+           <q-item-section side>
+             <q-btn  flat round dense icon="las la-bell" @click="$router.push({name:'notifications'})" class="q-ml-md" >
+               <q-badge v-if="showP2PWarningNotificaton" rounded floating color="negative"><q-icon size="10px" name="priority_high"/></q-badge>
+             </q-btn>
+           </q-item-section>
+    <q-item-section></q-item-section>
+         </q-item>
+         <q-item v-if="!person" class="block ">
            <q-item-section>
              <p class="text-negative text-bold q-mb-sm">Ваш счет является анонимным. Для разблокировки всего функционала
-               <router-link :to="{name:'create_person'}">создайте персону</router-link>
-               и верифицируйте счет</p>
+               <router-link :to="{name:'create_person'}">верифицируйтесь</router-link></p>
            </q-item-section>
          <q-item-section>
              <q-item-label overline>
@@ -34,17 +47,12 @@
            </q-item-section>
 
          </q-item>
-         <q-item v-if="!person" class="block ">
-           <a class="q-btn q-btn-item non-selectable no-outline q-btn--unelevated q-btn--rectangle bg-blue-7 text-white q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--active" tabindex="0" href="https://t.me/verify_RUpaybot" target="_blank"><span class="q-focus-helper" tabindex="-1"></span><span class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i class="q-icon on-left lab la-telegram" aria-hidden="true" role="img"> </i><span class="block">Бот для верификации</span></span></a>
-         </q-item>
-         <q-item v-if="person"  >
 
+         <q-item v-if="person"  >
            <q-item-section ><router-link class="text-dark" :to="{name:'verify_person'}">Верифицировать пользователя</router-link> </q-item-section>
          </q-item>
        </q-list>
        <div class=" flex items-center text-center q-mb-xl">
-
-
          <p class="q-mb-none q-mr-md text-h5 text-bold" :class="{blur:$global.isBlur}">~ {{$filters.convertAmount(total)}} &#8381;</p>
          <q-btn :icon="$global.isBlur ? 'las la-low-vision' : 'las la-eye'" flat dense round @click="$global.toggleIsBlur()"/>
        </div>
@@ -75,6 +83,11 @@
          <q-btn stack @click="$router.push({name: 'withdraw'})" color="primary" unelevated no-caps>
            <q-icon color="white" size="22px" name="las la-wallet"/>
            <p class="no-margin text-caption lh100">Вывести</p>
+         </q-btn>
+
+         <q-btn stack @click="$router.push({name: 'p2p_index'})" color="primary" unelevated no-caps>
+           <q-icon color="white" size="22px" name="las la-users"/>
+           <p class="no-margin text-caption lh100">P2P</p>
          </q-btn>
 
 
@@ -138,17 +151,35 @@
   </q-page>
 </template>
 <script setup>
-import {computed, ref} from "vue";
+import {computed, ref, onBeforeMount} from "vue";
 import { useAccountStore } from 'stores/account'
 const accountStore = useAccountStore()
 const API_URL = process.env.API_URL
 const tab = ref('tokens')
 const selectedAssetId = ref(undefined)
 import {copyClipBoard} from "src/helpers/utils"
+import { useP2PStore } from 'stores/p2p'
+const p2pStore = useP2PStore()
 
+const user = computed(()=>{
+  return p2pStore.user
+})
+
+const p2p_notifications = computed(()=>{
+  return p2pStore.notifications
+})
+
+onBeforeMount( async ()=>{
+  await p2pStore.get_notifications()
+  await p2pStore.get_user()
+})
 
 const current_address = computed(()=>{
   return accountStore.addresses[accountStore.currentAddressIdx].address
+})
+
+const showP2PWarningNotificaton = computed(()=>{
+  return p2p_notifications.value.filter(x=>x.is_new).length>0
 })
 
 const assets = computed(()=>{
@@ -218,7 +249,7 @@ const total = computed(()=>{
 <style lang="sass">
 .top-buttons
   display: grid
-  grid-template-columns: repeat(5,1fr)
+  grid-template-columns: repeat(6,1fr)
   grid-gap: 10px
   padding: 0 8px
 .tokens-tab
