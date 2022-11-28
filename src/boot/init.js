@@ -6,7 +6,8 @@ const sraStore = useEraStore()
 import { useGlobalStore } from 'stores/global'
 const globalStore = useGlobalStore()
 import {useRoute} from "vue-router"
-
+import { useP2PStore } from 'stores/p2p'
+const p2pStore = useP2PStore()
 
 
 export default boot(async ({ app,store,router }) => {
@@ -32,6 +33,7 @@ export default boot(async ({ app,store,router }) => {
   if(addresses){
     await accountStore.setAddresses()
     await sraStore.getAssets()
+    await p2pStore.get_payment_methods()
     sraStore.startCheckUnconfirmTx()
   }
 
