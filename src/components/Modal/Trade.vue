@@ -106,7 +106,7 @@
                       <p class="no-margin text-10 text-grey-8 text-weight-medium">Объем</p>
                     </div>
                     <q-linear-progress reverse
-                                       v-for="(order,index) in orders.have"
+                                       v-for="(order,index) in have_orders"
                                        @click="sellOrderClick(order)"
                                        class="flex items-center justify-between relative-position sell-pr cursor-pointer"
                                        color="red-2"
@@ -125,7 +125,7 @@
                       <p class="no-margin text-10 text-grey-8 text-weight-medium">Объем</p>
                     </div>
                     <q-linear-progress
-                      v-for="(order,index) in orders.want"
+                      v-for="(order,index) in want_orders"
                       @click="buyOrderClick(order)"
                       class="flex items-center justify-between relative-position bg-white buy-pr cursor-pointer"
                       color="light-green-11"
@@ -299,6 +299,8 @@ const balances = computed(()=>{
 
 
 let orders=ref([])
+let want_orders=ref([])
+let have_orders=ref([])
 let first_asset=ref({})
 let second_asset=ref({})
 let trade_type=ref('buy')
@@ -468,14 +470,15 @@ async function signTransaction(){
 
 
 function buyOrderClick(order){
-  amount.value = order.pairAmount
+  console.log(order)
+  amount.value = order.leftWant
   unit_price.value = order.pairPrice
   total.value = parseFloat(order.pairAmount * order.pairPrice).toFixed(5)
   trade_type.value='sell'
 }
 
 function sellOrderClick(order){
-  amount.value = parseFloat(order.pairAmount).toFixed(5)
+  amount.value = parseFloat(order.leftHave).toFixed(5)
   unit_price.value = order.pairPrice
   total.value = parseFloat(order.pairAmount * order.pairPrice).toFixed(5)
   trade_type.value='buy'
@@ -483,6 +486,8 @@ function sellOrderClick(order){
 
 async function getAssets(){
   trades_loading.value = true
+  have_orders.value = []
+  want_orders.value = []
   //globalStore.toggleLoadingState()
   // first_asset.value = await getAssetByKey(props.tradePair['0'])
   // second_asset.value = await getAssetByKey(props.tradePair['1'])
@@ -493,17 +498,50 @@ async function getAssets(){
   //console.log(props.tradePair)
   orders.value = await getOrders(props.tradePair['0'],props.tradePair['1'])
 
+  //console.log('orders',orders.value)
   //console.log('first_asset',first_asset.value)
   //console.log(second_asset.value)
 
   minAmount.value = parseFloat(second_asset.value.min_trade_price)
   minAmount_first_asset.value = parseFloat(first_asset.value.min_trade_price)
-  //console.log(orders)
+
   for (let x of orders.value.have){
     totalSell.value += parseFloat(x.leftHave)
+    let temp = []
+    temp = orders.value.have.filter(z=>z.pairPrice === x.pairPrice)
+    //console.log(temp)
+    let vol = 0
+
+    //console.log(temp[0])
+    if (have_orders.value.filter(p=>p.pairPrice===x.pairPrice).length>0){
+      //console.log('Have already',x.pairPrice)
+    }else {
+      for (let xx of temp){
+        vol += parseFloat(xx.leftHave)
+      }
+      temp[0].leftHave = vol
+      have_orders.value.push(temp[0])
+    }
   }
+  //console.log(have_orders.value)
+
   for (let x of orders.value.want){
     totalBuy.value += parseFloat(x.leftWant)
+    let temp = []
+    temp = orders.value.want.filter(z=>z.pairPrice === x.pairPrice)
+    //console.log(temp)
+    let vol = 0
+
+    //console.log(temp[0])
+    if (want_orders.value.filter(p=>p.pairPrice===x.pairPrice).length>0){
+      //console.log('Have already',x.pairPrice)
+    }else {
+      for (let xx of temp){
+        vol += parseFloat(xx.leftWant)
+      }
+      temp[0].leftWant = vol
+      want_orders.value.push(temp[0])
+    }
   }
 
   const resp = await api.get(`/api/settings/volume?q_key=${second_asset.value.key}&b_key=${first_asset.value.key}`)
@@ -518,7 +556,7 @@ async function getAssets(){
   }
   chartOptions.value.series[0].data = trades.value
   chartOptions.value.series[0].name = `${first_asset.value.name}/${second_asset.value.name}`
-  console.log(trades.value)
+  //console.log(trades.value)
   trades_loading.value = false
   //globalStore.toggleLoadingState()
 }
