@@ -473,14 +473,14 @@ function buyOrderClick(order){
   console.log(order)
   amount.value = order.leftWant
   unit_price.value = order.pairPrice
-  total.value = parseFloat(order.pairAmount * order.pairPrice).toFixed(5)
+  total.value = parseFloat(order.leftWant * order.pairPrice).toFixed(5)
   trade_type.value='sell'
 }
 
 function sellOrderClick(order){
   amount.value = parseFloat(order.leftHave).toFixed(5)
   unit_price.value = order.pairPrice
-  total.value = parseFloat(order.pairAmount * order.pairPrice).toFixed(5)
+  total.value = parseFloat(order.leftHave * order.pairPrice).toFixed(5)
   trade_type.value='buy'
 }
 
