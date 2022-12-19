@@ -10,7 +10,7 @@
 
             <div class="game__grid">
               <div @click="$router.push('/games/chiken_bro')" class="game__grid__item">
-                <img src="~assets/game1.jpeg" alt="">
+                <img src="~assets/game1_1.jpg" alt="">
               </div>
 
             </div>
