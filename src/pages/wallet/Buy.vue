@@ -6,7 +6,37 @@
 
       <div class="" style="height: 60px"></div>
       <div v-if="action_type==='other' " class="q-mb-lg">
-        <div v-if="asset.key!==1048610">
+
+        <div v-if="asset.key===1048610">
+          <p class="q-mb-sm text-caption">Cовершаете транзакцию на адрес:</p>
+          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
+          <q-btn rounded class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <p class="q-mb-sm text-caption">
+            Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+            <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
+          </p>
+          <p class="q-mb-sm text-caption text-bold">После проведения транзакции, скопируйте Transaction Hash, вставьте в поле ниже и нажмите кнопку проверить</p>
+
+          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
+          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('avr')" :disable="!tx_hash" unelevated no-caps
+                 class="full-width q-py-md" label="Проверить транзакцию"/>
+        </div>
+        <div v-else-if="asset.key===1048618">
+          <p class="q-mb-sm text-caption">Cовершаете транзакцию на адрес:</p>
+          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
+          <q-btn rounded class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <p class="q-mb-sm text-caption">
+            Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+            <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
+          </p>
+          <p class="q-mb-sm text-caption text-bold">После проведения транзакции, скопируйте Transaction Hash, вставьте в поле ниже и нажмите кнопку проверить</p>
+
+          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
+          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('umi')" :disable="!tx_hash" unelevated no-caps
+                 class="full-width q-py-md" label="Проверить транзакцию"/>
+        </div>
+
+        <div v-else>
           <p class="q-mb-sm text-caption">Укажите кошелек с которого будете совершать транзакцию*</p>
           <q-input class="q-mb-sm" rounded dense outlined  v-model="fromWallet"  />
           <div>
@@ -24,20 +54,6 @@
             <q-input rounded class="q-mb-sm" dense outlined  v-model="amount" type="number" />
             <q-btn rounded color="primary" :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
           </div>
-        </div>
-        <div v-else>
-          <p class="q-mb-sm text-caption">Cовершаете транзакцию на адрес:</p>
-          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-          <q-btn rounded class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
-          <p class="q-mb-sm text-caption">
-            Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
-            <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
-          </p>
-          <p class="q-mb-sm text-caption text-bold">После проведения транзакции, скопируйте Transaction Hash, вставьте в поле ниже и нажмите кнопку проверить</p>
-
-          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
-          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash" :disable="!tx_hash" unelevated no-caps
-                 class="full-width q-py-md" label="Проверить транзакцию"/>
         </div>
 
       </div>
@@ -179,19 +195,21 @@ const want_to_buy = computed(()=>{
 
 })
 
-async function checkTxHash(){
+async function checkTxHash(target_asset){
   is_loading.value = !is_loading.value
+  console.log(asset.value)
   const response = await axios.post(URL+'/api/data/check_tx_hash',{
     tx:tx_hash.value,
     wallet:current_address.value,
-    addr:asset.value.from_address
+    addr:asset.value.from_address,
+    target_asset
   })
   if (response.data.success){
     useNotify('positive',JSON.stringify(response.data.message))
   }else {
     useNotify('negative',JSON.stringify(response.data.message))
   }
-
+  tx_hash.value = null
   is_loading.value = !is_loading.value
 }
 
@@ -218,6 +236,7 @@ async function new_payment(){
 
 async function send(){
   is_loading.value = !is_loading.value
+  code.value = makeid(4)
   await api.post('/api/settings/payment_request',{
     code:code.value,
     wallet:current_address.value,
@@ -241,7 +260,7 @@ async function send(){
 
 `
   )
-  code.value = makeid(4)
+  //code.value = makeid(4)
   fromWallet.value=null
   amount.value=null
 
@@ -285,7 +304,7 @@ function makeid(length) {
 onBeforeMount( async ()=>{
   asset_key.value = parseInt(route.query.asset)
   action_type.value = route.query.type
-  code.value=makeid(4)
+  //code.value=makeid(4)
   if (asset.value.payment_system){
     selected_payment.value = {label:asset.value.payment_system,
       value:asset.value.payment_system,
