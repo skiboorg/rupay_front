@@ -99,6 +99,16 @@ const routes = [
         component: () => import('pages/wallet/CreatePerson.vue'),
       },
       {
+        path: '/wallet/create_person_alt',
+        name: 'create_person_alt',
+        component: () => import('pages/wallet/CreatePersonAlt.vue'),
+      },
+      {
+        path: '/wallet/rub_to_rolf',
+        name: 'send_rub_to_rolf',
+        component: () => import('pages/wallet/SendRubToRolf.vue'),
+      },
+      {
         path: '/wallet/verify_person',
         name: 'verify_person',
         component: () => import('pages/wallet/VerifyPerson.vue'),

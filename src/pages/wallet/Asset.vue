@@ -36,7 +36,12 @@
             <p class="no-margin text-caption">Обмен</p>
           </q-btn>
 
-          <q-btn stack @click="$router.push({name: 'buy_part'})" color="primary" unelevated no-caps>
+          <q-btn v-if="asset.key===1643" stack @click="$router.push({name: 'send_rub_to_rolf'})" color="primary" unelevated no-caps>
+            <q-icon color="white" size="22px" name="las la-puzzle-piece"/>
+            <p class="no-margin text-caption lh100">Отправить на<br>РОЛФ</p>
+          </q-btn>
+
+          <q-btn v-if="asset.key===2" stack @click="$router.push({name: 'buy_part'})" color="primary" unelevated no-caps>
             <q-icon color="white" size="22px" name="las la-puzzle-piece"/>
             <p class="no-margin text-caption lh100">Внести паевой<br>взнос</p>
           </q-btn>

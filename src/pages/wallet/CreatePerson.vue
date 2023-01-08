@@ -2,7 +2,7 @@
   <page>
     <page-body class="q-px-md">
       <page-header ></page-header>
-      <div class="" style="height: 60px"></div>
+      <div class="" style="height: 20px"></div>
 <!--      v-if="!shared && !verify_sent"-->
       <div v-if="!shared" class="">
 

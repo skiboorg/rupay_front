@@ -16,12 +16,8 @@
              <q-item-label @click="copyAddress" caption
                            style="text-decoration: underline" class="cursor-pointer">Скопировать адрес кошелька</q-item-label>
            </q-item-section>
-
-
          </q-item>
-         <q-item v-if="!person" class="block ">
-           <a class="q-btn q-btn-item non-selectable no-outline q-btn--unelevated q-btn--rectangle bg-blue-7 text-white q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--active" tabindex="0" href="https://t.me/verify_RUpaybot" target="_blank"><span class="q-focus-helper" tabindex="-1"></span><span class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i class="q-icon on-left lab la-telegram" aria-hidden="true" role="img"> </i><span class="block">Бот для верификации</span></span></a>
-         </q-item>
+
          <q-item>
     <q-item-section side>
       <q-btn color="primary" @click="$router.push({name:'p2p_user'})" no-caps unelevated label="Настройки P2P"/>
@@ -35,8 +31,12 @@
          </q-item>
          <q-item v-if="!person" class="block ">
            <q-item-section>
-             <p class="text-negative text-bold q-mb-sm">Ваш счет является анонимным. Для разблокировки всего функционала
-               <router-link :to="{name:'create_person'}">верифицируйтесь</router-link></p>
+             <p class="text-negative text-bold q-mb-sm">Ваш счет является анонимным. Для разблокировки всего функционала создайте персону и верифицируйте счет</p>
+             <div class="q-gutter-md q-mb-md">
+               <q-btn size="13px" label="Верификация с пригласителем" color="blue-7" class=" " @click="$router.push({name:'create_person'})"  no-caps unelevated/>
+               <q-btn size="13px" label="Верификация без пригласителя" class="" color="blue-7" @click="$router.push({name:'create_person_alt'})" no-caps unelevated/>
+             </div>
+
            </q-item-section>
          <q-item-section>
              <q-item-label overline>
