@@ -11,51 +11,51 @@
           <q-select v-model="asset" outlined rounded dense options-dense :options="assets" option-label="name" label="Выберите актив*" class="q-mb-md"/>
           <div v-if="asset && can_withdrawal_asset">
             <div v-if="asset && asset.key===1643">
-              <p class="q-mb-sm text-negative ">Внимание! ФИО верифицированного пользователя должно совпадать с ФИО владельца карты.</p>
-              <p class="q-mb-sm text-negative">Срок вывода зависит от банка и может занимать до 5 рабочих дней. Комиссия на вывод 50 рублей +2%, удерживается из выводимой суммы</p>
-              <p class="q-mb-sm text-caption">Номер карты*</p>
-              <q-input class="q-mb-sm" rounded dense outlined  v-model="card" mask="#### #### #### ####" fill-mask="_" />
-              <p class="q-mb-sm text-caption">Название банка*</p>
-              <q-input class="q-mb-sm" rounded dense outlined  v-model="bank" />
-              <p class="q-mb-sm text-caption">ФИО получателя (владельца карты)*</p>
-              <q-input class="q-mb-sm" rounded dense outlined  v-model="fio" />
+<!--              <p class="q-mb-sm text-negative ">Внимание! ФИО верифицированного пользователя должно совпадать с ФИО владельца карты.</p>-->
+<!--              <p class="q-mb-sm text-negative">Срок вывода зависит от банка и может занимать до 5 рабочих дней. Комиссия на вывод 50 рублей +2%, удерживается из выводимой суммы</p>-->
+<!--              <p class="q-mb-sm text-caption">Номер карты*</p>-->
+<!--              <q-input class="q-mb-sm" rounded dense outlined  v-model="card" mask="#### #### #### ####" fill-mask="_" />-->
+<!--              <p class="q-mb-sm text-caption">Название банка*</p>-->
+<!--              <q-input class="q-mb-sm" rounded dense outlined  v-model="bank" />-->
+<!--              <p class="q-mb-sm text-caption">ФИО получателя (владельца карты)*</p>-->
+<!--              <q-input class="q-mb-sm" rounded dense outlined  v-model="fio" />-->
 
-              <q-option-group
-                class="q-mb-sm"
-                :options="options"
-                type="radio"
-                v-model="need_pay_13"
-              />
+<!--              <q-option-group-->
+<!--                class="q-mb-sm"-->
+<!--                :options="options"-->
+<!--                type="radio"-->
+<!--                v-model="need_pay_13"-->
+<!--              />-->
 
-              <div class="" v-if="need_pay_13">
-                <p class="q-mb-sm text-caption">ФИО*</p>
-                <q-input class="q-mb-sm" rounded dense outlined  v-model="fio_13" />
-                <p class="q-mb-sm text-caption">Телефон*</p>
-                <q-input class="q-mb-sm" rounded dense outlined  v-model="phone_13" mask="+7(###)### ## ##" fill-mask="_"/>
-                <p class="q-mb-sm text-caption">Паспорт (серия номер)*</p>
-                <q-input class="q-mb-sm" rounded dense outlined  v-model="passport_13" mask="#### ######" fill-mask="_"/>
-                <p class="q-mb-sm text-caption">Кем выдан*</p>
-                <q-input class="q-mb-sm" rounded dense outlined  v-model="vidan_13" />
-                <p class="q-mb-sm text-caption">Прописка*</p>
-                <q-input class="q-mb-sm" rounded dense outlined  v-model="propiska_13" />
-                <p class="q-mb-sm text-caption">ИНН*</p>
-                <q-input class="q-mb-sm" rounded dense outlined  v-model="inn_13" />
-                <p class="q-mb-sm text-caption">СНИЛС*</p>
-                <q-input class="q-mb-sm" rounded dense outlined  v-model="snils_13" />
+<!--              <div class="" v-if="need_pay_13">-->
+<!--                <p class="q-mb-sm text-caption">ФИО*</p>-->
+<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="fio_13" />-->
+<!--                <p class="q-mb-sm text-caption">Телефон*</p>-->
+<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="phone_13" mask="+7(###)### ## ##" fill-mask="_"/>-->
+<!--                <p class="q-mb-sm text-caption">Паспорт (серия номер)*</p>-->
+<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="passport_13" mask="#### ######" fill-mask="_"/>-->
+<!--                <p class="q-mb-sm text-caption">Кем выдан*</p>-->
+<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="vidan_13" />-->
+<!--                <p class="q-mb-sm text-caption">Прописка*</p>-->
+<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="propiska_13" />-->
+<!--                <p class="q-mb-sm text-caption">ИНН*</p>-->
+<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="inn_13" />-->
+<!--                <p class="q-mb-sm text-caption">СНИЛС*</p>-->
+<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="snils_13" />-->
 
-              </div>
-              <p class="q-mb-sm text-caption">Сумма вывода в рублях* (Ваш баланс <span>{{balances[1643] ? balances[1643][0][1] : '0'}}</span> RUB)</p>
-              <p class="q-mb-sm text-caption">Минимальная сумма вывода 2500 RUB</p>
-              <q-input class="q-mb-md" rounded dense outlined  v-model="sendInfo.amount" type="number" >
-                <template v-if="balances[1643]" v-slot:append>
-                  <q-btn @click="sendInfo.amount = balances[1643][0][1]" size="10px" flat rounded label="Вывести все"/>
-                </template>
-              </q-input>
-              <p class="q-mb-sm text-caption text-bold" v-if="need_pay_13">Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.15 + 50)}} RUB</p>
-              <p class="q-mb-sm text-caption text-bold" v-else>Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.02 + 50)}} RUB</p>
+<!--              </div>-->
+<!--              <p class="q-mb-sm text-caption">Сумма вывода в рублях* (Ваш баланс <span>{{balances[1643] ? balances[1643][0][1] : '0'}}</span> RUB)</p>-->
+<!--              <p class="q-mb-sm text-caption">Минимальная сумма вывода 2500 RUB</p>-->
+<!--              <q-input class="q-mb-md" rounded dense outlined  v-model="sendInfo.amount" type="number" >-->
+<!--                <template v-if="balances[1643]" v-slot:append>-->
+<!--                  <q-btn @click="sendInfo.amount = balances[1643][0][1]" size="10px" flat rounded label="Вывести все"/>-->
+<!--                </template>-->
+<!--              </q-input>-->
+<!--              <p class="q-mb-sm text-caption text-bold" v-if="need_pay_13">Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.15 + 50)}} RUB</p>-->
+<!--              <p class="q-mb-sm text-caption text-bold" v-else>Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.02 + 50)}} RUB</p>-->
 
-              <q-btn color="primary" rounded :loading="is_loading" @click="send" :disable="(!sendInfo.amount || sendInfo.amount<2500) || !fio || !card || !bank" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
-
+<!--              <q-btn color="primary" rounded :loading="is_loading" @click="send" :disable="(!sendInfo.amount || sendInfo.amount<2500) || !fio || !card || !bank" unelevated no-caps class="full-width q-py-md" label="Отправить"/>-->
+              <p class="text-center text-bold">Вывод на карту временно не доступен, в связи с переоформлением расчетного счета, пока можете воспользоваться <router-link :to="{name:'p2p_index'}">P2P</router-link></p>
             </div>
             <div v-else>
               <div v-if="asset && asset.key===1048610">
