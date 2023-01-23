@@ -26,6 +26,7 @@ const routes = [
       { path: 'sky', component: () => import('pages/marketplace/Sky.vue') },
       { path: 'blago', component: () => import('pages/marketplace/Blago.vue') },
       { path: 'broker', component: () => import('pages/marketplace/Broker.vue') },
+      { path: 'vip', component: () => import('pages/marketplace/Vip.vue') },
 
     ]
   },
