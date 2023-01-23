@@ -109,6 +109,108 @@
         <div class="second-grid">
           <div class="second-grid__text_top">
             <h3 class="second-grid__text_top_heading">
+              <span>Проект RuPay.pro  </span><br />
+              успешно прошел сертификацию
+            </h3>
+            <p class="second-grid__text_top_paragraph">
+              Проект RuPay.pro успешно прошел сертификацию на соответствие ГОСТ Р ИСО 9001-2015 в Системе добровольной сертификации «BLOCKCHAIN EXPERT».<br><br>
+
+              Также сертификацию прошел наш лидер команды Евгений Батраков. "Для меня это большая честь. Это заслуга всей команды RuPay.pro" - прокомментировал Евгений.<br><br>
+
+              Сертификацию проводят, чтобы в дальнейшем повышать качество реализации проектов. Главная цель – выявлять и затем распространять лучшие практики. Сертификация проходила в два этапа – дистанционный и очный. На первом проверяется выполнение поставленных целей, сроки реализации проекта и качество их ведения и мониторинга, на втором – непосредственно результаты проекта у участников, а также работу самого RuPay.pro: внутренние процессы, систему мотивации и мн. др.<br><br>
+
+              Мы достигли соглашения, чтобы каждый наш пайщик смог пройти сертификацию и подтвердить свои компетенции в области Blockchain. Следите за новостями.
+            </p>
+
+          </div>
+          <p class="second-grid__paragraph-mobile">
+            Проект RuPay.pro успешно прошел сертификацию на соответствие ГОСТ Р ИСО 9001-2015 в Системе добровольной сертификации «BLOCKCHAIN EXPERT».<br><br>
+
+            Также сертификацию прошел наш лидер команды Евгений Батраков. "Для меня это большая честь. Это заслуга всей команды RuPay.pro" - прокомментировал Евгений.
+          </p>
+          <div class="second-grid__img_container">
+            <svg viewBox="0 0 372 306" fill="none" xmlns="http://www.w3.org/2000/svg" class="second-grid__img_container_svg-1">
+              <path d="M2.60003 102.531C15.351 87.2324 35.8436 62.6461 44.496 52.2653" stroke="black" stroke-width="6"/>
+              <path d="M2.60003 52.2653C15.351 36.9672 35.8436 12.3809 44.496 2.00004" stroke="#002FCC" stroke-width="6"/>
+              <path d="M56.684 102.531C69.435 87.2324 89.9276 62.6461 98.58 52.2653" stroke="black" stroke-width="6"/>
+              <path d="M56.684 52.2653C69.435 36.9671 89.9276 12.3809 98.58 2.00001" stroke="#002FCC" stroke-width="6"/>
+              <path d="M110.768 102.531C123.519 87.2324 144.012 62.6461 152.664 52.2653" stroke="black" stroke-width="6"/>
+              <path d="M110.768 52.2653C123.519 36.9671 144.012 12.3809 152.664 2.00001" stroke="#002FCC" stroke-width="6"/>
+              <path d="M164.852 102.531C177.603 87.2324 198.096 62.6461 206.748 52.2653" stroke="black" stroke-width="6"/>
+              <path d="M164.852 52.2653C177.603 36.9672 198.096 12.3809 206.748 2.00004" stroke="#002FCC" stroke-width="6"/>
+              <path d="M218.936 303.592C231.687 288.293 252.18 263.707 260.832 253.326" stroke="black" stroke-width="6"/>
+              <path d="M218.936 253.326C231.687 238.028 252.18 213.442 260.832 203.061" stroke="#002FCC" stroke-width="6"/>
+              <path d="M218.936 203.061C231.687 187.763 252.18 163.177 260.832 152.796" stroke="black" stroke-width="6"/>
+              <path d="M218.936 152.796C231.687 137.498 252.18 112.911 260.832 102.53" stroke="#002FCC" stroke-width="6"/>
+              <path d="M218.936 102.531C231.687 87.2324 252.18 62.6461 260.832 52.2653" stroke="black" stroke-width="6"/>
+              <path d="M218.936 52.2652C231.687 36.9671 252.18 12.3808 260.832 1.99998" stroke="#002FCC" stroke-width="6"/>
+              <path d="M273.02 303.592C285.771 288.293 306.264 263.707 314.916 253.326" stroke="black" stroke-width="6"/>
+              <path d="M273.02 253.326C285.771 238.028 306.264 213.442 314.916 203.061" stroke="#002FCC" stroke-width="6"/>
+              <path d="M273.02 203.061C285.771 187.763 306.263 163.177 314.916 152.796" stroke="black" stroke-width="6"/>
+              <path d="M273.02 152.796C285.771 137.498 306.263 112.911 314.916 102.53" stroke="#002FCC" stroke-width="6"/>
+              <path d="M273.02 102.531C285.771 87.2324 306.263 62.6461 314.916 52.2653" stroke="black" stroke-width="6"/>
+              <path d="M273.02 52.2653C285.771 36.9672 306.263 12.3809 314.916 2.00004" stroke="#002FCC" stroke-width="6"/>
+              <path d="M327.104 303.592C339.855 288.293 360.348 263.707 369 253.326" stroke="black" stroke-width="6"/>
+              <path d="M327.104 253.326C339.855 238.028 360.348 213.442 369 203.061" stroke="#002FCC" stroke-width="6"/>
+              <path d="M327.104 203.061C339.855 187.763 360.348 163.177 369 152.796" stroke="black" stroke-width="6"/>
+              <path d="M327.104 152.796C339.855 137.498 360.348 112.911 369 102.53" stroke="#002FCC" stroke-width="6"/>
+              <path d="M327.104 102.531C339.855 87.2324 360.348 62.6461 369 52.2653" stroke="black" stroke-width="6"/>
+            </svg>
+            <a href="/1.pdf" target="_blank" style="position:relative; z-index: 1000"><img draggable="false"
+                                            class="second-grid__img_container_pic"
+                                            src="/1.jpg"
+                                            alt=""
+            /></a>
+
+            <a href="/2.pdf" target="_blank" style="position:relative; z-index: 1000"><img draggable="false"
+                                            class="second-grid__img_container_pic"
+                                            src="/2.jpg"
+                                            alt=""
+            /></a>
+
+            <svg viewBox="0 0 223 184" fill="none" xmlns="http://www.w3.org/2000/svg" class="second-grid__img_container_svg-2">
+              <path d="M220.628 121.619C213.055 130.706 200.883 145.309 195.743 151.475" stroke="black" stroke-width="6"/>
+              <path d="M220.628 151.475C213.055 160.561 200.883 175.165 195.743 181.33" stroke="#002FCC" stroke-width="6"/>
+              <path d="M188.504 121.619C180.931 130.706 168.759 145.309 163.62 151.475" stroke="black" stroke-width="6"/>
+              <path d="M188.504 151.475C180.931 160.561 168.759 175.165 163.62 181.33" stroke="#002FCC" stroke-width="6"/>
+              <path d="M156.38 121.619C148.807 130.706 136.635 145.309 131.496 151.475" stroke="black" stroke-width="6"/>
+              <path d="M156.38 151.475C148.807 160.561 136.635 175.165 131.496 181.33" stroke="#002FCC" stroke-width="6"/>
+              <path d="M124.256 121.619C116.683 130.706 104.511 145.309 99.3717 151.475" stroke="black" stroke-width="6"/>
+              <path d="M124.256 151.475C116.683 160.561 104.511 175.165 99.3717 181.33" stroke="#002FCC" stroke-width="6"/>
+              <path d="M92.1325 2.19618C84.5589 11.2827 72.387 25.886 67.2478 32.0519" stroke="black" stroke-width="6"/>
+              <path d="M92.1324 32.0519C84.5588 41.1384 72.387 55.7418 67.2478 61.9076" stroke="#002FCC" stroke-width="6"/>
+              <path d="M92.1325 61.9076C84.5589 70.9941 72.387 85.5974 67.2478 91.7633" stroke="black" stroke-width="6"/>
+              <path d="M92.1325 91.7633C84.5589 100.85 72.387 115.453 67.2478 121.619" stroke="#002FCC" stroke-width="6"/>
+              <path d="M92.1325 121.619C84.5589 130.706 72.387 145.309 67.2478 151.475" stroke="black" stroke-width="6"/>
+              <path d="M92.1325 151.475C84.5589 160.561 72.387 175.165 67.2478 181.33" stroke="#002FCC" stroke-width="6"/>
+              <path d="M60.0086 2.19618C52.435 11.2827 40.2632 25.886 35.1239 32.0519" stroke="black" stroke-width="6"/>
+              <path d="M60.0086 32.0519C52.435 41.1384 40.2632 55.7418 35.124 61.9076" stroke="#002FCC" stroke-width="6"/>
+              <path d="M60.0087 61.9076C52.4351 70.9941 40.2632 85.5974 35.124 91.7633" stroke="black" stroke-width="6"/>
+              <path d="M60.0087 91.7633C52.4351 100.85 40.2632 115.453 35.124 121.619" stroke="#002FCC" stroke-width="6"/>
+              <path d="M60.0087 121.619C52.4351 130.706 40.2632 145.309 35.124 151.475" stroke="black" stroke-width="6"/>
+              <path d="M60.0087 151.475C52.4351 160.561 40.2632 175.165 35.124 181.33" stroke="#002FCC" stroke-width="6"/>
+              <path d="M27.8847 2.19618C20.3111 11.2827 8.13923 25.886 3 32.0519" stroke="black" stroke-width="6"/>
+              <path d="M27.8847 32.0519C20.3111 41.1384 8.13924 55.7418 3.00002 61.9076" stroke="#002FCC" stroke-width="6"/>
+              <path d="M27.8847 61.9076C20.3111 70.9941 8.13926 85.5974 3.00003 91.7633" stroke="black" stroke-width="6"/>
+              <path d="M27.8847 91.7633C20.3111 100.85 8.13926 115.453 3.00003 121.619" stroke="#002FCC" stroke-width="6"/>
+              <path d="M27.8847 121.619C20.3111 130.706 8.13926 145.309 3.00003 151.475" stroke="black" stroke-width="6"/>
+            </svg>
+
+          </div>
+
+          <p class="second-grid__paragraph-mobile">
+            Сертификацию проводят, чтобы в дальнейшем повышать качество реализации проектов. Главная цель – выявлять и затем распространять лучшие практики. Сертификация проходила в два этапа – дистанционный и очный. На первом проверяется выполнение поставленных целей, сроки реализации проекта и качество их ведения и мониторинга, на втором – непосредственно результаты проекта у участников, а также работу самого RuPay.pro: внутренние процессы, систему мотивации и мн. др.<br><br>
+
+            Мы достигли соглашения, чтобы каждый наш пайщик смог пройти сертификацию и подтвердить свои компетенции в области Blockchain. Следите за новостями.
+          </p>
+
+
+        </div>
+      </q-carousel-slide>
+      <q-carousel-slide :name="3" >
+        <div class="second-grid">
+          <div class="second-grid__text_top">
+            <h3 class="second-grid__text_top_heading">
               <span>Нода </span><br />
               и её влияние.
             </h3>
@@ -208,7 +310,7 @@
           </div>
         </div>
       </q-carousel-slide>
-      <q-carousel-slide :name="3" >
+      <q-carousel-slide :name="4" >
         <div class="third">
           <div class="third__top_text">
             <h3 class="third__top_text_heading">
@@ -340,7 +442,7 @@
           </div>
         </div>
       </q-carousel-slide>
-      <q-carousel-slide :name="4" >
+      <q-carousel-slide :name="5" >
         <div class="fourth">
           <div class="fourth__top">
             <h3 class="fourth__top_heading">

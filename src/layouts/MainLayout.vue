@@ -211,9 +211,18 @@
       <p class="footer-txt">
         ИНН: 2366034781 | ОГРН : 1222300016223
       </p>
-      <p class="footer-txt">
+      <p class="footer-txt" style="margin-bottom: 16px !important;">
         Cайт и сервисы rupay.pro доступны только пайщикам кооператива, как
         действующим так и ассоциированным.
+      </p>
+      <p class="footer-txt">
+        <a href="/1.pdf" style="color: white; font-weight: bold">
+          СЕРТИФИКАТ
+          СООТВЕТСТВИЯ
+          ГОСТ Р ИСО 9001-2015 "Системы менеджмента
+          качества".
+        </a>
+
       </p>
     </footer>
   </q-layout>
