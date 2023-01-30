@@ -60,13 +60,14 @@
       <div v-else class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
           <div v-if="selected_payment.value !== 'rs'">
-            <q-select rounded v-if="asset.key === 2 || asset.key===1643 || asset.key===1048610 || asset.key===1048615" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>
-            <div class="" v-if="!selected_payment.disabled">
+<!--            asset.key===1643 ||-->
+<!--            <q-select rounded v-if="asset.key === 2 ||  asset.key===1048610 || asset.key===1048615" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>-->
+            <div class="" v-if="!selected_payment.disabled && asset.key===1643">
               <p class="q-mb-sm text-caption">Сумма пополнения в {{selected_payment.currency}}*<br>
                 <span class="text-bold text-negative ">
               мининум {{selected_payment.min}} {{selected_payment.currency}},
               максимум {{selected_payment.max}} {{selected_payment.currency}},
-                  <!--            комиссия {{selected_payment.commission * 100}} %-->
+                              комиссия {{selected_payment.commission * 100}} %
               </span>
               </p>
               <q-input rounded class="q-mb-sm" dense outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
@@ -149,7 +150,7 @@ import {useNotify} from "src/helpers/utils";
 import { copyToClipboard } from 'quasar'
 
 const URL = 'https://rupay.pro'
-//const URL = 'http://127.0.0.1:8000'
+//const URL = 'http://127.0.0.1:8010'
 
 let action_type = ref(null)
 let code = ref(null)
@@ -164,20 +165,20 @@ let summ = ref(0)
 let tx_hash = ref(null)
 let comission = ref(0.02)
 let current_course = ref(0)
-const selected_payment = ref({label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:true})
+const selected_payment = ref({label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.06, disabled:false})
 
 const payment_systems = [
-  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:true},
-  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:15000,commission:0.1, disabled:true},
-  {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0, disabled:true},
+  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:false},
+  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:15000,commission:0.1, disabled:false},
+  {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0, disabled:false},
 ]
 
 const want_to_buy = computed(()=>{
-  if (asset.value.key === 1048610 || asset.value.key === 1048615 ){
+  if (asset.value.key === 1048610 || asset.value.key === 1048615 || asset.value.key === 1643 ){
     summ.value = to_pay.value
     let cource_plus_comission  = parseFloat(parseFloat(asset.value.course) + parseFloat(asset.value.course * selected_payment.value.commission)).toFixed(2)
     console.log(cource_plus_comission)
-    current_course.value = cource_plus_comission
+    current_course.value = asset.value.course// cource_plus_comission
     return parseFloat(to_pay.value / cource_plus_comission).toFixed(5)
   }else{
     if (asset.value.key === 2 ){
