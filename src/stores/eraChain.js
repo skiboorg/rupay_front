@@ -149,7 +149,10 @@ export const useEraStore = defineStore('era_store', () => {
     }
 
     async function setTradePairs() {
-      trade_pairs.value = await getTradePairs()
+      const res =  await getTradePairs()
+      delete res['VIP REWARD_RUB']
+
+      trade_pairs.value = res
       // const response_v24 = await axios.get(`${process.env.API_URL}/apiexchange/spot/pairs`)
       // trade_pairs_v24.value = response_v24.data
       //console.log(trade_pairs.value)
