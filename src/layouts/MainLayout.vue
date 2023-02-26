@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout v-if="!to" view="lHh Lpr lFf">
     <header>
     <router-link to="/">
       <img class="logo" src="~assets/logo.svg" alt="">
@@ -226,6 +226,9 @@
       </p>
     </footer>
   </q-layout>
+  <q-layout v-else view="lHh Lpr lFf">
+    <div class="flex column items-center justify-center fullscreen text-h3 text-center">Технические работы</div>
+  </q-layout>
 </template>
 
 <script setup>
@@ -236,6 +239,8 @@ const accountStore = useAccountStore()
 
 const mobileMenuActive=ref(false)
 const curLink=ref('index')
+
+const to = ref(true)
 
 const allowAdr=[
   '75UzMQz72t4FDkEMdFS4WPc9gUyLqAbH6C',
