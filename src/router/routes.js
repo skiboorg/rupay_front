@@ -37,6 +37,7 @@ const routes = [
       { path: '', component: () => import('pages/games/Index.vue') },
       { path: 'chiken_bro', component: () => import('pages/games/ChikenBro.vue') },
       { path: 'mine', component: () => import('pages/games/mine.vue') },
+      { path: 'coop', component: () => import('pages/games/coop.vue') },
 
 
     ]

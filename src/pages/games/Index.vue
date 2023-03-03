@@ -16,6 +16,9 @@
               <div @click="$router.push('/games/mine')" class="game__grid__item">
                 <img src="~assets/mine.jpg" alt="">
               </div>
+              <div @click="$router.push('/games/coop')" class="game__grid__item">
+                <img src="~assets/coop.png" alt="">
+              </div>
 
             </div>
 
