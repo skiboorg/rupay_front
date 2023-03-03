@@ -4,13 +4,17 @@
       <div class="container">
 
 
-            <h3 class="game__heading">Игры, обеспеченные реальным бизнесом<br>
-             <span class="text-primary">Играй и зарабатывай!</span>
+            <h3 class="game__heading">Играй и<br>
+             <span class="text-primary">зарабатывай!</span>
             </h3>
 
             <div class="game__grid">
               <div @click="$router.push('/games/chiken_bro')" class="game__grid__item">
-                <img src="~assets/game1_1.jpg" alt="">
+                <img src="~assets/game1.jpeg" alt="">
+              </div>
+
+              <div @click="$router.push('/games/mine')" class="game__grid__item">
+                <img src="~assets/mine.jpg" alt="">
               </div>
 
             </div>
@@ -41,20 +45,20 @@
   color: #000000
 .game__grid
   display: grid
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
   grid-gap: 15px
   &__item
     cursor: pointer
     img
       width: 100%
       height: 100%
-      object-fit: contain
+      object-fit: cover
       border-radius: 50px
       display: block
       transform: scale(1)
       transition: all .2s linear
-      &:hover
-        transform: scale(1.1)
 
-
+@media screen and (max-width: 540px)
+  .game__grid
+    grid-template-columns: repeat(2, 1fr)
 </style>
