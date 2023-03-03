@@ -10,6 +10,7 @@ const routes = [
       // { path: 'tokens', component: () => import('pages/Tokens.vue') },
       { path: 'apps', component: () => import('pages/Apps.vue') },
       { path: 'ido', component: () => import('pages/Ido.vue') },
+      { path: 'nko', component: () => import('pages/nko.vue') },
       { path: 'wallet', component: () => import('pages/wallet/Auth.vue') },
       { path: 'avr', component: () => import('pages/ArvAdmin.vue') },
     ]

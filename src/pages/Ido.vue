@@ -4,60 +4,68 @@
 
       <div class="container">
         <h3 class="main-grid__text_top_heading">
-          <span>Добро пожаловать  </span><br />
-          в раздел IDO
+          <span>Раздел  </span><br />
+          в разработке
         </h3>
-        <p class="text-h6 text-bold">Что это такое?</p>
-        <p class="text-body1"><span class="text-bold">IDO (initial dex offering) — первое публичное размещение токенов на децентрализованных (dex)
+
+        <div class="" v-if="false">
+          <h3 class="main-grid__text_top_heading">
+            <span>Добро пожаловать  </span><br />
+            в раздел IDO
+          </h3>
+          <p class="text-h6 text-bold">Что это такое?</p>
+          <p class="text-body1"><span class="text-bold">IDO (initial dex offering) — первое публичное размещение токенов на децентрализованных (dex)
           биржах.</span>Разработчики привлекают деньги инвесторов при поддержке децентрализованных бирж, которые используют
-          пулы ликвидности. <span class="text-bold">Инвесторы могут быстро приобретать выходящие в оборот токены по низким ценам, зарабатывая на
+            пулы ликвидности. <span class="text-bold">Инвесторы могут быстро приобретать выходящие в оборот токены по низким ценам, зарабатывая на
           последующем росте курса.</span></p>
-        <p class="text-body1">Проще говоря - на данной странице у вас есть возможность принять участие в новых проектах,  путем инвестирования OLF в эти стартапы.</p>
-        <p class="text-body1">Что для этого необходимо и как это работает?</p>
-        <p class="text-body1">Для того, чтобы получить доступ к стартапам на нашей площадке необходимо иметь неснижаемый баланс на IDO-кошельке в размере 100 OLF.  При таком балансе вы получаете право на первоочередное приобретение токенов по самой низкой цене на этапе Pre-sale.</p>
-        <p class="text-body1">Если ваш баланс составляет 100 OLF, то вы получаете право на участие в 1 (Одном) Pre-sale в счет этого баланса (на сумму от 0 до 100 OLF в эквиваленте цены желаемого токена). Количество стартапов не ограниченно, но для доступа ко всем баланс должен быть не менее 100 OLF.</p>
+          <p class="text-body1">Проще говоря - на данной странице у вас есть возможность принять участие в новых проектах,  путем инвестирования OLF в эти стартапы.</p>
+          <p class="text-body1">Что для этого необходимо и как это работает?</p>
+          <p class="text-body1">Для того, чтобы получить доступ к стартапам на нашей площадке необходимо иметь неснижаемый баланс на IDO-кошельке в размере 100 OLF.  При таком балансе вы получаете право на первоочередное приобретение токенов по самой низкой цене на этапе Pre-sale.</p>
+          <p class="text-body1">Если ваш баланс составляет 100 OLF, то вы получаете право на участие в 1 (Одном) Pre-sale в счет этого баланса (на сумму от 0 до 100 OLF в эквиваленте цены желаемого токена). Количество стартапов не ограниченно, но для доступа ко всем баланс должен быть не менее 100 OLF.</p>
 
 
-        <div class="" v-if="current_address && eraStore.seed">
+          <div class="" v-if="current_address && eraStore.seed">
 
-          <div class="row q-col-gutter-md">
-            <div class="col-12 col-md-6">
-              <p class="text-h6 text-bold">Ваш баланс в пуле: {{parseFloat(own_pool.amount).toFixed(5)}} OLF</p>
-              <p class="text-h6 text-bold">Ваш баланс сети RUPAY: {{parseFloat(olf_balance).toFixed(5)}} OLF</p>
-              <q-input v-model="sendInfo.amount" class="q-mb-md" type="number" label="Сумма пополнения"  outlined rounded/>
+            <div class="row q-col-gutter-md">
+              <div class="col-12 col-md-6">
+                <p class="text-h6 text-bold">Ваш баланс в пуле: {{parseFloat(own_pool.amount).toFixed(5)}} OLF</p>
+                <p class="text-h6 text-bold">Ваш баланс сети RUPAY: {{parseFloat(olf_balance).toFixed(5)}} OLF</p>
+                <q-input v-model="sendInfo.amount" class="q-mb-md" type="number" label="Сумма пополнения"  outlined rounded/>
 
                 <q-btn unelevated rounded color="primary"
                        @click="getFee"
                        :disable = "!sendInfo.amount || sendInfo.amount > olf_balance"
                        no-caps class="q-pa-md" label="Пополнить счет IDO пула"/>
-            </div>
-            <div class="col-12 col-md-6">
-              <div v-if="asset.length>0">
-                <p  class="text-h6 text-bold">Новый проект {{asset[0].name}}</p>
-                <p  class="text-h6 text-bold">Цена {{asset_in_olf_course}} OLF</p>
-                <q-input class="q-mb-md" type="number" rounded outlined v-model="want_to_bye_asset" :label="`Сколько ${asset[0].name} хотите купить`">
-                  <template  v-slot:append>
-                    <q-btn @click="want_to_bye_asset = parseFloat(own_pool.amount / asset_in_olf_course).toFixed(5) " size="10px" flat rounded label="Купить на все OLF"/>
-                  </template>
-                </q-input>
-                <q-btn @click="buy" v-if="want_to_bye_olf"
-                       unelevated rounded class="q-pa-md"
-                       color="primary" no-caps
-                       :disable="want_to_bye_olf>parseFloat(own_pool.amount).toFixed(5) "
-                       :label="`Купить на ${want_to_bye_olf} OLF`"/>
-
               </div>
+              <div class="col-12 col-md-6">
+                <div v-if="asset.length>0">
+                  <p  class="text-h6 text-bold">Новый проект {{asset[0].name}}</p>
+                  <p  class="text-h6 text-bold">Цена {{asset_in_olf_course}} OLF</p>
+                  <q-input class="q-mb-md" type="number" rounded outlined v-model="want_to_bye_asset" :label="`Сколько ${asset[0].name} хотите купить`">
+                    <template  v-slot:append>
+                      <q-btn @click="want_to_bye_asset = parseFloat(own_pool.amount / asset_in_olf_course).toFixed(5) " size="10px" flat rounded label="Купить на все OLF"/>
+                    </template>
+                  </q-input>
+                  <q-btn @click="buy" v-if="want_to_bye_olf"
+                         unelevated rounded class="q-pa-md"
+                         color="primary" no-caps
+                         :disable="want_to_bye_olf>parseFloat(own_pool.amount).toFixed(5) "
+                         :label="`Купить на ${want_to_bye_olf} OLF`"/>
 
-              <p v-else class="text-h6 text-bold">Новых проектов пока нет </p>
+                </div>
+
+                <p v-else class="text-h6 text-bold">Новых проектов пока нет </p>
+              </div>
             </div>
+
+
           </div>
-
-
+          <div class="" v-else>
+            <p class="text-h6 text-bold">Вы не вошли в кошелек RUPAY</p>
+          </div>
         </div>
-        <div class="" v-else>
-          <p class="text-h6 text-bold">Вы не вошли в кошелек RUPAY</p>
         </div>
-      </div>
+
 
 
     </section>

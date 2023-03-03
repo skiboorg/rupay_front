@@ -35,6 +35,10 @@
             <router-link class="nav-menu__list_li_link" to="/ido">
               <p :class="$route.path === '/ido' ? 'active' : ''">IDO RUpay</p>
             </router-link>
+          </li><li class="nav-menu__list_li">
+            <router-link class="nav-menu__list_li_link" to="/nko">
+              <p :class="$route.path === '/nko' ? 'active' : ''">ЕДИНАЯ СИСТЕМА УЧЕТА для НКО</p>
+            </router-link>
           </li>
 
           <li class="nav-menu__list_li">
@@ -128,6 +132,7 @@
       <q-item ><router-link class="mobile-link" to="/marketplace">Маркетплейс</router-link></q-item>
       <q-item ><router-link class="mobile-link" to="/games">RUpay cashGame</router-link></q-item>
       <q-item ><router-link class="mobile-link" to="/ido">IDO RUpay</router-link></q-item>
+      <q-item ><router-link class="mobile-link" to="/nko">ЕДИНАЯ СИСТЕМА УЧЕТА для НКО</router-link></q-item>
 
 
       <q-item > <a class="mobile-link" href="https://scan.rupay.pro">RUpay Scan</a></q-item>
