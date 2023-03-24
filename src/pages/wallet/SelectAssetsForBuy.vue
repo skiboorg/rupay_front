@@ -34,7 +34,7 @@
               </q-item-section>
               <q-item-section class="text-weight-medium">
                 <q-item-label>{{asset.name}}</q-item-label>
-                <q-item-label caption v-if="!asset.is_enabled">{{$t('item_disabled')}}</q-item-label>
+                <q-item-label caption v-if="!asset.is_enabled">Временно недоступно</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
@@ -55,7 +55,7 @@
               </q-item-section>
               <q-item-section class="text-weight-medium">
                 <q-item-label>{{asset.name}}</q-item-label>
-                <q-item-label caption v-if="!asset.is_enabled">{{$t('item_disabled')}}</q-item-label>
+                <q-item-label caption v-if="!asset.is_enabled">Временно недоступно</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>

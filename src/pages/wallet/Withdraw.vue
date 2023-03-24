@@ -18,7 +18,7 @@
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="text-bold">{{ scope.opt.name }}</q-item-label>
-                  <q-item-label caption v-if="!scope.opt.is_withdaw_enabled">{{$t('item_disabled')}}</q-item-label>
+                  <q-item-label caption v-if="!scope.opt.is_withdaw_enabled">Временно недоступно</q-item-label>
 
                 </q-item-section>
               </q-item>
