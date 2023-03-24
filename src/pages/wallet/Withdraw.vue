@@ -8,7 +8,22 @@
       <div  class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
 
-          <q-select v-model="asset" outlined rounded dense options-dense :options="assets" option-label="name" label="Выберите актив*" class="q-mb-md"/>
+          <q-select v-model="asset" outlined rounded dense options-dense :options="assets" option-label="name" label="Выберите актив*" class="q-mb-md">
+            <template v-slot:option="scope">
+              <q-item v-bind="scope.itemProps" :class="{disabled:!scope.opt.is_withdaw_enabled}">
+                <q-item-section avatar>
+                  <q-avatar>
+                    <img :src="scope.opt.icon">
+                  </q-avatar>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-bold">{{ scope.opt.name }}</q-item-label>
+                  <q-item-label caption v-if="!scope.opt.is_withdaw_enabled">{{$t('item_disabled')}}</q-item-label>
+
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
           <div v-if="asset && can_withdrawal_asset">
             <div v-if="asset && asset.key===1643">
 <!--              <p class="q-mb-sm text-negative ">Внимание! ФИО верифицированного пользователя должно совпадать с ФИО владельца карты.</p>-->
