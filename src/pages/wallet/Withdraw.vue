@@ -8,7 +8,7 @@
       <div  class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
 
-          <q-select v-model="asset" outlined rounded dense options-dense :options="assets" option-label="name" label="Выберите актив*" class="q-mb-md">
+          <q-select v-model="asset" outlined rounded  :options="assets" option-label="name" :label="$t('p2p_select_asset')" class="q-mb-md">
             <template v-slot:option="scope">
               <q-item v-bind="scope.itemProps" :class="{disabled:!scope.opt.is_withdaw_enabled}">
                 <q-item-section avatar>
@@ -18,7 +18,7 @@
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="text-bold">{{ scope.opt.name }}</q-item-label>
-                  <q-item-label caption v-if="!scope.opt.is_withdaw_enabled">Временно недоступно</q-item-label>
+                  <q-item-label caption v-if="!scope.opt.is_withdaw_enabled">{{$t('item_disabled')}}</q-item-label>
 
                 </q-item-section>
               </q-item>
@@ -26,70 +26,70 @@
           </q-select>
           <div v-if="asset && can_withdrawal_asset">
             <div v-if="asset && asset.key===1643">
-<!--              <p class="q-mb-sm text-negative ">Внимание! ФИО верифицированного пользователя должно совпадать с ФИО владельца карты.</p>-->
-<!--              <p class="q-mb-sm text-negative">Срок вывода зависит от банка и может занимать до 5 рабочих дней. Комиссия на вывод 50 рублей +2%, удерживается из выводимой суммы</p>-->
-<!--              <p class="q-mb-sm text-caption">Номер карты*</p>-->
-<!--              <q-input class="q-mb-sm" rounded dense outlined  v-model="card" mask="#### #### #### ####" fill-mask="_" />-->
-<!--              <p class="q-mb-sm text-caption">Название банка*</p>-->
-<!--              <q-input class="q-mb-sm" rounded dense outlined  v-model="bank" />-->
-<!--              <p class="q-mb-sm text-caption">ФИО получателя (владельца карты)*</p>-->
-<!--              <q-input class="q-mb-sm" rounded dense outlined  v-model="fio" />-->
+              <p class="q-mb-sm text-negative ">Внимание! ФИО верифицированного пользователя должно совпадать с ФИО владельца карты.</p>
+              <p class="q-mb-sm text-negative">Срок вывода зависит от банка и может занимать до 5 рабочих дней. Комиссия на вывод 50 рублей +2%, удерживается из выводимой суммы</p>
+              <p class="q-mb-sm text-caption">Номер карты*</p>
+              <q-input class="q-mb-sm" rounded  outlined  v-model="card" mask="#### #### #### ####" fill-mask="_" />
+              <p class="q-mb-sm text-caption">Название банка*</p>
+              <q-input class="q-mb-sm" rounded  outlined  v-model="bank" />
+              <p class="q-mb-sm text-caption">ФИО получателя (владельца карты)*</p>
+              <q-input class="q-mb-sm" rounded  outlined  v-model="fio" />
 
-<!--              <q-option-group-->
-<!--                class="q-mb-sm"-->
-<!--                :options="options"-->
-<!--                type="radio"-->
-<!--                v-model="need_pay_13"-->
-<!--              />-->
+              <q-option-group
+                class="q-mb-sm"
+                :options="options"
+                type="radio"
+                v-model="need_pay_13"
+              />
 
-<!--              <div class="" v-if="need_pay_13">-->
-<!--                <p class="q-mb-sm text-caption">ФИО*</p>-->
-<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="fio_13" />-->
-<!--                <p class="q-mb-sm text-caption">Телефон*</p>-->
-<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="phone_13" mask="+7(###)### ## ##" fill-mask="_"/>-->
-<!--                <p class="q-mb-sm text-caption">Паспорт (серия номер)*</p>-->
-<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="passport_13" mask="#### ######" fill-mask="_"/>-->
-<!--                <p class="q-mb-sm text-caption">Кем выдан*</p>-->
-<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="vidan_13" />-->
-<!--                <p class="q-mb-sm text-caption">Прописка*</p>-->
-<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="propiska_13" />-->
-<!--                <p class="q-mb-sm text-caption">ИНН*</p>-->
-<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="inn_13" />-->
-<!--                <p class="q-mb-sm text-caption">СНИЛС*</p>-->
-<!--                <q-input class="q-mb-sm" rounded dense outlined  v-model="snils_13" />-->
+              <div class="" v-if="need_pay_13">
+                <p class="q-mb-sm text-caption">ФИО*</p>
+                <q-input class="q-mb-sm" rounded  outlined  v-model="fio_13" />
+                <p class="q-mb-sm text-caption">Телефон*</p>
+                <q-input class="q-mb-sm" rounded  outlined  v-model="phone_13" mask="+7(###)### ## ##" fill-mask="_"/>
+                <p class="q-mb-sm text-caption">Паспорт (серия номер)*</p>
+                <q-input class="q-mb-sm" rounded  outlined  v-model="passport_13" mask="#### ######" fill-mask="_"/>
+                <p class="q-mb-sm text-caption">Кем выдан*</p>
+                <q-input class="q-mb-sm" rounded  outlined  v-model="vidan_13" />
+                <p class="q-mb-sm text-caption">Прописка*</p>
+                <q-input class="q-mb-sm" rounded  outlined  v-model="propiska_13" />
+                <p class="q-mb-sm text-caption">ИНН*</p>
+                <q-input class="q-mb-sm" rounded  outlined  v-model="inn_13" />
+                <p class="q-mb-sm text-caption">СНИЛС*</p>
+                <q-input class="q-mb-sm" rounded  outlined  v-model="snils_13" />
 
-<!--              </div>-->
-<!--              <p class="q-mb-sm text-caption">Сумма вывода в рублях* (Ваш баланс <span>{{balances[1643] ? balances[1643][0][1] : '0'}}</span> RUB)</p>-->
-<!--              <p class="q-mb-sm text-caption">Минимальная сумма вывода 2500 RUB</p>-->
-<!--              <q-input class="q-mb-md" rounded dense outlined  v-model="sendInfo.amount" type="number" >-->
-<!--                <template v-if="balances[1643]" v-slot:append>-->
-<!--                  <q-btn @click="sendInfo.amount = balances[1643][0][1]" size="10px" flat rounded label="Вывести все"/>-->
-<!--                </template>-->
-<!--              </q-input>-->
-<!--              <p class="q-mb-sm text-caption text-bold" v-if="need_pay_13">Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.15 + 50)}} RUB</p>-->
-<!--              <p class="q-mb-sm text-caption text-bold" v-else>Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.02 + 50)}} RUB</p>-->
+              </div>
+              <p class="q-mb-sm text-caption">Сумма вывода в рублях* (Ваш баланс <span>{{balances[1643] ? balances[1643][0][1] : '0'}}</span> RUB)</p>
+              <p class="q-mb-sm text-caption">Минимальная сумма вывода 2500 RUB</p>
+              <q-input class="q-mb-md" rounded  outlined  v-model="sendInfo.amount" type="number" >
+                <template v-if="balances[1643]" v-slot:append>
+                  <q-btn @click="sendInfo.amount = balances[1643][0][1]" size="10px" flat rounded label="Вывести все"/>
+                </template>
+              </q-input>
+              <p class="q-mb-sm text-caption text-bold" v-if="need_pay_13">Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.15 + 50)}} RUB</p>
+              <p class="q-mb-sm text-caption text-bold" v-else>Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.02 + 50)}} RUB</p>
 
-<!--              <q-btn color="primary" rounded :loading="is_loading" @click="send" :disable="(!sendInfo.amount || sendInfo.amount<2500) || !fio || !card || !bank" unelevated no-caps class="full-width q-py-md" label="Отправить"/>-->
-              <p class="text-center text-bold">Вывод на карту временно не доступен, в связи с переоформлением расчетного счета, пока можете воспользоваться <router-link :to="{name:'p2p_index'}">P2P</router-link></p>
+              <q-btn color="primary" rounded :loading="is_loading" @click="getWalletInfo" :disable="(!sendInfo.amount || sendInfo.amount<2500) || !fio || !card || !bank" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+              <!--              <p class="text-center text-bold">Вывод на карту временно не доступен, в связи с переоформлением расчетного счета, пока можете воспользоваться <router-link :to="{name:'p2p_index'}">P2P</router-link></p>-->
             </div>
             <div v-else>
               <div v-if="asset && asset.key===1048610">
-                  <Avr/>
+                <Avr/>
               </div>
               <div v-else-if="asset && asset.key===1048615">
-                  <Mttl/>
+                <Mttl/>
               </div>
               <div v-else>
                 <p class="q-mb-sm text-negative ">Сервис RUPAY не взимает комиссию за вывод, однако блокчейн выводимой сети взимает, на ваш счёт указанный для вывода поступит сумма за вычетом комиссии сети
                 </p>
                 <p class="q-mb-sm text-caption">Адрес в сети {{asset.description}} {{asset.name}}*</p>
-                <q-input class="q-mb-sm" rounded dense outlined  v-model="address" />
+                <q-input class="q-mb-sm" rounded  outlined  v-model="address" />
                 <p class="q-mb-sm text-caption">ФИО получателя*</p>
-                <q-input class="q-mb-sm" rounded dense outlined  v-model="fio" />
+                <q-input class="q-mb-sm" rounded  outlined  v-model="fio" />
                 <p class="q-mb-sm text-caption">Сумма вывода (Ваш баланс <span>{{balances[asset.key] ? balances[asset.key][0][1] : '0'}}</span> {{asset.name}})</p>
                 <p class="q-mb-sm text-caption">Минимальная сумма вывода {{5000 / asset.course}} {{asset.name}}</p>
 
-                <q-input class="q-mb-md" rounded dense outlined  v-model="sendInfo.amount" type="number" >
+                <q-input class="q-mb-md" rounded  outlined  v-model="sendInfo.amount" type="number" >
                   <template v-if="balances[asset.key]" v-slot:append>
                     <q-btn @click="sendInfo.amount = balances[asset.key][0][1]" size="10px" flat rounded label="Вывести все"/>
                   </template>
@@ -127,6 +127,7 @@ import { era } from 'boot/erachain'
 import axios from 'axios'
 import {useNotify} from "src/helpers/utils";
 import {EraChain} from "erachain-js-api";
+import {api} from "boot/axios";
 
 let assets = ref([])
 
@@ -134,6 +135,9 @@ const all_assets = computed(()=>{
   return eraStore.assets
 })
 
+const current_address = computed(()=>{
+  return accountStore.addresses[0].address
+})
 const sendInfo = ref({
   amount : '',
   // address :'73SB6ZgqkhX98WnqZRRNxhd9XGtmas2Btb',
@@ -201,9 +205,26 @@ const can_withdrawal_asset = computed(()=>{
 const person = computed(()=>{
   return accountStore.verifyPersonData
 })
+async function getWalletInfo(){
+  is_loading.value = !is_loading.value
+  const response = await api.post('api/settings/rupay_withdrawal',{
+    wallet:current_address.value,
+    amount:sendInfo.value.amount,
+    asset:asset.value.key,
+    reg:person.value.tx_timestamp
+  })
+  if (response.data.success){
+    useNotify('positive',response.data.message)
+    await getFee()
+  }else {
+    useNotify('negative',response.data.message)
+  }
+  is_loading.value = !is_loading.value
+}
+
 
 async function getFee(){
-  is_loading.value = !is_loading.value
+
   const isBase64 = true
   const keys = await eraStore.getKeyPair()
   const keyPair = new EraChain.Type.KeyPair(keys)
@@ -229,7 +250,7 @@ async function getFee(){
   }else {
     useNotify('negative',result.error.message)
   }
-  is_loading.value = !is_loading.value
+
 }
 
 async function signTransaction(){
@@ -237,7 +258,7 @@ async function signTransaction(){
   console.log(result)
   if (result.error){
     useNotify('negative',result.message)
-    is_loading.value = !is_loading.value
+
   }else {
     useNotify('info','Транзакция создана')
     let text = ``
@@ -284,7 +305,7 @@ async function signTransaction(){
     bank.value=null
     sendInfo.value.amount=null
     useNotify('positive','Запрос успешно отправлен')
-    is_loading.value = !is_loading.value
+
 
   }
 }
@@ -305,4 +326,8 @@ onBeforeMount(()=>{
     font-size: 12px
     text-align: center
     line-height: 120%
+
+.disabled
+  pointer-events: none
+
 </style>
