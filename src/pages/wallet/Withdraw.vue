@@ -8,7 +8,7 @@
       <div  class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
 
-          <q-select v-model="asset" outlined rounded  :options="assets" option-label="name" :label="$t('p2p_select_asset')" class="q-mb-md">
+          <q-select v-model="asset" outlined rounded  :options="assets" option-label="name" label="Выберите актив" class="q-mb-md">
             <template v-slot:option="scope">
               <q-item v-bind="scope.itemProps" :class="{disabled:!scope.opt.is_withdaw_enabled}">
                 <q-item-section avatar>
@@ -18,7 +18,7 @@
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="text-bold">{{ scope.opt.name }}</q-item-label>
-                  <q-item-label caption v-if="!scope.opt.is_withdaw_enabled">{{$t('item_disabled')}}</q-item-label>
+                  <q-item-label caption v-if="!scope.opt.is_withdaw_enabled">Временно недоступно</q-item-label>
 
                 </q-item-section>
               </q-item>
@@ -60,7 +60,9 @@
 
               </div>
               <p class="q-mb-sm text-caption">Сумма вывода в рублях* (Ваш баланс <span>{{balances[1643] ? balances[1643][0][1] : '0'}}</span> RUB)</p>
-              <p class="q-mb-sm text-caption">Минимальная сумма вывода 2500 RUB</p>
+              <p class="q-mb-sm text-caption">ВНИМАНИЕ!!<br>
+                Вывод средств доступен верифицированным пользователям, которые прошли верификацию не позже чем за 15 суток до попытки вывода средств.
+                Минимальный вывод средств убран, введен порог на вывод не более 3000 рублей в сутки. (Временная мера, данный порог будет убираться постепенно)B</p>
               <q-input class="q-mb-md" rounded  outlined  v-model="sendInfo.amount" type="number" >
                 <template v-if="balances[1643]" v-slot:append>
                   <q-btn @click="sendInfo.amount = balances[1643][0][1]" size="10px" flat rounded label="Вывести все"/>
@@ -69,7 +71,7 @@
               <p class="q-mb-sm text-caption text-bold" v-if="need_pay_13">Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.15 + 50)}} RUB</p>
               <p class="q-mb-sm text-caption text-bold" v-else>Вы получите: {{sendInfo.amount - (sendInfo.amount * 0.02 + 50)}} RUB</p>
 
-              <q-btn color="primary" rounded :loading="is_loading" @click="getWalletInfo" :disable="(!sendInfo.amount || sendInfo.amount<2500) || !fio || !card || !bank" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+              <q-btn color="primary" rounded :loading="is_loading" @click="getWalletInfo" :disable="!sendInfo.amount || !fio || !card || !bank" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
               <!--              <p class="text-center text-bold">Вывод на карту временно не доступен, в связи с переоформлением расчетного счета, пока можете воспользоваться <router-link :to="{name:'p2p_index'}">P2P</router-link></p>-->
             </div>
             <div v-else>
