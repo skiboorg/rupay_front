@@ -106,24 +106,25 @@
 <!--        </div>-->
 <!--      </q-carousel-slide>-->
       <q-carousel-slide :name="1" >
-        <div class="main-grid">
+
+        <div class="main-grid" v-for="i in news" :key="i.id">
           <div class="main-grid__text_top">
             <h3 class="main-grid__text_top_heading">
-              <span>Технические </span><br />
-              работы!
+              {{ i.title }}
             </h3>
-            <p class="main-grid__text_top_paragraph">
-              Rupay.pro находятся на плановом обновлении, некоторые разделы сайта могут быть не доступны.
-            </p>
+            <div style="display: block !important;" class="main-grid__text_top_paragraph" v-html="i.text">
+
+            </div>
           </div>
 
           <div class="main-grid__img_container">
-            <img style="width: 100%; height: 100%" src="~assets/to.jpg" alt="">
+            <img style="width: 90%; height: 100%" :src="i.image" alt="">
 
           </div>
 
 
         </div>
+
       </q-carousel-slide>
       <q-carousel-slide :name="2" >
         <div class="second-grid">
@@ -747,20 +748,28 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {ref, onBeforeMount} from "vue";
 import axios from 'axios'
 import { Notify } from 'quasar'
+
+import {api} from "boot/axios";
 const videoModal=ref(false)
 const tokenModal=ref(false)
 const formModal=ref(false)
 const slide =ref(1)
 
+const news = ref([])
 
 const name=ref(null)
 const org=ref(null)
 const phone=ref(null)
 const text=ref(null)
 const is_loading=ref(false)
+
+onBeforeMount( async ()=>{
+  const response = await api.get(`/api/settings/news`)
+  news.value = response.data
+})
 
 async function sendMsg (){
   is_loading.value = !is_loading.value
