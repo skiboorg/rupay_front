@@ -8,51 +8,90 @@
       <div v-if="action_type==='other' " class="q-mb-lg">
 
         <div v-if="asset.key===1048610">
-          <p class="q-mb-sm text-caption">Cовершаете транзакцию на адрес:</p>
+          <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
           <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-          <q-btn rounded class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
           <p class="q-mb-sm text-caption">
-            Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
-            <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
+            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+            <span class="text-negative">{{$t('send_only11')}}</span><br>
           </p>
-          <p class="q-mb-sm text-caption text-bold">После проведения транзакции, скопируйте Transaction Hash, вставьте в поле ниже и нажмите кнопку проверить</p>
+          <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
 
           <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
           <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('avr')" :disable="!tx_hash" unelevated no-caps
-                 class="full-width q-py-md" label="Проверить транзакцию"/>
+                 class="full-width q-py-md" :label="$t('check_transaction')"/>
         </div>
         <div v-else-if="asset.key===1048618">
-          <p class="q-mb-sm text-caption">Cовершаете транзакцию на адрес:</p>
+          <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
           <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-          <q-btn rounded class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
           <p class="q-mb-sm text-caption">
-            Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
-            <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
+            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+            <span class="text-negative">{{$t('send_only11')}}</span><br>
           </p>
-          <p class="q-mb-sm text-caption text-bold">После проведения транзакции, скопируйте Transaction Hash, вставьте в поле ниже и нажмите кнопку проверить</p>
+          <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
 
           <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
           <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('umi')" :disable="!tx_hash" unelevated no-caps
-                 class="full-width q-py-md" label="Проверить транзакцию"/>
+                 class="full-width q-py-md" :label="$t('check_transaction')"/>
         </div>
+        <div v-else-if="asset.key===2033">
+          <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
+          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
+          <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <p class="q-mb-sm text-caption">
+            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+            <span class="text-negative">{{$t('send_only11')}}</span><br>
+          </p>
+          <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
 
+          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
+          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('usdt')" :disable="!tx_hash" unelevated no-caps
+                 class="full-width q-py-md" :label="$t('check_transaction')"/>
+        </div>
+        <div v-else-if="asset.key===16">
+          <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
+          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
+          <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <p class="q-mb-sm text-caption">
+            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+            <span class="text-negative">{{$t('send_only11')}}</span><br>
+          </p>
+          <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
+
+          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
+          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('bnb')" :disable="!tx_hash" unelevated no-caps
+                 class="full-width q-py-md" :label="$t('check_transaction')"/>
+        </div>
+        <div v-else-if="asset.key===2">
+          <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
+          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
+          <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+          <p class="q-mb-sm text-caption">
+            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+            <span class="text-negative">{{$t('send_only11')}}</span><br>
+          </p>
+          <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
+
+          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
+          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('olf')" :disable="!tx_hash" unelevated no-caps
+                 class="full-width q-py-md" :label="$t('check_transaction')"/>
+        </div>
         <div v-else>
-          <p class="q-mb-sm text-caption">Укажите кошелек с которого будете совершать транзакцию*</p>
+          <p class="q-mb-sm text-caption">{{$t('wallet_from')}}</p>
           <q-input class="q-mb-sm" rounded dense outlined  v-model="fromWallet"  />
           <div>
-            <p class="q-mb-sm text-caption">С указанного вами кошелька совершаете транзакцию на адрес:</p>
+            <p class="q-mb-sm text-caption">{{$t('wallet_to')}}</p>
             <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-            <q-btn rounded class="q-mb-sm" color="primary" label="Скопировать адрес" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
+            <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
             <p class="q-mb-sm text-caption">
-              Отправляйте на данный адрес только <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
-              <span class="text-negative">Отправка любых других монет приведет к их безвозвратной потере</span><br>
-              Совершая транзакцию в <span class="text-weight-bold">{{asset.name}}</span> вы делаете добровольный имущественный паевой взнос ПКРГИ РОЛФ
-              Равный количеству отправляемых {{asset.name}} Вывод монет с кошелька является выплатой по вашему взносу<br>
-              Зачисление происходит в сроки до 24 часов с момента транзакции (указаны максимальные сроки)
+              <span class="text-negative" v-html="$t('send_only')"></span><br> <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+              {{$t('send_only1')}}<span class="text-weight-bold">{{asset.name}}</span> {{$t('send_only2')}}{{asset.name}} {{$t('send_only3')}}
             </p>
-            <p class="q-mb-sm text-caption">Сумма пополнения*</p>
+            <p class="q-mb-sm text-caption">{{$t('buy_amomunt')}}*</p>
             <q-input rounded class="q-mb-sm" dense outlined  v-model="amount" type="number" />
-            <q-btn rounded color="primary" :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+            <q-btn rounded color="primary" :loading="is_loading" @click="send" :disable="!amount || !fromWallet" unelevated no-caps class="full-width q-py-md"
+                   :label="$t('send_btn')"/>
           </div>
         </div>
 
@@ -60,30 +99,32 @@
       <div v-else class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
           <div v-if="selected_payment.value !== 'rs'">
-<!--            asset.key===1643 ||-->
-<!--            <q-select rounded v-if="asset.key === 2 ||  asset.key===1048610 || asset.key===1048615" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>-->
-            <div class="" v-if="!selected_payment.disabled && asset.key===1643">
-              <p class="q-mb-sm text-caption">Сумма пополнения в {{selected_payment.currency}}*<br>
+            <!--            asset.key===1643 ||-->
+            <!--            <q-select rounded v-if="asset.key === 2 ||  asset.key===1048610 || asset.key===1048615" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>-->
+            <!--            && asset.key===1643-->
+            <div class="" v-if="!selected_payment.disabled ">
+              <p class="q-mb-sm text-caption">{{$t('buy_amomunt')}} {{selected_payment.currency}}*<br>
                 <span class="text-bold text-negative ">
-              мининум {{selected_payment.min}} {{selected_payment.currency}},
-              максимум {{selected_payment.max}} {{selected_payment.currency}},
-                              комиссия {{selected_payment.commission * 100}} %
+              {{$t('buy_amomunt_min')}} {{selected_payment.min}} {{selected_payment.currency}},
+              {{$t('buy_amomunt_max')}} {{selected_payment.max}} {{selected_payment.currency}},
+                              {{$t('buy_amomunt_comission')}} {{selected_payment.commission * 100}} %
               </span>
               </p>
-              <q-input rounded class="q-mb-sm" dense outlined  v-model="to_pay" type="number" label="На какую сумму хотите пополнить*"/>
+              <q-input rounded class="q-mb-sm" dense outlined  v-model="to_pay" type="number" :label="$t('buy_amomunt_label')"/>
               <div class="q-mb-sm flex items-center justify-between">
-                <p  class="no-margin text-caption text-bold">Вы получите: {{want_to_buy}} {{asset.name}}</p>
-                <p  class="no-margin text-caption text-bold">Текущий курс: {{parseFloat(current_course).toFixed(2)}} руб</p>
+                <p  class="no-margin text-caption text-bold">{{$t('buy_amomunt_total')}}: {{want_to_buy}} {{asset.name}}</p>
+                <p  class="no-margin text-caption text-bold">{{$t('buy_amomunt_cource')}}: {{parseFloat(current_course).toFixed(2)}} RUB</p>
 
               </div>
 
 
-              <q-btn color="primary" rounded :loading="is_loading" @click="new_payment" :disable="to_pay<selected_payment.min || to_pay>selected_payment.max" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+              <q-btn color="primary" rounded :loading="is_loading" @click="new_payment"
+                     :disable="to_pay<selected_payment.min || to_pay>selected_payment.max" unelevated no-caps class="full-width q-py-md" :label="$t('send_btn')"/>
 
             </div>
             <div v-else>
-              <p class="text-center text-negative text-bold">Данный тип оплаты временно не доступен</p>
-              <p class="text-center text-positive text-bold">Вы можете возпользоваться площадкой <router-link :to="{name:'p2p_index'}">P2P</router-link></p>
+              <p class="text-center text-negative text-bold">{{$t('buy_disable')}}</p>
+              <p class="text-center text-positive text-bold">{{$t('buy_disable_p2p')}} <router-link :to="{name:'p2p_index'}">P2P</router-link></p>
             </div>
 
           </div>
@@ -117,8 +158,8 @@
                   Юридический адрес компании: улица ГОРЬКОГО, д. 60/4, кв./оф. 44, Краснодарский край, р-н ГОРОД-КУРОРТ СОЧИ, г. Сочи</p></div>
             </div>
             <div v-else>
-              <p class="text-center text-negative text-bold">Данный тип оплаты временно не доступен</p>
-              <p class="text-center text-positive text-bold">Вы можете возпользоваться площадкой <router-link :to="{name:'p2p_index'}">P2P</router-link></p>
+              <p class="text-center text-negative text-bold">{{$t('buy_disable')}}</p>
+              <p class="text-center text-positive text-bold">{{$t('buy_disable_p2p')}} <router-link :to="{name:'p2p_index'}">P2P</router-link></p>
             </div>
 
 
@@ -150,7 +191,7 @@ import {useNotify} from "src/helpers/utils";
 import { copyToClipboard } from 'quasar'
 
 const URL = 'https://rupay.pro'
-//const URL = 'http://127.0.0.1:8010'
+//const URL = 'http://127.0.0.1:8000'
 
 let action_type = ref(null)
 let code = ref(null)
@@ -160,21 +201,23 @@ let is_loading = ref(false)
 let is_sent = ref(false)
 let asset_key = ref(0)
 
-let to_pay = ref(300)
+let to_pay = ref(1000)
 let summ = ref(0)
-let tx_hash = ref(null)
+//let tx_hash = ref('0x461b40304fa2e5d779eaad8aef50560895df9461e00c7537bf3523a57d9dd948')
+
+let tx_hash = ref('')
 let comission = ref(0.02)
 let current_course = ref(0)
-const selected_payment = ref({label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.06, disabled:false})
+const selected_payment = ref({label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:1000,max:15000,commission:0.06, disabled:false})
 
 const payment_systems = [
-  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:300,max:15000,commission:0.1, disabled:false},
-  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:300,max:15000,commission:0.1, disabled:false},
+  {label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:1000,max:15000,commission:0.1, disabled:false},
+  {label:'Qiwi',value:'Qiwi',currency:"RUB",min:1000,max:15000,commission:0.1, disabled:false},
   {label:'Перевод на Р/С',value:'rs',currency:"RUB",min:1000,max:50000,commission:0, disabled:false},
 ]
 
 const want_to_buy = computed(()=>{
-  if (asset.value.key === 1048610 || asset.value.key === 1048615 || asset.value.key === 1643 ){
+  if (asset.value.key === 1048610 || asset.value.key === 1048615 || asset.value.key === 1643 || asset.value.key === 1048619 ){
     summ.value = to_pay.value
     let cource_plus_comission  = parseFloat(parseFloat(asset.value.course) + parseFloat(asset.value.course * selected_payment.value.commission)).toFixed(2)
     console.log(cource_plus_comission)
@@ -223,7 +266,8 @@ async function new_payment(){
       want_to_buy:want_to_buy.value,
       amount:summ.value,
       currency : asset.value.key === 2 || asset.value.key === 1643 || asset.value.key === 1048610 ? selected_payment.value.currency : 'USD',
-      asset_id:asset.value.key
+      asset_id:asset.value.key,
+      redirect_url: process.env.PAYMENT_REDIRECT_URL
     }
   )
   is_loading.value = !is_loading.value
@@ -276,7 +320,7 @@ async function send(){
 function copyAddress(){
   copyToClipboard(asset.value.from_address)
     .then(() => {
-      useNotify('positive', 'Адрес кошелька скопирован')
+      useNotify('positive', 'Запрос успешно отправлен<br>Ожидаем поступление средств')
     })
     .catch(() => {
       // fail

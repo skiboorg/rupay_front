@@ -3,11 +3,20 @@ import { createI18n } from 'vue-i18n'
 import messages from 'src/i18n'
 
 export default boot(({ app }) => {
-  const i18n = createI18n({
-    locale: 'en-US',
-    messages
-  })
+  let i18n
+  const lang = localStorage.getItem('lang')
+  if (lang){
+    i18n = createI18n({
+      locale: lang,
+      messages
+    })
+  }else {
+    localStorage.setItem('lang','ru-RU')
+    i18n = createI18n({
+      locale: 'ru-RU',
+      messages
+    })
+  }
 
-  // Set i18n instance on app
   app.use(i18n)
 })

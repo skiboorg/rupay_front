@@ -163,6 +163,40 @@ const routes = [
         name: 'p2p_user',
         component: () => import('pages/wallet/P2P/User.vue'),
       },
+      {
+        path: '/wallet/documents',
+        name: 'documents',
+        component: () => import('pages/wallet/FunctionPages/Documents.vue'),
+      },
+      {
+        path: '/wallet/new_document',
+        name: 'new_document',
+        component: () => import('pages/wallet/FunctionPages/CreateDocument.vue'),
+      },
+      {
+        path: '/wallet/vip_club',
+        name: 'vip_club',
+        component: () => import('pages/wallet/FunctionPages/VIP.vue'),
+      },
+      {
+        path: '/wallet/our_games',
+        name: 'our_games',
+        component: () => import('pages/wallet/FunctionPages/Games.vue'),
+      },
+      {
+        path: '/wallet/ido',
+        name: 'ido',
+        component: () => import('pages/wallet/FunctionPages/IDO.vue'),
+      },
+      {
+        path: '/wallet/esu',
+        name: 'esu',
+        component: () => import('pages/wallet/FunctionPages/ESU.vue'),
+      },{
+        path: '/wallet/marketplace',
+        name: 'marketplace',
+        component: () => import('pages/wallet/FunctionPages/Marketplace.vue'),
+      },
 
 
     ]

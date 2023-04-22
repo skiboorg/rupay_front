@@ -105,7 +105,7 @@
           align="justify"
         >
           <q-tab no-caps class="bg-white" name="tokens" label="Активы" />
-          <q-tab disable no-caps class="bg-white" name="nft" label="NFTs" />
+          <q-tab  no-caps class="bg-white" name="functions" :label="$t('applications')" />
 
         </q-tabs>
 
@@ -145,7 +145,103 @@
           </q-list>
           </q-scroll-area>
         </q-tab-panel>
-        <q-tab-panel name="nft">
+        <q-tab-panel name="functions">
+          <q-scroll-area style="height: 50vh;">
+            <div class="functions-grid">
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://doxod24.net/1097802" target="_blank">
+                  <img src="~assets/zb.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">Заработок без вложений</p>
+                </a>
+              </div>
+
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://fastref.ru/1097802" target="_blank">
+                  <img src="~assets/br.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">Быстрый набор рефералов</p>
+                </a>
+              </div>
+
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://adv24.pro/1097802" target="_blank">
+                  <img src="~assets/rv.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">Рекламные возможности SurfEarner</p>
+                </a>
+              </div>
+
+
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://t.me/rupayPRO" target="_blank">
+                  <img src="~assets/tg.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_chat')}}</p>
+                </a>
+              </div>
+
+              <div class="functions-grid-item" @click="$router.push({name:'documents'})">
+                <img src="~assets/docs.png" alt="">
+                <p class="text-caption text-center no-margin lh100">{{$t('app_docs')}}</p>
+              </div>
+              <div class="functions-grid-item" @click="$router.push({name:'our_games'})">
+                <img src="~assets/game.png" alt="">
+                <p class="text-caption text-center no-margin lh100">{{$t('app_games')}}</p>
+              </div>
+              <div class="functions-grid-item" @click="$router.push({name:'ido'})">
+                <img src="~assets/ido.png" alt="">
+                <p class="text-caption text-center no-margin lh100">{{$t('app_ido')}}</p>
+              </div>
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://oneunion.ru" target="_blank">
+                  <img src="~assets/ou.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_union')}}</p>
+                </a>
+              </div>
+              <div class="functions-grid-item" @click="$router.push({name:'vip_club'})">
+                <img src="~assets/vip.png" alt="">
+                <p class="text-caption text-center no-margin lh100">{{$t('app_vip')}}</p>
+              </div>
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://scan.rupay.pro/index/main.html" target="_blank">
+                  <img src="~assets/scan.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_scan')}}</p>
+                </a>
+              </div>
+
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://t.me/money_from_space" target="_blank">
+                  <img src="~assets/aim.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_aim')}}</p>
+                </a>
+              </div>
+
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://xn--h1aeefgah.xn--p1ai/" target="_blank">
+                  <img src="~assets/coop.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_coop')}}</p>
+                </a>
+              </div>
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://t.me/Pure_Net_bot?start=1975902007" target="_blank">
+                  <img src="~assets/pnet.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_pnet')}}</p>
+                </a>
+              </div>
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://x-car.ru" target="_blank">
+                  <img src="~assets/xcar.jpg" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_xcar')}}</p>
+                </a>
+              </div>
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://t.me/+ZH4XwL9gJjAxNTJi" target="_blank">
+                  <img src="~assets/tree.jpeg" alt="">
+                  <p class="text-caption text-center no-margin lh100">Дерево жизни</p>
+                </a>
+              </div>
+
+            </div>
+          </q-scroll-area>
+
+
         </q-tab-panel>
       </q-tab-panels>
   </q-page>
@@ -247,6 +343,28 @@ const total = computed(()=>{
 
 </script>
 <style lang="sass">
+.functions-grid
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr 1fr
+  grid-template-rows: 120px
+  grid-gap: 20px
+  &-item
+    display: flex
+    flex-direction: column
+    align-items: center
+    a
+      display: flex
+      flex-direction: column
+      align-items: center
+
+    img
+      width: 100px
+      height: 100px
+      margin-bottom: 5px
+      border-radius: 20px
+
+.text-caption
+  font-size: 10px
 .top-buttons
   display: grid
   grid-template-columns: repeat(6,1fr)
