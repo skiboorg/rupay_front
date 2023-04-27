@@ -14,9 +14,16 @@ export default boot(async ({ app,store,router }) => {
 
 
   console.log(window.location.href.includes('wallet'))
-
   const addresses = localStorage.getItem('addresses')
   const hash = localStorage.getItem('hash')
+
+  const params = window.location.search
+  if (params.split('=')[1]==='SerfEarnerTOP'){
+    localStorage.setItem('is_ref',true)
+  }else {
+    localStorage.removeItem('is_ref')
+  }
+
   if (window.location.href.includes('wallet')){
     if (!sraStore.seed){
       await router.push('/wallet')
