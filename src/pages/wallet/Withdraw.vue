@@ -74,6 +74,44 @@
               <q-btn color="primary" rounded :loading="is_loading" @click="getWalletInfo" :disable="!sendInfo.amount  || !fio || !card || !bank" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
               <!--              <p class="text-center text-bold">Вывод на карту временно не доступен, в связи с переоформлением расчетного счета, пока можете воспользоваться <router-link :to="{name:'p2p_index'}">P2P</router-link></p>-->
             </div>
+            <div v-else-if="asset && asset.key===2033">
+              <p class="q-mb-sm text-negative ">Сервис RUPAY не взимает комиссию за вывод, однако блокчейн выводимой сети взимает, на ваш счёт указанный для вывода поступит сумма за вычетом комиссии сети
+              </p>
+              <p class="q-mb-sm text-caption">Адрес в сети {{asset.description}} {{asset.name}}*</p>
+              <q-input class="q-mb-sm" rounded  outlined  v-model="address" />
+              <p class="q-mb-sm text-caption">ФИО получателя*</p>
+              <q-input class="q-mb-sm" rounded  outlined  v-model="fio" />
+              <p class="q-mb-sm text-caption">Сумма вывода (Ваш баланс <span>{{balances[asset.key] ? balances[asset.key][0][1] : '0'}}</span> {{asset.name}})</p>
+
+
+              <q-input class="q-mb-md" rounded  outlined  v-model="sendInfo.amount" type="number" >
+                <template v-if="balances[asset.key]" v-slot:append>
+                  <q-btn @click="sendInfo.amount = balances[asset.key][0][1]" size="10px" flat rounded label="Вывести все"/>
+                </template>
+              </q-input>
+              <p class="text-negative" v-if="sendInfo.amount">Комиссия сети 2 USDT. Вы получите: {{sendInfo.amount - 2 }} USDT</p>
+              <q-btn color="primary" rounded :loading="is_loading" @click="getWalletInfo" :disable="!sendInfo.amount  || !fio || !address" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+
+            </div>
+            <div v-else-if="asset && asset.key===2">
+              <p class="q-mb-sm text-negative ">Сервис RUPAY не взимает комиссию за вывод, однако блокчейн выводимой сети взимает, на ваш счёт указанный для вывода поступит сумма за вычетом комиссии сети
+              </p>
+              <p class="q-mb-sm text-caption">Адрес в сети {{asset.description}} {{asset.name}}*</p>
+              <q-input class="q-mb-sm" rounded  outlined  v-model="address" />
+              <p class="q-mb-sm text-caption">ФИО получателя*</p>
+              <q-input class="q-mb-sm" rounded  outlined  v-model="fio" />
+              <p class="q-mb-sm text-caption">Сумма вывода (Ваш баланс <span>{{balances[asset.key] ? balances[asset.key][0][1] : '0'}}</span> {{asset.name}})</p>
+
+
+              <q-input class="q-mb-md" rounded  outlined  v-model="sendInfo.amount" type="number" >
+                <template v-if="balances[asset.key]" v-slot:append>
+                  <q-btn @click="sendInfo.amount = balances[asset.key][0][1]" size="10px" flat rounded label="Вывести все"/>
+                </template>
+              </q-input>
+
+              <q-btn color="primary" rounded :loading="is_loading" @click="getWalletInfo" :disable="!sendInfo.amount  || !fio || !address" unelevated no-caps class="full-width q-py-md" label="Отправить"/>
+
+            </div>
             <div v-else>
               <div v-if="asset && asset.key===1048610">
                 <Avr/>
@@ -266,6 +304,7 @@ async function signTransaction(){
     let text = ``
     if (address.value){
       text = `ФИО введенное : ${fio.value}%0A
+      Адрес кошелька ${current_address.value}%0A
             ФИО в блокчейне ${person.value.name}%0A
             Адрес сети ${asset.value.name} : ${address.value}%0A
             Сумма в ${asset.value.name}: ${sendInfo.value.amount}%0A`
@@ -274,6 +313,7 @@ async function signTransaction(){
     if (!address.value && !need_pay_13.value){
       text = `ФИО введенное : ${fio.value}%0A
             ФИО в блокчейне ${person.value.name}%0A
+            Адрес кошелька ${current_address.value}%0A
             Номер карты: ${card.value}%0A
             Банк: ${bank.value}%0A
             Сумма вывода в ${asset.value.name}: ${sendInfo.value.amount}%0A
@@ -284,6 +324,7 @@ async function signTransaction(){
     {
       text = `ФИО введенное : ${fio.value}%0A
   ФИО в блокчейне ${person.value.name}%0A
+  Адрес кошелька ${current_address.value}%0A
   Номер карты: ${card.value}%0A
   Банк: ${bank.value}%0A
   Сумма вывода в ${asset.value.name}: ${sendInfo.value.amount}%0A
