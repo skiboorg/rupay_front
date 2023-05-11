@@ -85,6 +85,7 @@ export const useAccountStore = defineStore('account', () => {
                 //console.log('add course to ',all_assets_data.find(x=>x.key===parseInt(id)).course)
                 resp.data.course=all_assets_data.find(x=>x.key===parseInt(id)).course
                 resp.data.course_api=all_assets_data.find(x=>x.key===parseInt(id)).course_api
+                resp.data.p2p_min_sell_price=all_assets_data.find(x=>x.key===parseInt(id)).p2p_min_sell_price
                 assets.value.push(resp.data )
               }else {
                 console.log('add course error. Asset key:', id)

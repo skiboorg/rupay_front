@@ -184,6 +184,11 @@ const routes = [
         component: () => import('pages/wallet/FunctionPages/Games.vue'),
       },
       {
+        path: '/wallet/neuro',
+        name: 'neuroclick',
+        component: () => import('pages/wallet/FunctionPages/NeuroClick.vue'),
+      },
+      {
         path: '/wallet/ido',
         name: 'ido',
         component: () => import('pages/wallet/FunctionPages/IDO.vue'),

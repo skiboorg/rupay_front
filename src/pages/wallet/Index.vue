@@ -105,7 +105,7 @@
           align="justify"
         >
           <q-tab no-caps class="bg-white" name="tokens" label="Активы" />
-          <q-tab  no-caps class="bg-white" name="functions" :label="$t('applications')" />
+          <q-tab  no-caps class="bg-white" name="functions" label="Функционал" />
 
         </q-tabs>
 
@@ -175,6 +175,11 @@
                   <img src="~assets/tg.png" alt="">
                   <p class="text-caption text-center no-margin lh100">{{$t('app_chat')}}</p>
                 </a>
+              </div>
+
+              <div class="functions-grid-item" @click="$router.push({name:'neuroclick'})">
+                <img src="~assets/neuro.jpg" alt="">
+                <p class="text-caption text-center no-margin lh100">NeuroClick - пополнение баланса</p>
               </div>
 
               <div class="functions-grid-item" @click="$router.push({name:'documents'})">
