@@ -202,6 +202,32 @@ const routes = [
         name: 'marketplace',
         component: () => import('pages/wallet/FunctionPages/Marketplace.vue'),
       },
+      {
+        path: '/wallet/airlo',
+        name: 'airlo',
+        component: () => import('pages/wallet/FunctionPages/Airlo.vue'),
+      },
+
+      {
+        path: '/wallet/aviasales',
+        name: 'aviasales',
+        component: () => import('pages/wallet/FunctionPages/Aviasales.vue'),
+      },
+      {
+        path: '/wallet/tutu',
+        name: 'tutu',
+        component: () => import('pages/wallet/FunctionPages/Tutu.vue'),
+      },
+      {
+        path: '/wallet/yaTravel',
+        name: 'yatravel',
+        component: () => import('pages/wallet/FunctionPages/YaTravel.vue'),
+      },
+      {
+        path: '/wallet/yourloyer',
+        name: 'yourloyer',
+        component: () => import('pages/wallet/FunctionPages/Yourloyer.vue'),
+      },
 
 
     ]

@@ -105,7 +105,7 @@
           align="justify"
         >
           <q-tab no-caps class="bg-white" name="tokens" label="Активы" />
-          <q-tab  no-caps class="bg-white" name="functions" label="Функционал" />
+          <q-tab  no-caps class="bg-white" name="functions" label="Маркетплейс" />
 
         </q-tabs>
 
@@ -148,12 +148,61 @@
         <q-tab-panel name="functions">
           <q-scroll-area style="height: 50vh;">
             <div class="functions-grid">
+
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://t.me/rupayPRO" target="_blank">
+                  <img src="~assets/tg.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_chat')}}</p>
+                </a>
+              </div>
+
+              <div class="functions-grid-item" >
+                <a style="color: inherit;text-decoration: none" href="https://scan.rupay.pro/index/main.html" target="_blank">
+                  <img src="~assets/scan.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_scan')}}</p>
+                </a>
+              </div>
+
+              <div class="functions-grid-item" @click="$router.push({name:'vip_club'})">
+                <img src="~assets/vip.png" alt="">
+                <p class="text-caption text-center no-margin lh100">{{$t('app_vip')}}</p>
+              </div>
+
+              <div class="functions-grid-item" @click="$router.push({name:'yatravel'})">
+                <img src="~assets/yatrav.webp" alt="">
+                <p class="text-caption text-center no-margin lh100">Яндекс путешествия</p>
+              </div>
+
+              <div class="functions-grid-item" @click="$router.push({name:'aviasales'})">
+                <img src="~assets/avia.webp" alt="">
+                <p class="text-caption text-center no-margin lh100">Авиасейлс</p>
+              </div>
+
+              <div class="functions-grid-item" @click="$router.push({name:'tutu'})">
+                <img src="~assets/tutu.webp" alt="">
+                <p class="text-caption text-center no-margin lh100">Туту.ру</p>
+              </div>
+
+
+              <div class="functions-grid-item" @click="$router.push({name:'airlo'})">
+                <img src="~assets/airalo.webp" alt="">
+                <p class="text-caption text-center no-margin lh100">Airalo</p>
+              </div>
+
+
+              <div class="functions-grid-item" @click="$router.push({name:'yourloyer'})">
+                <img src="~assets/urist.webp" alt="">
+                <p class="text-caption text-center no-margin lh100">Твой юрист</p>
+              </div>
+
+
               <div class="functions-grid-item" >
                 <a style="color: inherit;text-decoration: none" href="https://doxod24.net/1097802" target="_blank">
                   <img src="~assets/zb.png" alt="">
                   <p class="text-caption text-center no-margin lh100">Заработок без вложений</p>
                 </a>
               </div>
+
 
               <div class="functions-grid-item" >
                 <a style="color: inherit;text-decoration: none" href="https://fastref.ru/1097802" target="_blank">
@@ -169,45 +218,25 @@
                 </a>
               </div>
 
-
-              <div class="functions-grid-item" >
-                <a style="color: inherit;text-decoration: none" href="https://t.me/rupayPRO" target="_blank">
-                  <img src="~assets/tg.png" alt="">
-                  <p class="text-caption text-center no-margin lh100">{{$t('app_chat')}}</p>
-                </a>
+              <div class="functions-grid-item" @click="$router.push({name:'our_games'})">
+                <img src="~assets/game.png" alt="">
+                <p class="text-caption text-center no-margin lh100">{{$t('app_games')}}</p>
               </div>
 
-              <div class="functions-grid-item" @click="$router.push({name:'neuroclick'})">
-                <img src="~assets/neuro.jpg" alt="">
-                <p class="text-caption text-center no-margin lh100">NeuroClick - пополнение баланса</p>
+              <div class="functions-grid-item" @click="$router.push({name:'ido'})">
+                <img src="~assets/ido.png" alt="">
+                <p class="text-caption text-center no-margin lh100">{{$t('app_ido')}}</p>
               </div>
 
               <div class="functions-grid-item" @click="$router.push({name:'documents'})">
                 <img src="~assets/docs.png" alt="">
                 <p class="text-caption text-center no-margin lh100">{{$t('app_docs')}}</p>
               </div>
-              <div class="functions-grid-item" @click="$router.push({name:'our_games'})">
-                <img src="~assets/game.png" alt="">
-                <p class="text-caption text-center no-margin lh100">{{$t('app_games')}}</p>
-              </div>
-              <div class="functions-grid-item" @click="$router.push({name:'ido'})">
-                <img src="~assets/ido.png" alt="">
-                <p class="text-caption text-center no-margin lh100">{{$t('app_ido')}}</p>
-              </div>
+
               <div class="functions-grid-item" >
                 <a style="color: inherit;text-decoration: none" href="https://oneunion.ru" target="_blank">
                   <img src="~assets/ou.png" alt="">
                   <p class="text-caption text-center no-margin lh100">{{$t('app_union')}}</p>
-                </a>
-              </div>
-              <div class="functions-grid-item" @click="$router.push({name:'vip_club'})">
-                <img src="~assets/vip.png" alt="">
-                <p class="text-caption text-center no-margin lh100">{{$t('app_vip')}}</p>
-              </div>
-              <div class="functions-grid-item" >
-                <a style="color: inherit;text-decoration: none" href="https://scan.rupay.pro/index/main.html" target="_blank">
-                  <img src="~assets/scan.png" alt="">
-                  <p class="text-caption text-center no-margin lh100">{{$t('app_scan')}}</p>
                 </a>
               </div>
 
@@ -219,30 +248,30 @@
               </div>
 
               <div class="functions-grid-item" >
-                <a style="color: inherit;text-decoration: none" href="https://xn--h1aeefgah.xn--p1ai/" target="_blank">
-                  <img src="~assets/coop.png" alt="">
-                  <p class="text-caption text-center no-margin lh100">{{$t('app_coop')}}</p>
-                </a>
-              </div>
-              <div class="functions-grid-item" >
                 <a style="color: inherit;text-decoration: none" href="https://t.me/Pure_Net_bot?start=1975902007" target="_blank">
                   <img src="~assets/pnet.png" alt="">
                   <p class="text-caption text-center no-margin lh100">{{$t('app_pnet')}}</p>
                 </a>
               </div>
+
               <div class="functions-grid-item" >
                 <a style="color: inherit;text-decoration: none" href="https://x-car.ru" target="_blank">
                   <img src="~assets/xcar.jpg" alt="">
                   <p class="text-caption text-center no-margin lh100">{{$t('app_xcar')}}</p>
                 </a>
               </div>
+
               <div class="functions-grid-item" >
-                <a style="color: inherit;text-decoration: none" href="https://t.me/+ZH4XwL9gJjAxNTJi" target="_blank">
-                  <img src="~assets/tree.jpeg" alt="">
-                  <p class="text-caption text-center no-margin lh100">Дерево жизни</p>
+                <a style="color: inherit;text-decoration: none" href="https://xn--h1aeefgah.xn--p1ai/" target="_blank">
+                  <img src="~assets/coop.png" alt="">
+                  <p class="text-caption text-center no-margin lh100">{{$t('app_coop')}}</p>
                 </a>
               </div>
 
+              <div class="functions-grid-item" @click="$router.push({name:'neuroclick'})">
+                <img src="~assets/neuro.jpg" alt="">
+                <p class="text-caption text-center no-margin lh100">NeuroClick - пополнение баланса</p>
+              </div>
             </div>
           </q-scroll-area>
 
