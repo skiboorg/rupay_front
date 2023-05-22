@@ -5,76 +5,22 @@
       </page-header>
 
       <div class="" style="height: 60px"></div>
+
       <div v-if="action_type==='other' " class="q-mb-lg">
 
-        <div v-if="asset.key===1048610">
+        <div v-if="asset.is_can_buy_by_tx_check">
+          <q-select class="q-mb-md" rounded outlined dense :label="$t('choose_network')" v-model="network" :options="asset.networks" option-label="name"/>
           <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
-          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
+          <p class="text-weight-medium q-mb-sm">{{network.address}}</p>
           <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
           <p class="q-mb-sm text-caption">
-            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
-            <span class="text-negative">{{$t('send_only11')}}</span><br>
-          </p>
-          <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
-
-          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
-          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('avr')" :disable="!tx_hash" unelevated no-caps
-                 class="full-width q-py-md" :label="$t('check_transaction')"/>
-        </div>
-        <div v-else-if="asset.key===1048618">
-          <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
-          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-          <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
-          <p class="q-mb-sm text-caption">
-            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
-            <span class="text-negative">{{$t('send_only11')}}</span><br>
-          </p>
-          <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
-
-          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
-          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('umi')" :disable="!tx_hash" unelevated no-caps
-                 class="full-width q-py-md" :label="$t('check_transaction')"/>
-        </div>
-        <div v-else-if="asset.key===2033">
-          <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
-          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-          <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
-          <p class="q-mb-sm text-caption">
-            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
+            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{network.description}}</span><br>
             <span class="text-negative">{{$t('send_only11')}}</span><br>
           </p>
           <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
 
           <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
           <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('usdt')" :disable="!tx_hash" unelevated no-caps
-                 class="full-width q-py-md" :label="$t('check_transaction')"/>
-        </div>
-        <div v-else-if="asset.key===16">
-          <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
-          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-          <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
-          <p class="q-mb-sm text-caption">
-            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
-            <span class="text-negative">{{$t('send_only11')}}</span><br>
-          </p>
-          <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
-
-          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
-          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('bnb')" :disable="!tx_hash" unelevated no-caps
-                 class="full-width q-py-md" :label="$t('check_transaction')"/>
-        </div>
-        <div v-else-if="asset.key===2">
-          <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
-          <p class="text-weight-medium q-mb-sm">{{asset.from_address}}</p>
-          <q-btn rounded class="q-mb-sm" color="primary" :label="$t('address_copy_btn')" @click="copyAddress" no-caps size="12px" unelevated  icon="las la-copy"/>
-          <p class="q-mb-sm text-caption">
-            {{$t('send_only')}} <span class="text-weight-bold">{{asset.name}} {{asset.description}}</span><br>
-            <span class="text-negative">{{$t('send_only11')}}</span><br>
-          </p>
-          <p class="q-mb-sm text-caption text-bold">{{$t('after_transaction')}}</p>
-
-          <q-input rounded class="q-mb-sm" dense outlined  v-model="tx_hash"  />
-          <q-btn rounded color="primary" :loading="is_loading" @click="checkTxHash('olf')" :disable="!tx_hash" unelevated no-caps
                  class="full-width q-py-md" :label="$t('check_transaction')"/>
         </div>
         <div v-else>
@@ -99,9 +45,10 @@
       <div v-else class="q-mb-lg">
         <q-scroll-area style="height: 85vh;">
           <div v-if="selected_payment.value !== 'rs'">
+
             <!--            asset.key===1643 ||-->
             <!--            <q-select rounded v-if="asset.key === 2 ||  asset.key===1048610 || asset.key===1048615" v-model="selected_payment" outlined dense :options="payment_systems" class="q-mb-md" label="Выберите тип оплаты"/>-->
-            <!--            && asset.key===1643-->
+<!--            && asset.key===1643-->
             <div class="" v-if="!selected_payment.disabled ">
               <p class="q-mb-sm text-caption">{{$t('buy_amomunt')}} {{selected_payment.currency}}*<br>
                 <span class="text-bold text-negative ">
@@ -172,7 +119,8 @@
 
 </template>
 <script setup>
-
+import { useI18n } from 'vue-i18n'
+const i18n = useI18n()
 import { useEraStore } from 'stores/eraChain'
 const sraStore = useEraStore()
 
@@ -191,7 +139,7 @@ import {useNotify} from "src/helpers/utils";
 import { copyToClipboard } from 'quasar'
 
 const URL = 'https://rupay.pro'
-//const URL = 'http://127.0.0.1:8000'
+//const URL = 'http://127.0.0.1:8010'
 
 let action_type = ref(null)
 let code = ref(null)
@@ -203,9 +151,9 @@ let asset_key = ref(0)
 
 let to_pay = ref(1000)
 let summ = ref(0)
-//let tx_hash = ref('0x461b40304fa2e5d779eaad8aef50560895df9461e00c7537bf3523a57d9dd948')
+//let tx_hash = ref('0x93b0f7e85ad0372b23697efaaf4d7aab19713a7b7cb832d4ecc77e2b7b3098aa')
 
-let tx_hash = ref('')
+const tx_hash = ref('')
 let comission = ref(0.02)
 let current_course = ref(0)
 const selected_payment = ref({label:'Visa/Mastercard/МИР',value:'Card1',currency:"RUB", min:1000,max:15000,commission:0.06, disabled:false})
@@ -217,36 +165,32 @@ const payment_systems = [
 ]
 
 const want_to_buy = computed(()=>{
-  if (asset.value.key === 1048610 || asset.value.key === 1048615 || asset.value.key === 1643 || asset.value.key === 1048619 ){
+  if (asset.value.key === 1048615 || asset.value.key === 1643 || asset.value.key === 1048619 || asset.value.key === 2){
     summ.value = to_pay.value
     let cource_plus_comission  = parseFloat(parseFloat(asset.value.course) + parseFloat(asset.value.course * selected_payment.value.commission)).toFixed(2)
     console.log(cource_plus_comission)
     current_course.value = asset.value.course// cource_plus_comission
     return parseFloat(to_pay.value / cource_plus_comission).toFixed(5)
   }else{
-    if (asset.value.key === 2 ){
       summ.value = to_pay.value
-      current_course.value = asset.value.course
-      return parseFloat(parseFloat(to_pay.value / asset.value.course)).toFixed(5)
-    }else{
-      current_course.value = asset.value.course_api
-      summ.value = to_pay.value * asset.value.course_api
-      return parseFloat(to_pay.value).toFixed(5)
-    }
+      current_course.value = parseFloat(parseFloat(asset.value.course) + (parseFloat(asset.value.course) * 0.1))
+      return parseFloat(parseFloat(to_pay.value / current_course.value)).toFixed(5)
+
   }
 
 
 
 })
+const network = ref(null)
 
 async function checkTxHash(target_asset){
   is_loading.value = !is_loading.value
   console.log(asset.value)
   const response = await axios.post(URL+'/api/data/check_tx_hash',{
-    tx:tx_hash.value,
+    tx:tx_hash.value.replace(/\s/g, '' ),
     wallet:current_address.value,
-    addr:asset.value.from_address,
-    target_asset
+    network:network.value,
+    target_asset:{name:asset.value.name,key:asset.value.key,to:asset.value.round_to}
   })
   if (response.data.success){
     useNotify('positive',JSON.stringify(response.data.message))
@@ -311,7 +255,7 @@ async function send(){
 
   is_loading.value = !is_loading.value
   is_sent.value = true
-  useNotify('positive','Запрос успешно отправлен<br>Ожидаем поступление средств')
+  useNotify('positive',i18n.t('buy_success'))
 
 
 }
@@ -320,7 +264,7 @@ async function send(){
 function copyAddress(){
   copyToClipboard(asset.value.from_address)
     .then(() => {
-      useNotify('positive', 'Запрос успешно отправлен<br>Ожидаем поступление средств')
+      useNotify('positive', i18n.t('wallet_address_copy'))
     })
     .catch(() => {
       // fail
@@ -328,8 +272,11 @@ function copyAddress(){
 }
 
 const asset = computed(()=>{
-  return sraStore.assets.find(x=>x.key===asset_key.value)
+  const asset_item = sraStore.assets.find(x=>x.key===asset_key.value)
+  network.value = asset_item.networks[0]
+  return asset_item
 })
+
 
 const current_address = computed(()=>{
   return accountStore.addresses[accountStore.currentAddressIdx].address
@@ -350,17 +297,17 @@ onBeforeMount( async ()=>{
   asset_key.value = parseInt(route.query.asset)
   action_type.value = route.query.type
   //code.value=makeid(4)
-  if (asset.value.payment_system){
-    selected_payment.value = {label:asset.value.payment_system,
-      value:asset.value.payment_system,
-      currency:`${asset.value.name}`,
-      min:asset.value.payment_min / asset.value.course_api,
-      max:asset.value.payment_max / asset.value.course_api,
+  //if (asset.value.payment_system){
+  //  selected_payment.value = {label:asset.value.payment_system,
+  //    value:asset.value.payment_system,
+  //    currency:`${asset.value.name}`,
+  //    min:asset.value.payment_min / asset.value.course_api,
+   //   max:asset.value.payment_max / asset.value.course_api,
 
-      commission:asset.value.payment_comission/100
-    }
-    to_pay.value = asset.value.payment_min / asset.value.course_api
-  }
+   //   commission:asset.value.payment_comission/100
+   // }
+   // to_pay.value = asset.value.payment_min / asset.value.course_api
+  //}
 
 })
 </script>
