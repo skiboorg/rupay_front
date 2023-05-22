@@ -5,9 +5,7 @@
       </page-header>
 
       <div class="" style="height: 60px"></div>
-
       <div v-if="action_type==='other' " class="q-mb-lg">
-
         <div v-if="asset.is_can_buy_by_tx_check">
           <q-select class="q-mb-md" rounded outlined dense :label="$t('choose_network')" v-model="network" :options="asset.networks" option-label="name"/>
           <p class="q-mb-sm text-caption">{{$t('create_transaction')}}:</p>
@@ -119,8 +117,6 @@
 
 </template>
 <script setup>
-import { useI18n } from 'vue-i18n'
-const i18n = useI18n()
 import { useEraStore } from 'stores/eraChain'
 const sraStore = useEraStore()
 
@@ -255,7 +251,7 @@ async function send(){
 
   is_loading.value = !is_loading.value
   is_sent.value = true
-  useNotify('positive',i18n.t('buy_success'))
+  useNotify('positive','Успешно/Success')
 
 
 }
@@ -264,7 +260,7 @@ async function send(){
 function copyAddress(){
   copyToClipboard(asset.value.from_address)
     .then(() => {
-      useNotify('positive', i18n.t('wallet_address_copy'))
+      useNotify('positive', 'Адрес кошелька скопирован/Wallet address copied')
     })
     .catch(() => {
       // fail
