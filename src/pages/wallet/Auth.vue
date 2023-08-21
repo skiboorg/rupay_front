@@ -15,17 +15,19 @@
           </div>
 
 
-          <div class="auth-card">
-            <div class="auth-card__buttons flex items-center justify-center ">
-              <q-btn @click="loginActive=true" unelevated no-caps :class="{'not-active':!loginActive}" :color="[loginActive ? 'primary' : '']" class="text-bold auth-card__button q-mr-xl " size="26px" label="Авторизация"/>
-              <q-btn @click="loginActive=false" unelevated no-caps :class="{'not-active':loginActive}" :color="[!loginActive ? 'primary' : '']" class="text-bold auth-card__button" size="26px" label="Регистрация"/>
-            </div>
+          <div class="auth-card text-center">
+            <img class="q-mb-lg" src="https://app.rupay.pro/img/logo.ee83538b.png"/>
+            <p class="text-h5 text-bold text-center">Технические работы</p>
+<!--            <div class="auth-card__buttons flex items-center justify-center ">-->
+<!--              <q-btn @click="loginActive=true" unelevated no-caps :class="{'not-active':!loginActive}" :color="[loginActive ? 'primary' : '']" class="text-bold auth-card__button q-mr-xl " size="26px" label="Авторизация"/>-->
+<!--              <q-btn @click="loginActive=false" unelevated no-caps :class="{'not-active':loginActive}" :color="[!loginActive ? 'primary' : '']" class="text-bold auth-card__button" size="26px" label="Регистрация"/>-->
+<!--            </div>-->
 
-            <Login v-if="loginActive" @seedGood="setSeed"/>
+<!--            <Login v-if="loginActive" @seedGood="setSeed"/>-->
 
 
 
-            <Register v-if="!loginActive " @openLogin="openLogin"/>
+<!--            <Register v-if="!loginActive " @openLogin="openLogin"/>-->
           </div>
 
 
