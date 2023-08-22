@@ -232,7 +232,11 @@
     </footer>
   </q-layout>
   <q-layout v-else view="lHh Lpr lFf">
-    <div class="flex column items-center justify-center fullscreen text-h3 text-center">Технические работы</div>
+    <div class="flex column items-center justify-center fullscreen text-h3 text-center">
+      <img style="max-width: 100%; height: 300px; object-fit: contain" class="q-mb-md" src="~assets/logo11.png">
+      <p>Технические работы</p>
+
+    </div>
   </q-layout>
 </template>
 
@@ -245,7 +249,7 @@ const accountStore = useAccountStore()
 const mobileMenuActive=ref(false)
 const curLink=ref('index')
 
-const to = ref(false)
+const to = ref(true)
 
 const allowAdr=[
   '75UzMQz72t4FDkEMdFS4WPc9gUyLqAbH6C',
