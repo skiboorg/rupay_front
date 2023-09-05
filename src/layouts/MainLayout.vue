@@ -235,6 +235,7 @@
     <div class="flex column items-center justify-center fullscreen text-h3 text-center">
       <img style="max-width: 100%; height: 300px; object-fit: contain" class="q-mb-md" src="~assets/logo11.png">
       <p>Технические работы</p>
+      <p>Кошелек доступен <a href="https://app.rupay.pro">по адресу</a></p>
 
     </div>
   </q-layout>
