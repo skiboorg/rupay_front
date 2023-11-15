@@ -250,7 +250,7 @@ const accountStore = useAccountStore()
 const mobileMenuActive=ref(false)
 const curLink=ref('index')
 
-const to = ref(true)
+const to = ref(false)
 
 const allowAdr=[
   '75UzMQz72t4FDkEMdFS4WPc9gUyLqAbH6C',

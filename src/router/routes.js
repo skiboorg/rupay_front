@@ -2,19 +2,31 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/AltLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') },
       // { path: '', component: () => import('pages/IndexPage.vue') },
       // { path: 'node', component: () => import('pages/Node.vue') },
       // { path: 'tokens', component: () => import('pages/Tokens.vue') },
-      { path: 'apps', component: () => import('pages/Apps.vue') },
-      { path: 'ido', component: () => import('pages/Ido.vue') },
-      { path: 'nko', component: () => import('pages/nko.vue') },
-      { path: 'wallet', component: () => import('pages/wallet/Auth.vue') },
-      { path: 'avr', component: () => import('pages/ArvAdmin.vue') },
+
     ]
   },
+
+  // {
+  //   path: '/',
+  //   component: () => import('layouts/MainLayout.vue'),
+  //   children: [
+  //     { path: '', component: () => import('pages/Index.vue') },
+  //     // { path: '', component: () => import('pages/IndexPage.vue') },
+  //     // { path: 'node', component: () => import('pages/Node.vue') },
+  //     // { path: 'tokens', component: () => import('pages/Tokens.vue') },
+  //     { path: 'apps', component: () => import('pages/Apps.vue') },
+  //     { path: 'ido', component: () => import('pages/Ido.vue') },
+  //     { path: 'nko', component: () => import('pages/nko.vue') },
+  //     { path: 'wallet', component: () => import('pages/wallet/Auth.vue') },
+  //     { path: 'avr', component: () => import('pages/ArvAdmin.vue') },
+  //   ]
+  // },
   {
     path: '/marketplace',
     component: () => import('layouts/MainLayout.vue'),

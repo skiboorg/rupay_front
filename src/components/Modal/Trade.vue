@@ -550,7 +550,7 @@ async function getAssets(){
   //console.log(pair_data.value)
   //console.log(totalSell.value)
   //console.log(totalBuy.value)
-  const resp_trades = await api.get(`https://scan.rupay.pro/apiexchange/trades/${first_asset.value.key}/${second_asset.value.key}`)
+  const resp_trades = await api.get(`https://scan.rupay.pro/apiexchange/trades/${first_asset.value.key}/${second_asset.value.key}?timestamp=1696160795000&limit=500`)
   for (let x of resp_trades.data.reverse()){
     trades.value.push([x.timestamp,x.price])
   }

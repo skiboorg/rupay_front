@@ -1,5 +1,5 @@
 <template>
-
+<div class="" v-if="false">
   <main>
     <q-carousel
       v-model="slide"
@@ -544,14 +544,9 @@
       <div v-if="slide>1" class="swiper-button-prev" @click="$refs.carousel.previous()"></div>
       <div v-if="slide<4" class="swiper-button-next" @click="$refs.carousel.next()"></div>
     </div>
-
-
-
-
-
-
-
   </main>
+  </div>
+
   <q-dialog
     v-model="videoModal"
   >
